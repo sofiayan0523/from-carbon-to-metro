@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>從碳客變捷客 - App Mockup</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Microsoft JhengHei", sans-serif; }
+  body {
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    min-height: 100vh;
+    padding: 40px 20px;
+    color: #1b3a1d;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  .header h1 {
+    font-size: 32px;
+    color: #1b5e20;
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+  }
+  .header .subtitle {
+    font-size: 14px;
+    color: #2e7d32;
+    letter-spacing: 1px;
+  }
+  .header .tag {
+    display: inline-block;
+    background: #2e7d32;
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    margin-top: 10px;
+  }
+  .mockup-row {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .screen-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .screen-label {
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  .screen-label .num {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    background: #1b5e20;
+    color: #fff;
+    border-radius: 50%;
+    line-height: 28px;
+    font-weight: bold;
+    margin-bottom: 6px;
+  }
+  .screen-label .title {
+    display: block;
+    font-size: 14px;
+    color: #1b5e20;
+    font-weight: 600;
+  }
+  /* Phone frame */
+  .phone {
+    width: 340px;
+    height: 700px;
+    background: #000;
+    border-radius: 40px;
+    padding: 12px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    position: relative;
+  }
+  .phone::before {
+    content: "";
+    position: absolute;
+    top: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 22px;
+    background: #000;
+    border-radius: 12px;
+    z-index: 10;
+  }
+  .screen {
+    width: 100%;
+    height: 100%;
+    background: #f5f7f4;
+    border-radius: 30px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .status-bar {
+    height: 44px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px 0 30px;
+    font-size: 13px;
+    font-weight: 600;
+    padding-top: 8px;
+  }
+  .status-bar .icons {
+    display: flex;
+    gap: 5px;
+    font-size: 11px;
+  }
+  .app-header {
+    padding: 8px 20px 14px;
+    background: linear-gradient(135deg, #2e7d32 0%, #43a047 100%);
+    color: #fff;
+  }
+  .app-header .greeting {
+    font-size: 12px;
+    opacity: 0.85;
+  }
+  .app-header .user {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 2px;
+  }
+  .app-header .tabs {
+    display: flex;
+    gap: 16px;
+    margin-top: 12px;
+    font-size: 13px;
+  }
+  .app-header .tab {
+    opacity: 0.7;
+    padding-bottom: 4px;
+  }
+  .app-header .tab.active {
+    opacity: 1;
+    border-bottom: 2px solid #fff;
+    font-weight: 600;
+  }
+  .body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+  }
+  /* ─── Screen 1: Green Point Report ─── */
+  .card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 18px;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .card-title {
+    font-size: 13px;
+    color: #757575;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .hero-card {
+    background: linear-gradient(135deg, #43a047 0%, #66bb6a 100%);
+    color: #fff;
+  }
+  .hero-card .card-title { color: rgba(255,255,255,0.85); }
+  .big-num {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  .big-num .unit {
+    font-size: 14px;
+    font-weight: 400;
+    opacity: 0.9;
+  }
+  .multiplier {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.25);
+  }
+  .multiplier .label {
+    font-size: 12px;
+    opacity: 0.9;
+  }
+  .multiplier .value {
+    font-size: 20px;
+    font-weight: 700;
+    background: rgba(255,255,255,0.2);
+    padding: 4px 12px;
+    border-radius: 10px;
+  }
+  .progress {
+    height: 6px;
+    background: rgba(255,255,255,0.25);
+    border-radius: 3px;
+    margin-top: 8px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: #fff;
+    width: 75%;
+    border-radius: 3px;
+  }
+  .progress-text {
+    font-size: 11px;
+    margin-top: 4px;
+    opacity: 0.85;
+  }
+  .recommend-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .recommend-item:last-child { border-bottom: none; }
+  .station-dot {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #e8f5e9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .recommend-info {
+    flex: 1;
+  }
+  .recommend-info .station {
+    font-size: 12px;
+    color: #757575;
+  }
+  .recommend-info .shop {
+    font-size: 14px;
+    font-weight: 600;
+    color: #212121;
+    margin-top: 2px;
+  }
+  .badge {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-weight: 600;
+  }
+  .badge-earn { background: #fff3e0; color: #e65100; }
+  .badge-spend { background: #e3f2fd; color: #1565c0; }
+  .action-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .btn {
+    flex: 1;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+  }
+  .btn-primary { background: #2e7d32; color: #fff; }
+  .btn-secondary { background: #e8f5e9; color: #2e7d32; }
+  /* ─── Screen 2: Map ─── */
+  .map-screen {
+    background: #f5f7f4;
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+  }
+  .map-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(76,175,80,0.08) 0%, transparent 40%),
+      radial-gradient(circle at 70% 60%, rgba(33,150,243,0.08) 0%, transparent 40%),
+      linear-gradient(180deg, #f0f4f0 0%, #e8efe8 100%);
+  }
+  .mrt-line {
+    position: absolute;
+    background: linear-gradient(90deg, transparent, currentColor, transparent);
+    height: 6px;
+    border-radius: 3px;
+    opacity: 0.7;
+  }
+  .line-red { color: #e53935; top: 35%; left: 10%; right: 10%; transform: rotate(-5deg); }
+  .line-green { color: #43a047; top: 55%; left: 15%; right: 5%; transform: rotate(10deg); }
+  .line-blue { color: #1e88e5; top: 70%; left: 5%; right: 15%; transform: rotate(-3deg); }
+  .pin {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    border: 2px solid #fff;
+  }
+  .pin-earn { background: #e53935; }
+  .pin-spend { background: #43a047; }
+  .pin-star { background: #fbc02d; color: #fff; }
+  .pin.large { width: 44px; height: 44px; font-size: 18px; animation: pulse 2s infinite; }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(251,192,45,0.6); }
+    50% { box-shadow: 0 0 0 12px rgba(251,192,45,0); }
+  }
+  .map-search {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    right: 16px;
+    background: #fff;
+    border-radius: 14px;
+    padding: 12px 16px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 5;
+  }
+  .map-search input {
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 14px;
+    background: transparent;
+  }
+  .map-filters {
+    position: absolute;
+    top: 70px;
+    left: 16px;
+    right: 16px;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    z-index: 5;
+  }
+  .filter-chip {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 18px;
+    padding: 6px 14px;
+    font-size: 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .filter-chip.active {
+    background: #2e7d32;
+    color: #fff;
+    border-color: #2e7d32;
+  }
+  .legend {
+    position: absolute;
+    bottom: 80px;
+    left: 16px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 11px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 3px 0;
+  }
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+  .map-bottom-sheet {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-radius: 20px 20px 0 0;
+    padding: 16px 16px 20px;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+    z-index: 4;
+  }
+  .sheet-handle {
+    width: 40px;
+    height: 4px;
+    background: #ccc;
+    border-radius: 2px;
+    margin: 0 auto 12px;
+  }
+  .sheet-title { font-size: 13px; color: #757575; margin-bottom: 8px; }
+  .sheet-shop {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .shop-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+  }
+  /* ─── Screen 3: Carbon Footprint Dashboard ─── */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .stat-mini {
+    background: #fff;
+    border-radius: 14px;
+    padding: 14px;
+    text-align: center;
+  }
+  .stat-mini .num {
+    font-size: 22px;
+    font-weight: 700;
+    color: #2e7d32;
+  }
+  .stat-mini .lbl {
+    font-size: 11px;
+    color: #757575;
+    margin-top: 2px;
+  }
+  .chart-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+  .chart-title {
+    font-size: 13px;
+    color: #424242;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .chart {
+    height: 120px;
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    padding: 0 4px;
+  }
+  .bar {
+    flex: 1;
+    background: linear-gradient(180deg, #66bb6a, #43a047);
+    border-radius: 4px 4px 0 0;
+    position: relative;
+    transition: all 0.3s;
+  }
+  .bar.peak {
+    background: linear-gradient(180deg, #81c784, #2e7d32);
+  }
+  .x-axis {
+    display: flex;
+    gap: 6px;
+    padding: 6px 4px 0;
+    font-size: 9px;
+    color: #9e9e9e;
+  }
+  .x-axis span {
+    flex: 1;
+    text-align: center;
+  }
+  .level-bar {
+    background: linear-gradient(135deg, #1b5e20, #2e7d32);
+    color: #fff;
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+  .level-bar .lvl-title {
+    font-size: 12px;
+    opacity: 0.85;
+  }
+  .level-bar .lvl-num {
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 4px;
+  }
+  .level-bar .rank {
+    font-size: 11px;
+    opacity: 0.85;
+    margin-top: 4px;
+  }
+  .badges {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .achievement {
+    flex: 1;
+    background: rgba(255,255,255,0.15);
+    border-radius: 10px;
+    padding: 8px;
+    text-align: center;
+    font-size: 18px;
+  }
+  .achievement .lbl {
+    font-size: 9px;
+    margin-top: 2px;
+    opacity: 0.9;
+  }
+  .tree-card {
+    background: linear-gradient(135deg, #f1f8e9, #e8f5e9);
+    border-radius: 16px;
+    padding: 16px;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .tree-emoji {
+    font-size: 36px;
+    margin-bottom: 6px;
+  }
+  .tree-card .num {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1b5e20;
+  }
+  .tree-card .desc {
+    font-size: 12px;
+    color: #558b2f;
+    margin-top: 4px;
+  }
+  /* Bottom Nav */
+  .bottom-nav {
+    height: 65px;
+    background: #fff;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: 8px;
+  }
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    color: #9e9e9e;
+    font-size: 10px;
+  }
+  .nav-item.active { color: #2e7d32; }
+  .nav-item .icon { font-size: 20px; }
+  .footnote {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 12px;
+    color: #558b2f;
+    line-height: 1.6;
+  }
+  .footnote strong { color: #1b5e20; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>從碳客變捷客</h1>
+  <div class="subtitle">2026 捷運盃黑客松 ・ 應用介面原型示意</div>
+  <span class="tag">玩點生活・智慧串聯</span>
+</div>
+
+<div class="mockup-row">
+
+  <!-- ═══ Screen 1: Home / Green Point Report ═══ -->
+  <div class="screen-wrap">
+    <div class="screen-label">
+      <span class="num">1</span>
+      <span class="title">首頁・今日綠點報告</span>
+    </div>
+    <div class="phone">
+      <div class="screen">
+        <div class="status-bar">
+          <span>9:41</span>
+          <span class="icons">●●● 📶 🔋</span>
+        </div>
+        <div class="app-header">
+          <div class="greeting">早安 ☀</div>
+          <div class="user">Sofia,今天也是綠捷客 🌿</div>
+          <div class="tabs">
+            <span class="tab active">首頁</span>
+            <span class="tab">地圖</span>
+            <span class="tab">碳足跡</span>
+            <span class="tab">會員</span>
+          </div>
+        </div>
+        <div class="body">
+          <div class="card hero-card">
+            <div class="card-title">🌿 本月碳節省</div>
+            <div class="big-num">8.2 <span class="unit">kg CO₂</span></div>
+            <div class="multiplier">
+              <div>
+                <div class="label">目前綠點乘數</div>
+                <div class="progress">
+                  <div class="progress-fill"></div>
+                </div>
+                <div class="progress-text">距 1.5x 加成還差 1.8 kg</div>
+              </div>
+              <div class="value">⭐ 1.2x</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">📍 今日 AI 推薦路線</div>
+            <div class="recommend-item">
+              <div class="station-dot">🚇</div>
+              <div class="recommend-info">
+                <div class="station">大安站 1 號出口</div>
+                <div class="shop">路易莎咖啡</div>
+              </div>
+              <div class="badge badge-earn">+15 點</div>
+            </div>
+            <div class="recommend-item">
+              <div class="station-dot">🚇</div>
+              <div class="recommend-info">
+                <div class="station">忠孝復興站 2 號出口</div>
+                <div class="shop">全聯福利中心</div>
+              </div>
+              <div class="badge badge-spend">折 $30</div>
+            </div>
+            <div class="recommend-item">
+              <div class="station-dot">🚇</div>
+              <div class="recommend-info">
+                <div class="station">中山站 4 號出口</div>
+                <div class="shop">誠品書店</div>
+              </div>
+              <div class="badge badge-earn">+20 點</div>
+            </div>
+            <div class="action-row">
+              <button class="btn btn-secondary">分享減碳成績</button>
+              <button class="btn btn-primary">查看完整路線</button>
+            </div>
+          </div>
+        </div>
+        <div class="bottom-nav">
+          <div class="nav-item active"><span class="icon">🏠</span>首頁</div>
+          <div class="nav-item"><span class="icon">🗺</span>地圖</div>
+          <div class="nav-item"><span class="icon">🌍</span>碳足跡</div>
+          <div class="nav-item"><span class="icon">👤</span>會員</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Screen 2: Map / AI Route ═══ -->
+  <div class="screen-wrap">
+    <div class="screen-label">
+      <span class="num">2</span>
+      <span class="title">AI 點數路線地圖</span>
+    </div>
+    <div class="phone">
+      <div class="screen">
+        <div class="status-bar">
+          <span>9:41</span>
+          <span class="icons">●●● 📶 🔋</span>
+        </div>
+        <div class="map-screen">
+          <div class="map-bg"></div>
+
+          <div class="mrt-line line-red"></div>
+          <div class="mrt-line line-green"></div>
+          <div class="mrt-line line-blue"></div>
+
+          <div class="pin pin-earn" style="top: 30%; left: 25%;">15</div>
+          <div class="pin pin-spend" style="top: 38%; left: 55%;">30</div>
+          <div class="pin pin-star large" style="top: 50%; left: 40%;">⭐</div>
+          <div class="pin pin-earn" style="top: 60%; left: 65%;">20</div>
+          <div class="pin pin-spend" style="top: 68%; left: 28%;">50</div>
+          <div class="pin pin-earn" style="top: 78%; left: 50%;">10</div>
+
+          <div class="map-search">
+            <span>🔍</span>
+            <input placeholder="搜尋商家、車站..." value="">
+          </div>
+
+          <div class="map-filters">
+            <div class="filter-chip active">全部</div>
+            <div class="filter-chip">🍱 餐飲</div>
+            <div class="filter-chip">🛍 購物</div>
+            <div class="filter-chip">☕ 飲品</div>
+            <div class="filter-chip">📚 文化</div>
+          </div>
+
+          <div class="legend">
+            <div class="legend-item">
+              <div class="legend-dot" style="background:#e53935"></div>累點商家
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:#43a047"></div>用點商家
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:#fbc02d"></div>AI 推薦
+            </div>
+          </div>
+
+          <div class="map-bottom-sheet">
+            <div class="sheet-handle"></div>
+            <div class="sheet-title">⭐ AI 推薦・距你最近</div>
+            <div class="sheet-shop">
+              <div class="shop-icon">☕</div>
+              <div style="flex:1">
+                <div style="font-weight:600; font-size:15px;">cama café・忠孝店</div>
+                <div style="font-size:12px; color:#757575; margin-top:2px;">忠孝復興站 ・ 距 120m</div>
+                <div style="margin-top:6px;">
+                  <span class="badge badge-earn">累點 1:5 加倍</span>
+                  <span class="badge badge-spend" style="margin-left:6px;">用點折 $50</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bottom-nav">
+          <div class="nav-item"><span class="icon">🏠</span>首頁</div>
+          <div class="nav-item active"><span class="icon">🗺</span>地圖</div>
+          <div class="nav-item"><span class="icon">🌍</span>碳足跡</div>
+          <div class="nav-item"><span class="icon">👤</span>會員</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Screen 3: Carbon Footprint Dashboard ═══ -->
+  <div class="screen-wrap">
+    <div class="screen-label">
+      <span class="num">3</span>
+      <span class="title">個人碳足跡儀表板</span>
+    </div>
+    <div class="phone">
+      <div class="screen">
+        <div class="status-bar">
+          <span>9:41</span>
+          <span class="icons">●●● 📶 🔋</span>
+        </div>
+        <div class="app-header">
+          <div class="greeting">5 月個人報告</div>
+          <div class="user">🌍 我的碳足跡</div>
+          <div class="tabs">
+            <span class="tab">本日</span>
+            <span class="tab active">本月</span>
+            <span class="tab">本年</span>
+          </div>
+        </div>
+        <div class="body">
+          <div class="stat-grid">
+            <div class="stat-mini">
+              <div class="num">32</div>
+              <div class="lbl">本月搭乘趟數</div>
+            </div>
+            <div class="stat-mini">
+              <div class="num">296 <span style="font-size:14px">km</span></div>
+              <div class="lbl">累計里程</div>
+            </div>
+          </div>
+
+          <div class="tree-card">
+            <div class="tree-emoji">🌳🌳</div>
+            <div class="num">26.6 kg CO₂</div>
+            <div class="desc">本月碳節省 ≈ 種植 2.2 棵樹</div>
+          </div>
+
+          <div class="chart-card">
+            <div class="chart-title">
+              <span>每日減碳趨勢</span>
+              <span style="font-size:11px;color:#9e9e9e">近 14 天</span>
+            </div>
+            <div class="chart">
+              <div class="bar" style="height: 35%"></div>
+              <div class="bar" style="height: 50%"></div>
+              <div class="bar peak" style="height: 75%"></div>
+              <div class="bar" style="height: 45%"></div>
+              <div class="bar" style="height: 60%"></div>
+              <div class="bar" style="height: 30%"></div>
+              <div class="bar" style="height: 25%"></div>
+              <div class="bar" style="height: 55%"></div>
+              <div class="bar" style="height: 70%"></div>
+              <div class="bar peak" style="height: 85%"></div>
+              <div class="bar" style="height: 65%"></div>
+              <div class="bar" style="height: 50%"></div>
+              <div class="bar" style="height: 40%"></div>
+              <div class="bar peak" style="height: 90%"></div>
+            </div>
+            <div class="x-axis">
+              <span>5/2</span><span>5/4</span><span>5/6</span><span>5/8</span>
+              <span>5/10</span><span>5/12</span><span>今日</span>
+            </div>
+          </div>
+
+          <div class="level-bar">
+            <div class="lvl-title">🌿 目前等級・綠點乘數</div>
+            <div class="lvl-num">1.5x 加成中</div>
+            <div class="rank">全市排名 前 15%・領先 85,000 位用戶</div>
+            <div class="badges">
+              <div class="achievement">
+                🏆<div class="lbl">通勤達人</div>
+              </div>
+              <div class="achievement">
+                🌱<div class="lbl">減碳新星</div>
+              </div>
+              <div class="achievement">
+                🎯<div class="lbl">連續 14 天</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="action-row">
+            <button class="btn btn-secondary">查看排行榜</button>
+            <button class="btn btn-primary">分享到社群</button>
+          </div>
+        </div>
+        <div class="bottom-nav">
+          <div class="nav-item"><span class="icon">🏠</span>首頁</div>
+          <div class="nav-item"><span class="icon">🗺</span>地圖</div>
+          <div class="nav-item active"><span class="icon">🌍</span>碳足跡</div>
+          <div class="nav-item"><span class="icon">👤</span>會員</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footnote">
+  <strong>團隊：通勤族也想拯救地球</strong> ・ 嚴世紀(Numbers Protocol) × 鍾天傑(LikeCoin) × 嚴世裕(台北市政府地政局)<br>
+  本原型以 HTML/CSS 製作,正式產品將整合於台北捷運 Go App,並串接環境部碳排係數資料集與捷運點數系統。
+</div>
+
+</body>
+</html>
