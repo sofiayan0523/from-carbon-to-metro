@@ -347,6 +347,7 @@
   .filter-chip:focus-visible,
   .preference-chip:focus-visible,
   .sort-chip:focus-visible,
+  .trip-chip:focus-visible,
   .recommendation-card:focus-visible,
   .pin:focus-visible,
   .app-header .tab:focus-visible {
@@ -385,6 +386,28 @@
     color: #2e7d32;
     font-size: 11px;
     font-weight: 700;
+  }
+  .carbon-insights {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .carbon-chip {
+    border: 1px solid rgba(255,255,255,0.28);
+    border-radius: 12px;
+    padding: 8px 10px;
+    background: rgba(255,255,255,0.14);
+  }
+  .carbon-chip span {
+    display: block;
+    font-size: 10px;
+    opacity: 0.82;
+  }
+  .carbon-chip strong {
+    display: block;
+    margin-top: 2px;
+    font-size: 13px;
   }
   /* ─── Screen 2: Map ─── */
   .map-screen {
@@ -792,6 +815,137 @@
     color: #558b2f;
     margin-top: 4px;
   }
+  .trip-panel {
+    background: #fff;
+    border: 1px solid #edf3ec;
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+  .panel-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .panel-title {
+    color: #263126;
+    font-size: 13px;
+    font-weight: 800;
+  }
+  .panel-note {
+    color: #6d806d;
+    font-size: 11px;
+    line-height: 1.4;
+    margin-top: 3px;
+  }
+  .trip-options {
+    display: grid;
+    gap: 8px;
+  }
+  .trip-chip {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    align-items: center;
+    width: 100%;
+    border: 1px solid #e1efe0;
+    border-radius: 13px;
+    background: #fbfdfb;
+    padding: 9px 10px;
+    color: #263126;
+    text-align: left;
+    cursor: pointer;
+  }
+  .trip-chip.active {
+    border-color: #2e7d32;
+    background: #f1f8f1;
+    box-shadow: inset 4px 0 0 #fbc02d;
+  }
+  .trip-name {
+    display: block;
+    font-size: 12px;
+    font-weight: 800;
+  }
+  .trip-route {
+    display: block;
+    margin-top: 2px;
+    color: #6d806d;
+    font-size: 10px;
+    line-height: 1.35;
+  }
+  .trip-distance {
+    color: #1b5e20;
+    font-size: 12px;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+  .formula-card {
+    margin-top: 10px;
+    border-radius: 14px;
+    padding: 12px;
+    background: #263126;
+    color: #fff;
+  }
+  .formula-line {
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.45;
+  }
+  .formula-sub {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 9px;
+  }
+  .formula-sub div {
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 10px;
+    padding: 7px;
+  }
+  .formula-sub span {
+    display: block;
+    font-size: 9px;
+    opacity: 0.72;
+  }
+  .formula-sub strong {
+    display: block;
+    margin-top: 2px;
+    font-size: 12px;
+  }
+  .threshold-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .threshold-step {
+    border: 1px solid rgba(255,255,255,0.24);
+    border-radius: 12px;
+    padding: 10px;
+    background: rgba(255,255,255,0.1);
+  }
+  .threshold-step.unlocked {
+    background: rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.44);
+  }
+  .threshold-step.current {
+    border-color: #fbc02d;
+    box-shadow: 0 0 0 2px rgba(251,192,45,0.18);
+  }
+  .threshold-step .target {
+    display: block;
+    font-size: 12px;
+    font-weight: 800;
+  }
+  .threshold-step .status {
+    display: block;
+    margin-top: 4px;
+    font-size: 10px;
+    line-height: 1.35;
+    opacity: 0.88;
+  }
   /* ─── Screen 4: Member / Proof Shell ─── */
   .proof-status {
     display: flex;
@@ -993,6 +1147,16 @@
               </div>
               <div class="value">⭐ <span data-field="multiplier">1.2x</span></div>
             </div>
+            <div class="carbon-insights">
+              <div class="carbon-chip">
+                <span>本次通勤</span>
+                <strong><span data-field="tripDistance">8.0</span> km / <span data-field="tripCarbon">0.72</span> kg</strong>
+              </div>
+              <div class="carbon-chip">
+                <span>下一門檻</span>
+                <strong>再 <span data-field="nextKm">20.0</span> km</strong>
+              </div>
+            </div>
             <div class="action-row hero-actions">
               <button class="btn btn-secondary" type="button" data-action="complete-trip">完成通勤</button>
               <button class="btn btn-primary" type="button" data-nav="map">看路線</button>
@@ -1017,6 +1181,14 @@
               <div class="state-item">
                 <div class="label">目前畫面</div>
                 <div class="value" data-field="currentView">首頁</div>
+              </div>
+              <div class="state-item">
+                <div class="label">預估減碳</div>
+                <div class="value"><span data-field="tripCarbonGrams">720</span> g</div>
+              </div>
+              <div class="state-item">
+                <div class="label">加成預覽</div>
+                <div class="value" data-field="projectedMultiplier">1.2x</div>
               </div>
             </div>
           </div>
@@ -1173,6 +1345,52 @@
             </div>
           </div>
 
+          <div class="trip-panel">
+            <div class="panel-head">
+              <div>
+                <div class="panel-title">🚇 本次通勤模擬</div>
+                <div class="panel-note">以環境部係數示意：捷運替代私人運具每公里節省 90 gCO₂e。</div>
+              </div>
+              <span class="status-pill"><span data-field="projectedMultiplier">1.2x</span></span>
+            </div>
+            <div class="trip-options" aria-label="示範通勤路線">
+              <button class="trip-chip" type="button" data-trip-id="short">
+                <span>
+                  <span class="trip-name">短程轉乘</span>
+                  <span class="trip-route">中山 → 忠孝復興</span>
+                </span>
+                <span class="trip-distance">4.6 km</span>
+              </button>
+              <button class="trip-chip active" type="button" data-trip-id="daily">
+                <span>
+                  <span class="trip-name">日常通勤</span>
+                  <span class="trip-route">大安 → 台北車站</span>
+                </span>
+                <span class="trip-distance">8.0 km</span>
+              </button>
+              <button class="trip-chip" type="button" data-trip-id="challenge">
+                <span>
+                  <span class="trip-name">跨城挑戰</span>
+                  <span class="trip-route">淡水 → 南港展覽館</span>
+                </span>
+                <span class="trip-distance">23.4 km</span>
+              </button>
+            </div>
+            <div class="formula-card">
+              <div class="formula-line" data-field="carbonFormula">90 gCO₂e/km × 8.0 km = 720 gCO₂e = 0.72 kg</div>
+              <div class="formula-sub">
+                <div>
+                  <span>完成後本月</span>
+                  <strong><span data-field="projectedCarbon">8.9</span> kg CO₂</strong>
+                </div>
+                <div>
+                  <span>距下一級</span>
+                  <strong><span data-field="nextKg">1.8</span> kg / <span data-field="nextKm">20.0</span> km</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="tree-card">
             <div class="tree-emoji">🌳🌳</div>
             <div class="num"><span data-field="monthlyCarbon">8.2</span> kg CO₂</div>
@@ -1209,7 +1427,17 @@
           <div class="level-bar">
             <div class="lvl-title">🌿 目前等級・綠點乘數</div>
             <div class="lvl-num"><span data-field="multiplier">1.2x</span> 加成中</div>
-            <div class="rank">本月還差 <span data-field="nextKg">1.8</span> kg 可解鎖下一階段</div>
+            <div class="rank">本月還差 <span data-field="nextKg">1.8</span> kg，約 <span data-field="nextKm">20.0</span> km 可解鎖下一階段</div>
+            <div class="threshold-grid">
+              <div class="threshold-step" data-threshold-step="5">
+                <span class="target">5 kg → 1.2x</span>
+                <span class="status" data-field="threshold5Status">已解鎖 1.2x</span>
+              </div>
+              <div class="threshold-step current" data-threshold-step="10">
+                <span class="target">10 kg → 1.5x</span>
+                <span class="status" data-field="threshold10Status">還差 1.8 kg / 20.0 km</span>
+              </div>
+            </div>
             <div class="badges">
               <div class="achievement">
                 🏆<div class="lbl">通勤達人</div>
@@ -1353,6 +1581,33 @@
     discount: "折抵"
   };
 
+  const CARBON_GRAMS_PER_KM = 90;
+  const KG_PER_GRAM = 1000;
+
+  const tripCatalog = [
+    {
+      id: "short",
+      name: "短程轉乘",
+      route: "中山 → 忠孝復興",
+      distanceKm: 4.6,
+      basePoints: 12
+    },
+    {
+      id: "daily",
+      name: "日常通勤",
+      route: "大安 → 台北車站",
+      distanceKm: 8.0,
+      basePoints: 18
+    },
+    {
+      id: "challenge",
+      name: "跨城挑戰",
+      route: "淡水 → 南港展覽館",
+      distanceKm: 23.4,
+      basePoints: 36
+    }
+  ];
+
   const merchantCatalog = [
     {
       id: "louisa-daan",
@@ -1470,6 +1725,7 @@
     selectedPreference: "commute",
     selectedSort: "smart",
     selectedMerchantId: "louisa-daan",
+    selectedTripId: "daily",
     searchTerm: "",
     simulatedEarnedPoints: 0,
     simulatedSpentPoints: 0,
@@ -1498,11 +1754,28 @@
   function getNextThreshold(kg) {
     if (kg < 5) return { target: 5, label: "1.2x" };
     if (kg < 10) return { target: 10, label: "1.5x" };
-    return { target: 15, label: "社群挑戰" };
+    return { target: 10, label: "1.5x", maxReached: true };
+  }
+
+  function getSelectedTrip() {
+    return tripCatalog.find((trip) => trip.id === state.selectedTripId) || tripCatalog[1];
+  }
+
+  function calculateTripCarbonKg(distanceKm) {
+    return (distanceKm * CARBON_GRAMS_PER_KM) / KG_PER_GRAM;
+  }
+
+  function getRemainingThresholdDistance(remainingKg) {
+    if (remainingKg <= 0) return 0;
+    return remainingKg / (CARBON_GRAMS_PER_KM / KG_PER_GRAM);
   }
 
   function formatNumber(value, digits = 1) {
     return Number(value).toFixed(digits);
+  }
+
+  function formatInteger(value) {
+    return Math.round(value).toLocaleString("zh-TW");
   }
 
   function setText(field, value) {
@@ -1615,15 +1888,16 @@
   }
 
   function completeTrip() {
-    const distanceAdded = 8;
-    const carbonAdded = 0.72;
+    const trip = getSelectedTrip();
+    const distanceAdded = trip.distanceKm;
+    const carbonAdded = calculateTripCarbonKg(distanceAdded);
     const nextCarbon = state.metrics.monthlyCarbonKg + carbonAdded;
     const nextMultiplier = getMultiplier(nextCarbon);
 
     state.metrics.monthlyCarbonKg = nextCarbon;
     state.metrics.distanceKm += distanceAdded;
     state.metrics.trips += 1;
-    state.metrics.points += Math.round(18 * nextMultiplier);
+    state.metrics.points += Math.round(trip.basePoints * nextMultiplier);
     state.proof.status = "已有可註冊資料";
     state.proof.shortStatus = "可產生";
     state.proof.updated = new Date().toLocaleString("zh-TW", {
@@ -1632,11 +1906,11 @@
       hour: "2-digit",
       minute: "2-digit"
     });
-    state.proof.routeDigest = `本月 ${state.metrics.trips} 趟、${Math.round(state.metrics.distanceKm)} km；起訖站以匿名摘要隱藏`;
+    state.proof.routeDigest = `本月 ${state.metrics.trips} 趟、${Math.round(state.metrics.distanceKm)} km；最近一次 ${formatNumber(distanceAdded)} km 已轉為去識別摘要`;
     state.proof.progress = 64;
 
     render();
-    announce(`已完成示範通勤，新增 ${formatNumber(carbonAdded)} kg CO2 與捷運點數。`);
+    announce(`已完成${trip.name}，依 90 gCO2e/km 新增 ${formatNumber(carbonAdded)} kg CO2，綠點乘數 ${nextMultiplier.toFixed(1)}x。`);
   }
 
   function generateProof() {
@@ -1714,9 +1988,15 @@
     const multiplier = getMultiplier(carbon);
     const threshold = getNextThreshold(carbon);
     const remainingKg = Math.max(0, threshold.target - carbon);
-    const progress = threshold.target === 15 && carbon >= 10
+    const remainingKm = getRemainingThresholdDistance(remainingKg);
+    const progress = threshold.maxReached
       ? 100
       : (carbon / threshold.target) * 100;
+    const trip = getSelectedTrip();
+    const tripCarbonKg = calculateTripCarbonKg(trip.distanceKm);
+    const tripCarbonGrams = trip.distanceKm * CARBON_GRAMS_PER_KM;
+    const projectedCarbon = carbon + tripCarbonKg;
+    const projectedMultiplier = getMultiplier(projectedCarbon);
 
     setText("monthlyCarbon", formatNumber(carbon));
     setText("distance", Math.round(state.metrics.distanceKm));
@@ -1726,10 +2006,46 @@
     setText("currentView", viewLabels[state.activeView]);
     setText("treeEquivalent", formatNumber(carbon / 12.1));
     setText("nextKg", formatNumber(remainingKg));
+    setText("nextKm", formatNumber(remainingKm));
     setText("nextThreshold", remainingKg > 0
       ? `距 ${threshold.label} 加成還差 ${formatNumber(remainingKg)} kg`
-      : "已解鎖目前最高加成");
+      : "已解鎖 1.5x 最高加成");
+    setText("tripDistance", formatNumber(trip.distanceKm));
+    setText("tripCarbon", formatNumber(tripCarbonKg, 2));
+    setText("tripCarbonGrams", formatInteger(tripCarbonGrams));
+    setText("projectedCarbon", formatNumber(projectedCarbon));
+    setText("projectedMultiplier", `${projectedMultiplier.toFixed(1)}x`);
+    setText("carbonFormula", `${CARBON_GRAMS_PER_KM} gCO₂e/km × ${formatNumber(trip.distanceKm)} km = ${formatInteger(tripCarbonGrams)} gCO₂e = ${formatNumber(tripCarbonKg, 2)} kg`);
     setProgress("carbonProgress", progress);
+
+    document.querySelectorAll("[data-trip-id]").forEach((button) => {
+      const isActive = button.dataset.tripId === state.selectedTripId;
+      button.classList.toggle("active", isActive);
+      button.setAttribute("aria-pressed", isActive ? "true" : "false");
+    });
+
+    renderThresholds(carbon);
+  }
+
+  function renderThresholds(carbon) {
+    [
+      { target: 5, label: "1.2x", field: "threshold5Status" },
+      { target: 10, label: "1.5x", field: "threshold10Status" }
+    ].forEach((threshold) => {
+      const remainingKg = Math.max(0, threshold.target - carbon);
+      const remainingKm = getRemainingThresholdDistance(remainingKg);
+      const isUnlocked = carbon >= threshold.target;
+      const isCurrent = !isUnlocked && getNextThreshold(carbon).target === threshold.target;
+
+      setText(threshold.field, isUnlocked
+        ? `已解鎖 ${threshold.label}`
+        : `還差 ${formatNumber(remainingKg)} kg / ${formatNumber(remainingKm)} km`);
+
+      document.querySelectorAll(`[data-threshold-step="${threshold.target}"]`).forEach((node) => {
+        node.classList.toggle("unlocked", isUnlocked);
+        node.classList.toggle("current", isCurrent);
+      });
+    });
   }
 
   function renderMerchant() {
@@ -1899,6 +2215,15 @@
       selectFirstRecommendation();
       render();
       announce(`已更新排序為${sortLabels[state.selectedSort]}。`);
+      return;
+    }
+
+    const tripButton = event.target.closest("[data-trip-id]");
+    if (tripButton) {
+      state.selectedTripId = tripButton.dataset.tripId;
+      const trip = getSelectedTrip();
+      render();
+      announce(`已選擇${trip.name}，本次距離 ${formatNumber(trip.distanceKm)} 公里。`);
       return;
     }
 

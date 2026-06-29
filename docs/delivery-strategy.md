@@ -14,7 +14,7 @@
 - GitHub Pages 狀態：`built`
 - CI / Pages workflow：GitHub 內建 `pages-build-deployment`
 - 現有程式：`index.html` 與 `README.md`
-- 現有技術型態：純 HTML/CSS/JavaScript，無 build step，無外部 API，無登入；AI 路線推薦使用本機 mock 商家資料集與 deterministic scoring；繁中文字型已在 repo 內本地打包，避免離線或 headless QA 環境缺字
+- 現有技術型態：純 HTML/CSS/JavaScript，無 build step，無外部 API，無登入；AI 路線推薦使用本機 mock 商家資料集與 deterministic scoring；碳足跡使用 `90 gCO₂e/km × distance` 本機公式與 5 kg / 10 kg 綠點倍率門檻；繁中文字型已在 repo 內本地打包，避免離線或 headless QA 環境缺字
 
 ## 線上展示策略
 
@@ -28,6 +28,7 @@
 後續每個開發 phase 仍應遵守：
 
 - 主 demo 流程不得依賴外部 API 才能完成。
+- 碳足跡與綠點倍率需保留本機公式 fallback：`90 gCO₂e/km`、5 kg → 1.2x、10 kg → 1.5x。
 - 若加入任何網路整合，只能作為 bonus 或 live slot，必須保留 deterministic fallback。
 - PR target 固定為 `main`，merge 後由 GitHub Pages 內建 workflow 更新 production。
 
