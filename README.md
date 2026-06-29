@@ -8,7 +8,7 @@
 
 ## 本地預覽
 
-目前專案是純靜態 HTML/CSS，可直接開啟 `index.html`，或用本機靜態 server 預覽：
+目前專案是純靜態 HTML/CSS/JavaScript，可直接開啟 `index.html`，或用本機靜態 server 預覽：
 
 ```bash
 python3 -m http.server 4173 --bind 127.0.0.1
@@ -28,11 +28,12 @@ python3 -m http.server 4173 --bind 127.0.0.1
 - 🌿 **碳足跡綠點加成** — 將以捷運取代私人運具的碳節省量轉換為捷運點乘數加成
 - 📊 **今日綠點報告** — 個人化儀表板，整合減碳成績、推薦路線、社群排名
 
-## 三大畫面
+## 四大可導航區塊
 
 1. **首頁・今日綠點報告** — Hero Card + AI 推薦商家清單
 2. **AI 點數路線地圖** — 互動式捷運地圖 + 累點/用點/AI 推薦 Pin
 3. **個人碳足跡儀表板** — 14 天減碳趨勢圖 + 等級徽章
+4. **會員・可信數據證明** — 本機 demo state、去識別摘要與 proof shell
 
 ## 團隊：通勤族也想拯救地球
 
@@ -44,4 +45,4 @@ python3 -m http.server 4173 --bind 127.0.0.1
 
 ## 技術
 
-純 HTML/CSS（零 JS 依賴），任何現代瀏覽器可開啟。正式產品將整合於台北捷運 Go App，串接環境部碳排係數資料集與捷運點數系統。
+純 HTML/CSS/JavaScript（無 build step、無外部 API 依賴），任何現代瀏覽器可開啟。繁中文字型以本地 `assets/fonts/` 打包，確保離線 demo 與 QA 截圖可讀。正式產品將整合於台北捷運 Go App，串接環境部碳排係數資料集與捷運點數系統。

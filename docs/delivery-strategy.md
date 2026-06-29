@@ -14,7 +14,7 @@
 - GitHub Pages 狀態：`built`
 - CI / Pages workflow：GitHub 內建 `pages-build-deployment`
 - 現有程式：`index.html` 與 `README.md`
-- 現有技術型態：純 HTML/CSS，無 build step，無外部 API，無登入
+- 現有技術型態：純 HTML/CSS/JavaScript，無 build step，無外部 API，無登入；繁中文字型已在 repo 內本地打包，避免離線或 headless QA 環境缺字
 
 ## 線上展示策略
 

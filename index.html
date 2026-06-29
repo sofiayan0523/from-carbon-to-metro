@@ -5,9 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>從碳客變捷客 - App Mockup</title>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Microsoft JhengHei", sans-serif; }
+  @font-face {
+    font-family: "MetroNotoTC";
+    src: url("assets/fonts/NotoSansCJKtc-Regular.otf") format("opentype");
+    font-style: normal;
+    font-weight: 400 800;
+    font-display: swap;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: "MetroNotoTC", "Noto Sans CJK TC", "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif; }
   body {
-    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    background:
+      linear-gradient(120deg, rgba(46,125,50,0.10) 0 1px, transparent 1px 32px),
+      linear-gradient(135deg, #f5f7f4 0%, #dfeadd 100%);
     min-height: 100vh;
     padding: 40px 20px;
     color: #1b3a1d;
@@ -20,12 +29,12 @@
     font-size: 32px;
     color: #1b5e20;
     margin-bottom: 8px;
-    letter-spacing: 2px;
+    letter-spacing: 0;
   }
   .header .subtitle {
     font-size: 14px;
     color: #2e7d32;
-    letter-spacing: 1px;
+    letter-spacing: 0;
   }
   .header .tag {
     display: inline-block;
@@ -36,6 +45,30 @@
     font-size: 12px;
     margin-top: 10px;
   }
+  .demo-switcher {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    max-width: 520px;
+    margin: -30px auto 28px;
+  }
+  .demo-nav {
+    border: 1px solid rgba(46,125,50,0.2);
+    background: rgba(255,255,255,0.82);
+    color: #1b5e20;
+    border-radius: 999px;
+    padding: 8px 13px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(27,94,32,0.08);
+  }
+  .demo-nav.active {
+    background: #1b5e20;
+    color: #fff;
+    border-color: #1b5e20;
+  }
   .mockup-row {
     display: flex;
     justify-content: center;
@@ -43,6 +76,12 @@
     flex-wrap: wrap;
     max-width: 1400px;
     margin: 0 auto;
+  }
+  .mockup-row.app-mode .screen-wrap {
+    display: none;
+  }
+  .mockup-row.app-mode .screen-wrap.is-active {
+    display: flex;
   }
   .screen-wrap {
     display: flex;
@@ -133,13 +172,18 @@
   }
   .app-header .tabs {
     display: flex;
-    gap: 16px;
+    gap: 10px;
     margin-top: 12px;
     font-size: 13px;
   }
   .app-header .tab {
     opacity: 0.7;
     padding-bottom: 4px;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    font: inherit;
   }
   .app-header .tab.active {
     opacity: 1;
@@ -213,11 +257,26 @@
     background: #fff;
     width: 75%;
     border-radius: 3px;
+    transition: width 0.25s ease;
   }
   .progress-text {
     font-size: 11px;
     margin-top: 4px;
     opacity: 0.85;
+  }
+  .hero-actions {
+    margin-top: 14px;
+  }
+  .hero-actions .btn {
+    border: 1px solid rgba(255,255,255,0.35);
+  }
+  .hero-actions .btn-secondary {
+    background: rgba(255,255,255,0.94);
+    color: #1b5e20;
+  }
+  .hero-actions .btn-primary {
+    background: #fbc02d;
+    color: #1b3a1d;
   }
   .recommend-item {
     display: flex;
@@ -266,6 +325,7 @@
   }
   .btn {
     flex: 1;
+    min-width: 0;
     padding: 10px;
     border-radius: 10px;
     text-align: center;
@@ -276,6 +336,47 @@
   }
   .btn-primary { background: #2e7d32; color: #fff; }
   .btn-secondary { background: #e8f5e9; color: #2e7d32; }
+  .btn:focus-visible,
+  .demo-nav:focus-visible,
+  .nav-item:focus-visible,
+  .filter-chip:focus-visible,
+  .app-header .tab:focus-visible {
+    outline: 3px solid rgba(251,192,45,0.65);
+    outline-offset: 2px;
+  }
+  .state-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .state-item {
+    min-height: 62px;
+    border: 1px solid #edf3ec;
+    border-radius: 12px;
+    padding: 10px;
+    background: #fbfdfb;
+  }
+  .state-item .label {
+    color: #757575;
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
+  .state-item .value {
+    color: #1b5e20;
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    border-radius: 999px;
+    padding: 5px 9px;
+    background: #edf6ed;
+    color: #2e7d32;
+    font-size: 11px;
+    font-weight: 700;
+  }
   /* ─── Screen 2: Map ─── */
   .map-screen {
     background: #f5f7f4;
@@ -362,6 +463,7 @@
     font-size: 12px;
     white-space: nowrap;
     flex-shrink: 0;
+    cursor: pointer;
   }
   .filter-chip.active {
     background: #2e7d32;
@@ -412,6 +514,9 @@
     display: flex;
     align-items: center;
     gap: 12px;
+  }
+  .sheet-shop > div {
+    min-width: 0;
   }
   .shop-icon {
     width: 44px;
@@ -548,6 +653,78 @@
     color: #558b2f;
     margin-top: 4px;
   }
+  /* ─── Screen 4: Member / Proof Shell ─── */
+  .proof-status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255,255,255,0.25);
+  }
+  .proof-id {
+    max-width: 180px;
+    text-align: right;
+    font-size: 12px;
+    line-height: 1.4;
+    word-break: break-word;
+    opacity: 0.9;
+  }
+  .proof-row {
+    display: grid;
+    grid-template-columns: 88px 1fr;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 12px;
+  }
+  .proof-row:last-child { border-bottom: none; }
+  .proof-row .label { color: #757575; }
+  .proof-row .value {
+    color: #263126;
+    font-weight: 600;
+    line-height: 1.4;
+    word-break: break-word;
+  }
+  .audit-list {
+    list-style: none;
+  }
+  .audit-list li {
+    position: relative;
+    padding: 0 0 12px 18px;
+    color: #424242;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+  .audit-list li::before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #43a047;
+  }
+  .audit-list li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 12px;
+    left: 3px;
+    width: 2px;
+    height: calc(100% - 12px);
+    background: #d7ead7;
+  }
+  .privacy-note {
+    border-left: 4px solid #2e7d32;
+    background: #f5faf5;
+    border-radius: 10px;
+    padding: 10px 12px;
+    color: #4d654d;
+    font-size: 12px;
+    line-height: 1.5;
+  }
   /* Bottom Nav */
   .bottom-nav {
     height: 65px;
@@ -565,9 +742,22 @@
     gap: 2px;
     color: #9e9e9e;
     font-size: 10px;
+    width: 25%;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    min-width: 0;
   }
   .nav-item.active { color: #2e7d32; }
   .nav-item .icon { font-size: 20px; }
+  .live-region {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
   .footnote {
     text-align: center;
     margin-top: 50px;
@@ -576,6 +766,35 @@
     line-height: 1.6;
   }
   .footnote strong { color: #1b5e20; }
+  @media (max-width: 720px) {
+    body { padding: 24px 12px; }
+    .header { margin-bottom: 28px; }
+    .header h1 { font-size: 28px; }
+    .mockup-row { gap: 18px; }
+  }
+  @media (max-width: 420px) {
+    body { padding: 20px 10px; }
+    .phone {
+      width: min(340px, calc(100vw - 20px));
+      height: min(700px, calc((100vw - 20px) * 2.06));
+      border-radius: 34px;
+      padding: 10px;
+    }
+    .screen { border-radius: 26px; }
+    .app-header { padding: 8px 14px 12px; }
+    .app-header .user { font-size: 16px; }
+    .app-header .tabs {
+      justify-content: space-between;
+      gap: 6px;
+      font-size: 12px;
+    }
+    .body { padding: 12px; }
+    .card { padding: 14px; }
+    .state-list { grid-template-columns: 1fr; }
+    .map-filters { left: 12px; right: 12px; }
+    .map-search { left: 12px; right: 12px; }
+    .legend { left: 12px; bottom: 76px; }
+  }
 </style>
 </head>
 <body>
@@ -586,10 +805,18 @@
   <span class="tag">玩點生活・智慧串聯</span>
 </div>
 
-<div class="mockup-row">
+<div class="demo-switcher" aria-label="Prototype 區塊導覽">
+  <button class="demo-nav active" type="button" data-nav="home">首頁</button>
+  <button class="demo-nav" type="button" data-nav="map">AI 路線</button>
+  <button class="demo-nav" type="button" data-nav="carbon">碳足跡</button>
+  <button class="demo-nav" type="button" data-nav="proof">可信證明</button>
+</div>
+
+<div class="mockup-row app-mode" data-app>
+  <div class="live-region" aria-live="polite" data-live-region></div>
 
   <!-- ═══ Screen 1: Home / Green Point Report ═══ -->
-  <div class="screen-wrap">
+  <div class="screen-wrap is-active" data-view="home">
     <div class="screen-label">
       <span class="num">1</span>
       <span class="title">首頁・今日綠點報告</span>
@@ -603,26 +830,52 @@
         <div class="app-header">
           <div class="greeting">早安 ☀</div>
           <div class="user">Sofia,今天也是綠捷客 🌿</div>
-          <div class="tabs">
-            <span class="tab active">首頁</span>
-            <span class="tab">地圖</span>
-            <span class="tab">碳足跡</span>
-            <span class="tab">會員</span>
+          <div class="tabs" role="tablist" aria-label="主要功能">
+            <button class="tab active" type="button" data-nav="home">首頁</button>
+            <button class="tab" type="button" data-nav="map">地圖</button>
+            <button class="tab" type="button" data-nav="carbon">碳足跡</button>
+            <button class="tab" type="button" data-nav="proof">會員</button>
           </div>
         </div>
         <div class="body">
           <div class="card hero-card">
             <div class="card-title">🌿 本月碳節省</div>
-            <div class="big-num">8.2 <span class="unit">kg CO₂</span></div>
+            <div class="big-num"><span data-field="monthlyCarbon">8.2</span> <span class="unit">kg CO₂</span></div>
             <div class="multiplier">
               <div>
                 <div class="label">目前綠點乘數</div>
-                <div class="progress">
-                  <div class="progress-fill"></div>
+                  <div class="progress" aria-hidden="true">
+                  <div class="progress-fill" data-field="carbonProgress"></div>
                 </div>
-                <div class="progress-text">距 1.5x 加成還差 1.8 kg</div>
+                <div class="progress-text" data-field="nextThreshold">距 1.5x 加成還差 1.8 kg</div>
               </div>
-              <div class="value">⭐ 1.2x</div>
+              <div class="value">⭐ <span data-field="multiplier">1.2x</span></div>
+            </div>
+            <div class="action-row hero-actions">
+              <button class="btn btn-secondary" type="button" data-action="complete-trip">完成通勤</button>
+              <button class="btn btn-primary" type="button" data-nav="map">看路線</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">🧭 今日任務狀態</div>
+            <div class="state-list">
+              <div class="state-item">
+                <div class="label">捷運點數</div>
+                <div class="value"><span data-field="points">480</span> 點</div>
+              </div>
+              <div class="state-item">
+                <div class="label">本月搭乘</div>
+                <div class="value"><span data-field="trips">18</span> 趟</div>
+              </div>
+              <div class="state-item">
+                <div class="label">可信證明</div>
+                <div class="value" data-field="proofShort">等待資料</div>
+              </div>
+              <div class="state-item">
+                <div class="label">目前畫面</div>
+                <div class="value" data-field="currentView">首頁</div>
+              </div>
             </div>
           </div>
 
@@ -653,23 +906,23 @@
               <div class="badge badge-earn">+20 點</div>
             </div>
             <div class="action-row">
-              <button class="btn btn-secondary">分享減碳成績</button>
-              <button class="btn btn-primary">查看完整路線</button>
+              <button class="btn btn-secondary" type="button" data-action="complete-trip">完成示範通勤</button>
+              <button class="btn btn-primary" type="button" data-nav="map">查看完整路線</button>
             </div>
           </div>
         </div>
         <div class="bottom-nav">
-          <div class="nav-item active"><span class="icon">🏠</span>首頁</div>
-          <div class="nav-item"><span class="icon">🗺</span>地圖</div>
-          <div class="nav-item"><span class="icon">🌍</span>碳足跡</div>
-          <div class="nav-item"><span class="icon">👤</span>會員</div>
+          <button class="nav-item active" type="button" data-nav="home"><span class="icon">🏠</span>首頁</button>
+          <button class="nav-item" type="button" data-nav="map"><span class="icon">🗺</span>地圖</button>
+          <button class="nav-item" type="button" data-nav="carbon"><span class="icon">🌍</span>碳足跡</button>
+          <button class="nav-item" type="button" data-nav="proof"><span class="icon">👤</span>會員</button>
         </div>
       </div>
     </div>
   </div>
 
   <!-- ═══ Screen 2: Map / AI Route ═══ -->
-  <div class="screen-wrap">
+  <div class="screen-wrap" data-view="map">
     <div class="screen-label">
       <span class="num">2</span>
       <span class="title">AI 點數路線地圖</span>
@@ -699,12 +952,12 @@
             <input placeholder="搜尋商家、車站..." value="">
           </div>
 
-          <div class="map-filters">
-            <div class="filter-chip active">全部</div>
-            <div class="filter-chip">🍱 餐飲</div>
-            <div class="filter-chip">🛍 購物</div>
-            <div class="filter-chip">☕ 飲品</div>
-            <div class="filter-chip">📚 文化</div>
+          <div class="map-filters" aria-label="商家類型篩選">
+            <button class="filter-chip active" type="button" data-filter="all">全部</button>
+            <button class="filter-chip" type="button" data-filter="food">🍱 餐飲</button>
+            <button class="filter-chip" type="button" data-filter="shopping">🛍 購物</button>
+            <button class="filter-chip" type="button" data-filter="drink">☕ 飲品</button>
+            <button class="filter-chip" type="button" data-filter="culture">📚 文化</button>
           </div>
 
           <div class="legend">
@@ -725,28 +978,28 @@
             <div class="sheet-shop">
               <div class="shop-icon">☕</div>
               <div style="flex:1">
-                <div style="font-weight:600; font-size:15px;">cama café・忠孝店</div>
-                <div style="font-size:12px; color:#757575; margin-top:2px;">忠孝復興站 ・ 距 120m</div>
+                <div style="font-weight:600; font-size:15px;" data-field="merchantName">cama café・忠孝店</div>
+                <div style="font-size:12px; color:#757575; margin-top:2px;" data-field="merchantStation">忠孝復興站 ・ 距 120m</div>
                 <div style="margin-top:6px;">
-                  <span class="badge badge-earn">累點 1:5 加倍</span>
-                  <span class="badge badge-spend" style="margin-left:6px;">用點折 $50</span>
+                  <span class="badge badge-earn" data-field="merchantEarn">累點 1:5 加倍</span>
+                  <span class="badge badge-spend" style="margin-left:6px;" data-field="merchantSpend">用點折 $50</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div class="bottom-nav">
-          <div class="nav-item"><span class="icon">🏠</span>首頁</div>
-          <div class="nav-item active"><span class="icon">🗺</span>地圖</div>
-          <div class="nav-item"><span class="icon">🌍</span>碳足跡</div>
-          <div class="nav-item"><span class="icon">👤</span>會員</div>
+          <button class="nav-item" type="button" data-nav="home"><span class="icon">🏠</span>首頁</button>
+          <button class="nav-item active" type="button" data-nav="map"><span class="icon">🗺</span>地圖</button>
+          <button class="nav-item" type="button" data-nav="carbon"><span class="icon">🌍</span>碳足跡</button>
+          <button class="nav-item" type="button" data-nav="proof"><span class="icon">👤</span>會員</button>
         </div>
       </div>
     </div>
   </div>
 
   <!-- ═══ Screen 3: Carbon Footprint Dashboard ═══ -->
-  <div class="screen-wrap">
+  <div class="screen-wrap" data-view="carbon">
     <div class="screen-label">
       <span class="num">3</span>
       <span class="title">個人碳足跡儀表板</span>
@@ -769,19 +1022,19 @@
         <div class="body">
           <div class="stat-grid">
             <div class="stat-mini">
-              <div class="num">32</div>
+              <div class="num"><span data-field="trips">18</span></div>
               <div class="lbl">本月搭乘趟數</div>
             </div>
             <div class="stat-mini">
-              <div class="num">296 <span style="font-size:14px">km</span></div>
+              <div class="num"><span data-field="distance">91</span> <span style="font-size:14px">km</span></div>
               <div class="lbl">累計里程</div>
             </div>
           </div>
 
           <div class="tree-card">
             <div class="tree-emoji">🌳🌳</div>
-            <div class="num">26.6 kg CO₂</div>
-            <div class="desc">本月碳節省 ≈ 種植 2.2 棵樹</div>
+            <div class="num"><span data-field="monthlyCarbon">8.2</span> kg CO₂</div>
+            <div class="desc">本月碳節省 ≈ 種植 <span data-field="treeEquivalent">0.7</span> 棵樹</div>
           </div>
 
           <div class="chart-card">
@@ -813,8 +1066,8 @@
 
           <div class="level-bar">
             <div class="lvl-title">🌿 目前等級・綠點乘數</div>
-            <div class="lvl-num">1.5x 加成中</div>
-            <div class="rank">全市排名 前 15%・領先 85,000 位用戶</div>
+            <div class="lvl-num"><span data-field="multiplier">1.2x</span> 加成中</div>
+            <div class="rank">本月還差 <span data-field="nextKg">1.8</span> kg 可解鎖下一階段</div>
             <div class="badges">
               <div class="achievement">
                 🏆<div class="lbl">通勤達人</div>
@@ -829,15 +1082,93 @@
           </div>
 
           <div class="action-row">
-            <button class="btn btn-secondary">查看排行榜</button>
-            <button class="btn btn-primary">分享到社群</button>
+            <button class="btn btn-secondary" type="button" data-action="complete-trip">完成示範通勤</button>
+            <button class="btn btn-primary" type="button" data-nav="proof">查看可信證明</button>
           </div>
         </div>
         <div class="bottom-nav">
-          <div class="nav-item"><span class="icon">🏠</span>首頁</div>
-          <div class="nav-item"><span class="icon">🗺</span>地圖</div>
-          <div class="nav-item active"><span class="icon">🌍</span>碳足跡</div>
-          <div class="nav-item"><span class="icon">👤</span>會員</div>
+          <button class="nav-item" type="button" data-nav="home"><span class="icon">🏠</span>首頁</button>
+          <button class="nav-item" type="button" data-nav="map"><span class="icon">🗺</span>地圖</button>
+          <button class="nav-item active" type="button" data-nav="carbon"><span class="icon">🌍</span>碳足跡</button>
+          <button class="nav-item" type="button" data-nav="proof"><span class="icon">👤</span>會員</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Screen 4: Member / Proof Shell ═══ -->
+  <div class="screen-wrap" data-view="proof">
+    <div class="screen-label">
+      <span class="num">4</span>
+      <span class="title">會員・可信數據證明</span>
+    </div>
+    <div class="phone">
+      <div class="screen">
+        <div class="status-bar">
+          <span>9:41</span>
+          <span class="icons">●●● 📶 🔋</span>
+        </div>
+        <div class="app-header">
+          <div class="greeting">會員中心</div>
+          <div class="user">🔐 我的綠捷客證明</div>
+          <div class="tabs" role="tablist" aria-label="主要功能">
+            <button class="tab" type="button" data-nav="home">首頁</button>
+            <button class="tab" type="button" data-nav="map">地圖</button>
+            <button class="tab" type="button" data-nav="carbon">碳足跡</button>
+            <button class="tab active" type="button" data-nav="proof">會員</button>
+          </div>
+        </div>
+        <div class="body">
+          <div class="card hero-card">
+            <div class="card-title">🔐 可信證明狀態</div>
+            <div class="big-num" style="font-size:26px;" data-field="proofStatus">等待資料</div>
+            <div class="proof-status">
+              <div>
+                <div class="label">本機示範紀錄</div>
+                <div class="progress">
+                  <div class="progress-fill" data-field="proofProgress"></div>
+                </div>
+              </div>
+              <div class="proof-id" data-field="proofId">尚未產生 NID</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">🧾 去識別資料摘要</div>
+            <div class="proof-row">
+              <div class="label">碳節省</div>
+              <div class="value"><span data-field="monthlyCarbon">8.2</span> kg CO₂，本月累積</div>
+            </div>
+            <div class="proof-row">
+              <div class="label">資料摘要</div>
+              <div class="value" data-field="routeDigest">僅保留距離、月份與任務類型，不顯示完整起訖站</div>
+            </div>
+            <div class="proof-row">
+              <div class="label">更新時間</div>
+              <div class="value" data-field="proofUpdated">尚未更新</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">🧱 Audit trail</div>
+            <ul class="audit-list">
+              <li>完成捷運通勤後建立本機通勤事件。</li>
+              <li>碳節省與點數狀態寫入會員紀錄。</li>
+              <li>使用者同意後才註冊可信證明。</li>
+            </ul>
+            <div class="privacy-note">本機示範不會連線、不會上傳個人資料，也不會暴露完整路線。</div>
+          </div>
+
+          <div class="action-row">
+            <button class="btn btn-secondary" type="button" data-action="complete-trip">完成示範通勤</button>
+            <button class="btn btn-primary" type="button" data-action="generate-proof">產生示範證明</button>
+          </div>
+        </div>
+        <div class="bottom-nav">
+          <button class="nav-item" type="button" data-nav="home"><span class="icon">🏠</span>首頁</button>
+          <button class="nav-item" type="button" data-nav="map"><span class="icon">🗺</span>地圖</button>
+          <button class="nav-item" type="button" data-nav="carbon"><span class="icon">🌍</span>碳足跡</button>
+          <button class="nav-item active" type="button" data-nav="proof"><span class="icon">👤</span>會員</button>
         </div>
       </div>
     </div>
@@ -847,8 +1178,254 @@
 
 <div class="footnote">
   <strong>團隊：通勤族也想拯救地球</strong> ・ 嚴世紀(Numbers Protocol) × 鍾天傑(LINE Pay) × 嚴世裕(台北市政府地政局)<br>
-  本原型以 HTML/CSS 製作,正式產品將整合於台北捷運 Go App,並串接環境部碳排係數資料集與捷運點數系統。
+  本原型以 HTML/CSS/JavaScript 製作,正式產品將整合於台北捷運 Go App,並串接環境部碳排係數資料集與捷運點數系統。
 </div>
+
+<script>
+(() => {
+  const viewLabels = {
+    home: "首頁",
+    map: "AI 路線",
+    carbon: "碳足跡",
+    proof: "會員證明"
+  };
+
+  const merchants = {
+    all: {
+      name: "cama café・忠孝店",
+      station: "忠孝復興站 ・ 距 120m",
+      earn: "累點 1:5 加倍",
+      spend: "用點折 $50"
+    },
+    food: {
+      name: "MiaCucina・大安店",
+      station: "大安站 ・ 距 180m",
+      earn: "低碳套餐 +18 點",
+      spend: "用點折 $80"
+    },
+    shopping: {
+      name: "全聯福利中心・復興店",
+      station: "忠孝復興站 ・ 距 240m",
+      earn: "自備袋 +12 點",
+      spend: "用點折 $30"
+    },
+    drink: {
+      name: "路易莎咖啡・大安站前",
+      station: "大安站 ・ 距 90m",
+      earn: "通勤早鳥 +15 點",
+      spend: "用點折 $40"
+    },
+    culture: {
+      name: "誠品書店・南西店",
+      station: "中山站 ・ 距 160m",
+      earn: "文化探索 +20 點",
+      spend: "用點折 $60"
+    }
+  };
+
+  const state = {
+    activeView: "home",
+    selectedFilter: "all",
+    metrics: {
+      monthlyCarbonKg: 8.2,
+      distanceKm: 91,
+      trips: 18,
+      points: 480
+    },
+    proof: {
+      status: "等待資料",
+      shortStatus: "等待資料",
+      id: "尚未產生 NID",
+      updated: "尚未更新",
+      routeDigest: "僅保留距離、月份與任務類型，不顯示完整起訖站",
+      progress: 18
+    }
+  };
+
+  function getMultiplier(kg) {
+    if (kg >= 10) return 1.5;
+    if (kg >= 5) return 1.2;
+    return 1.0;
+  }
+
+  function getNextThreshold(kg) {
+    if (kg < 5) return { target: 5, label: "1.2x" };
+    if (kg < 10) return { target: 10, label: "1.5x" };
+    return { target: 15, label: "社群挑戰" };
+  }
+
+  function formatNumber(value, digits = 1) {
+    return Number(value).toFixed(digits);
+  }
+
+  function setText(field, value) {
+    document.querySelectorAll(`[data-field="${field}"]`).forEach((node) => {
+      node.textContent = value;
+    });
+  }
+
+  function setProgress(field, percent) {
+    document.querySelectorAll(`[data-field="${field}"]`).forEach((node) => {
+      node.style.width = `${Math.max(0, Math.min(100, percent))}%`;
+    });
+  }
+
+  function announce(message) {
+    const liveRegion = document.querySelector("[data-live-region]");
+    if (liveRegion) liveRegion.textContent = message;
+  }
+
+  function completeTrip() {
+    const distanceAdded = 8;
+    const carbonAdded = 0.72;
+    const nextCarbon = state.metrics.monthlyCarbonKg + carbonAdded;
+    const nextMultiplier = getMultiplier(nextCarbon);
+
+    state.metrics.monthlyCarbonKg = nextCarbon;
+    state.metrics.distanceKm += distanceAdded;
+    state.metrics.trips += 1;
+    state.metrics.points += Math.round(18 * nextMultiplier);
+    state.proof.status = "已有可註冊資料";
+    state.proof.shortStatus = "可產生";
+    state.proof.updated = new Date().toLocaleString("zh-TW", {
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit"
+    });
+    state.proof.routeDigest = `本月 ${state.metrics.trips} 趟、${Math.round(state.metrics.distanceKm)} km；起訖站以匿名摘要隱藏`;
+    state.proof.progress = 64;
+
+    render();
+    announce(`已完成示範通勤，新增 ${formatNumber(carbonAdded)} kg CO2 與捷運點數。`);
+  }
+
+  function generateProof() {
+    if (state.proof.shortStatus === "等待資料") {
+      state.proof.status = "請先完成通勤";
+      state.proof.shortStatus = "需通勤";
+      state.proof.progress = 28;
+      render();
+      announce("請先完成一筆示範通勤，再產生可信證明。");
+      return;
+    }
+
+    const digest = Math.round(state.metrics.monthlyCarbonKg * 1000).toString(16).toUpperCase();
+    state.proof.status = "已產生本機證明";
+    state.proof.shortStatus = "已產生";
+    state.proof.id = `NID-DEMO-${digest}`;
+    state.proof.progress = 100;
+    render();
+    announce("已產生本機示範證明。");
+  }
+
+  function renderNavigation() {
+    document.querySelectorAll("[data-view]").forEach((section) => {
+      const isActive = section.dataset.view === state.activeView;
+      section.classList.toggle("is-active", isActive);
+    });
+
+    document.querySelectorAll("[data-nav]").forEach((button) => {
+      const isPrimaryNav = button.classList.contains("tab")
+        || button.classList.contains("nav-item")
+        || button.classList.contains("demo-nav");
+      if (!isPrimaryNav) return;
+
+      const isActive = button.dataset.nav === state.activeView;
+      button.classList.toggle("active", isActive);
+
+      if (button.classList.contains("tab")) {
+        button.setAttribute("aria-selected", isActive ? "true" : "false");
+      } else {
+        if (isActive) {
+          button.setAttribute("aria-current", "page");
+        } else {
+          button.removeAttribute("aria-current");
+        }
+      }
+    });
+  }
+
+  function renderMetrics() {
+    const carbon = state.metrics.monthlyCarbonKg;
+    const multiplier = getMultiplier(carbon);
+    const threshold = getNextThreshold(carbon);
+    const remainingKg = Math.max(0, threshold.target - carbon);
+    const progress = threshold.target === 15 && carbon >= 10
+      ? 100
+      : (carbon / threshold.target) * 100;
+
+    setText("monthlyCarbon", formatNumber(carbon));
+    setText("distance", Math.round(state.metrics.distanceKm));
+    setText("trips", state.metrics.trips);
+    setText("points", state.metrics.points);
+    setText("multiplier", `${multiplier.toFixed(1)}x`);
+    setText("currentView", viewLabels[state.activeView]);
+    setText("treeEquivalent", formatNumber(carbon / 12.1));
+    setText("nextKg", formatNumber(remainingKg));
+    setText("nextThreshold", remainingKg > 0
+      ? `距 ${threshold.label} 加成還差 ${formatNumber(remainingKg)} kg`
+      : "已解鎖目前最高加成");
+    setProgress("carbonProgress", progress);
+  }
+
+  function renderMerchant() {
+    const merchant = merchants[state.selectedFilter] || merchants.all;
+    setText("merchantName", merchant.name);
+    setText("merchantStation", merchant.station);
+    setText("merchantEarn", merchant.earn);
+    setText("merchantSpend", merchant.spend);
+
+    document.querySelectorAll("[data-filter]").forEach((button) => {
+      const isActive = button.dataset.filter === state.selectedFilter;
+      button.classList.toggle("active", isActive);
+      button.setAttribute("aria-pressed", isActive ? "true" : "false");
+    });
+  }
+
+  function renderProof() {
+    setText("proofStatus", state.proof.status);
+    setText("proofShort", state.proof.shortStatus);
+    setText("proofId", state.proof.id);
+    setText("proofUpdated", state.proof.updated);
+    setText("routeDigest", state.proof.routeDigest);
+    setProgress("proofProgress", state.proof.progress);
+  }
+
+  function render() {
+    renderNavigation();
+    renderMetrics();
+    renderMerchant();
+    renderProof();
+  }
+
+  document.addEventListener("click", (event) => {
+    const navButton = event.target.closest("[data-nav]");
+    if (navButton) {
+      state.activeView = navButton.dataset.nav;
+      render();
+      announce(`已切換到${viewLabels[state.activeView]}。`);
+      return;
+    }
+
+    const filterButton = event.target.closest("[data-filter]");
+    if (filterButton) {
+      state.selectedFilter = filterButton.dataset.filter;
+      render();
+      announce(`已更新商家篩選。`);
+      return;
+    }
+
+    const actionButton = event.target.closest("[data-action]");
+    if (!actionButton) return;
+
+    if (actionButton.dataset.action === "complete-trip") completeTrip();
+    if (actionButton.dataset.action === "generate-proof") generateProof();
+  });
+
+  render();
+})();
+</script>
 
 </body>
 </html>
