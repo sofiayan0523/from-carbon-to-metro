@@ -6,6 +6,20 @@
 
 🔗 **[Live Demo](https://sofiayan0523.github.io/from-carbon-to-metro/)**
 
+## 本地預覽
+
+目前專案是純靜態 HTML/CSS，可直接開啟 `index.html`，或用本機靜態 server 預覽：
+
+```bash
+python3 -m http.server 4173 --bind 127.0.0.1
+```
+
+開啟 <http://127.0.0.1:4173/>。
+
+## 決賽交付策略
+
+決賽 prototype 採 GitHub Pages 作為線上展示，並在最後交付離線備援包，確保主辦單位電腦沒有網路時仍可完成 demo。細節見 [`docs/delivery-strategy.md`](docs/delivery-strategy.md)。
+
 ## 專案介紹
 
 「從碳客變捷客」是整合於台北捷運 Go App 的 AI 智慧服務模組，結合**個人化點數導航**與**碳足跡回饋**雙引擎：
