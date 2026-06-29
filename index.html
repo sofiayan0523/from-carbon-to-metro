@@ -349,6 +349,8 @@
   .sort-chip:focus-visible,
   .trip-chip:focus-visible,
   .recommendation-card:focus-visible,
+  .report-tab:focus-visible,
+  .modal-close:focus-visible,
   .pin:focus-visible,
   .app-header .tab:focus-visible {
     outline: 3px solid rgba(251,192,45,0.65);
@@ -408,6 +410,112 @@
     display: block;
     margin-top: 2px;
     font-size: 13px;
+  }
+  .report-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .report-stat {
+    min-width: 0;
+    border: 1px solid #edf3ec;
+    border-radius: 12px;
+    padding: 10px 8px;
+    background: #fbfdfb;
+  }
+  .report-stat > span {
+    display: block;
+    color: #6d806d;
+    font-size: 10px;
+    line-height: 1.3;
+  }
+  .report-stat strong {
+    display: block;
+    margin-top: 4px;
+    color: #1b5e20;
+    font-size: 15px;
+    line-height: 1.25;
+  }
+  .report-stat.accent {
+    border-color: rgba(216,183,106,0.45);
+    background: #fffaf0;
+  }
+  .task-list {
+    display: grid;
+    gap: 9px;
+  }
+  .task-item {
+    border: 1px solid #edf3ec;
+    border-radius: 13px;
+    padding: 10px;
+    background: #fbfdfb;
+  }
+  .task-top {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    align-items: start;
+  }
+  .task-title {
+    color: #263126;
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.35;
+  }
+  .task-reward {
+    margin-top: 3px;
+    color: #6d806d;
+    font-size: 10px;
+    line-height: 1.35;
+  }
+  .task-status {
+    border-radius: 999px;
+    padding: 4px 7px;
+    background: #edf6ed;
+    color: #1b5e20;
+    font-size: 10px;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+  .task-status.done {
+    background: #263126;
+    color: #fff;
+  }
+  .task-progress {
+    height: 6px;
+    margin-top: 9px;
+    border-radius: 999px;
+    background: #e7eee6;
+    overflow: hidden;
+  }
+  .task-progress-fill {
+    height: 100%;
+    width: 0;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #7f9c7e, #d8b76a);
+    transition: width 0.25s ease;
+  }
+  .share-teaser {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: center;
+  }
+  .share-preview {
+    min-width: 0;
+  }
+  .share-preview strong {
+    display: block;
+    color: #263126;
+    font-size: 14px;
+    line-height: 1.35;
+  }
+  .share-preview span {
+    display: block;
+    margin-top: 3px;
+    color: #6d806d;
+    font-size: 11px;
+    line-height: 1.4;
   }
   /* ─── Screen 2: Map ─── */
   .map-screen {
@@ -744,6 +852,9 @@
   .bar.peak {
     background: linear-gradient(180deg, #81c784, #2e7d32);
   }
+  .bar.today {
+    background: linear-gradient(180deg, #d8b76a, #7f9c7e);
+  }
   .x-axis {
     display: flex;
     gap: 6px;
@@ -793,6 +904,10 @@
     font-size: 9px;
     margin-top: 2px;
     opacity: 0.9;
+  }
+  .achievement.locked {
+    opacity: 0.55;
+    filter: grayscale(0.6);
   }
   .tree-card {
     background: linear-gradient(135deg, #f1f8e9, #e8f5e9);
@@ -914,6 +1029,45 @@
     margin-top: 2px;
     font-size: 12px;
   }
+  .report-panel {
+    background: #fff;
+    border: 1px solid #edf3ec;
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+  .report-panel .report-kicker {
+    color: #6d806d;
+    font-size: 11px;
+    font-weight: 800;
+  }
+  .report-panel .report-primary {
+    margin-top: 5px;
+    color: #1b5e20;
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1.1;
+  }
+  .report-panel .report-secondary {
+    margin-top: 5px;
+    color: #405f41;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+  .report-meter {
+    height: 7px;
+    margin-top: 10px;
+    border-radius: 999px;
+    background: #e7eee6;
+    overflow: hidden;
+  }
+  .report-meter-fill {
+    height: 100%;
+    width: 0;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #2e7d32, #d8b76a);
+    transition: width 0.25s ease;
+  }
   .threshold-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1018,6 +1172,107 @@
     font-size: 12px;
     line-height: 1.5;
   }
+  .share-modal[hidden] {
+    display: none;
+  }
+  .share-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(26,26,26,0.52);
+  }
+  .share-panel {
+    width: min(360px, calc(100vw - 32px));
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 20px 70px rgba(0,0,0,0.28);
+    overflow: hidden;
+  }
+  .share-panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 16px;
+    border-bottom: 1px solid #edf3ec;
+  }
+  .share-panel-head h2 {
+    color: #263126;
+    font-size: 15px;
+    line-height: 1.35;
+  }
+  .modal-close {
+    width: 32px;
+    height: 32px;
+    border: 0;
+    border-radius: 50%;
+    background: #edf3ec;
+    color: #263126;
+    font-size: 18px;
+    font-weight: 800;
+    cursor: pointer;
+  }
+  .share-card {
+    margin: 16px;
+    border-radius: 16px;
+    padding: 18px;
+    background:
+      linear-gradient(120deg, rgba(216,183,106,0.20) 0 1px, transparent 1px 24px),
+      linear-gradient(145deg, #263126, #1b5e20 62%, #7f9c7e);
+    color: #fff;
+  }
+  .share-card .brand {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    color: rgba(255,255,255,0.78);
+    font-size: 10px;
+    line-height: 1.35;
+  }
+  .share-card h3 {
+    margin-top: 16px;
+    font-size: 24px;
+    line-height: 1.18;
+    letter-spacing: 0;
+  }
+  .share-card .share-result {
+    margin-top: 10px;
+    color: rgba(255,255,255,0.84);
+    font-size: 12px;
+    line-height: 1.55;
+  }
+  .share-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .share-metric {
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 12px;
+    padding: 10px;
+    background: rgba(255,255,255,0.12);
+  }
+  .share-metric > span {
+    display: block;
+    font-size: 9px;
+    color: rgba(255,255,255,0.72);
+  }
+  .share-metric strong {
+    display: block;
+    margin-top: 3px;
+    font-size: 14px;
+  }
+  .share-note {
+    margin: 0 16px 16px;
+    color: #6d806d;
+    font-size: 11px;
+    line-height: 1.5;
+  }
   /* Bottom Nav */
   .bottom-nav {
     height: 65px;
@@ -1084,6 +1339,8 @@
     .body { padding: 12px; }
     .card { padding: 14px; }
     .state-list { grid-template-columns: 1fr; }
+    .report-summary-grid { grid-template-columns: 1fr; }
+    .share-teaser { grid-template-columns: 1fr; }
     .map-filters { left: 12px; right: 12px; }
     .preference-row,
     .sort-row { left: 12px; right: 12px; }
@@ -1164,6 +1421,24 @@
           </div>
 
           <div class="card">
+            <div class="card-title">📊 今日綠點報告</div>
+            <div class="report-summary-grid">
+              <div class="report-stat">
+                <span>本日減碳</span>
+                <strong><span data-field="todayCarbon">0.00</span> kg</strong>
+              </div>
+              <div class="report-stat accent">
+                <span>本月目標</span>
+                <strong><span data-field="monthlyGoalProgress">68</span>%</strong>
+              </div>
+              <div class="report-stat">
+                <span>年度累積</span>
+                <strong><span data-field="yearlyCarbon">73.4</span> kg</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
             <div class="card-title">🧭 今日任務狀態</div>
             <div class="state-list">
               <div class="state-item">
@@ -1194,11 +1469,27 @@
           </div>
 
           <div class="card">
+            <div class="card-title">✅ 任務與成就</div>
+            <div class="task-list" data-task-list aria-label="今日任務進度"></div>
+          </div>
+
+          <div class="card">
             <div class="card-title">📍 今日 AI 推薦路線</div>
             <div data-home-recommendations></div>
             <div class="action-row">
               <button class="btn btn-secondary" type="button" data-action="complete-trip">完成示範通勤</button>
               <button class="btn btn-primary" type="button" data-nav="map">查看完整路線</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">📣 分享今日成果</div>
+            <div class="share-teaser">
+              <div class="share-preview">
+                <strong data-field="shareHeadline">今天已累積 0.00 kg CO₂</strong>
+                <span data-field="shareSummary">完成通勤後會同步帶入本日減碳、點數與綠點乘數。</span>
+              </div>
+              <button class="btn btn-primary" type="button" data-action="open-share">產生分享卡</button>
             </div>
           </div>
         </div>
@@ -1328,9 +1619,9 @@
           <div class="greeting">5 月個人報告</div>
           <div class="user">🌍 我的碳足跡</div>
           <div class="tabs">
-            <span class="tab">本日</span>
-            <span class="tab active">本月</span>
-            <span class="tab">本年</span>
+            <button class="tab report-tab" type="button" data-report-mode="daily">本日</button>
+            <button class="tab report-tab active" type="button" data-report-mode="monthly">本月</button>
+            <button class="tab report-tab" type="button" data-report-mode="yearly">本年</button>
           </div>
         </div>
         <div class="body">
@@ -1342,6 +1633,15 @@
             <div class="stat-mini">
               <div class="num"><span data-field="distance">91</span> <span style="font-size:14px">km</span></div>
               <div class="lbl">累計里程</div>
+            </div>
+          </div>
+
+          <div class="report-panel">
+            <div class="report-kicker" data-field="reportModeLabel">本月報告</div>
+            <div class="report-primary" data-field="reportPrimary">8.2 kg CO₂</div>
+            <div class="report-secondary" data-field="reportSecondary">目標 12.0 kg，目前完成 68%。</div>
+            <div class="report-meter" aria-hidden="true">
+              <div class="report-meter-fill" data-field="reportProgress"></div>
             </div>
           </div>
 
@@ -1402,32 +1702,14 @@
               <span>每日減碳趨勢</span>
               <span style="font-size:11px;color:#9e9e9e">近 14 天</span>
             </div>
-            <div class="chart">
-              <div class="bar" style="height: 35%"></div>
-              <div class="bar" style="height: 50%"></div>
-              <div class="bar peak" style="height: 75%"></div>
-              <div class="bar" style="height: 45%"></div>
-              <div class="bar" style="height: 60%"></div>
-              <div class="bar" style="height: 30%"></div>
-              <div class="bar" style="height: 25%"></div>
-              <div class="bar" style="height: 55%"></div>
-              <div class="bar" style="height: 70%"></div>
-              <div class="bar peak" style="height: 85%"></div>
-              <div class="bar" style="height: 65%"></div>
-              <div class="bar" style="height: 50%"></div>
-              <div class="bar" style="height: 40%"></div>
-              <div class="bar peak" style="height: 90%"></div>
-            </div>
-            <div class="x-axis">
-              <span>5/2</span><span>5/4</span><span>5/6</span><span>5/8</span>
-              <span>5/10</span><span>5/12</span><span>今日</span>
-            </div>
+            <div class="chart" data-trend-chart aria-label="近 14 天每日減碳趨勢"></div>
+            <div class="x-axis" data-trend-axis></div>
           </div>
 
           <div class="level-bar">
             <div class="lvl-title">🌿 目前等級・綠點乘數</div>
             <div class="lvl-num"><span data-field="multiplier">1.2x</span> 加成中</div>
-            <div class="rank">本月還差 <span data-field="nextKg">1.8</span> kg，約 <span data-field="nextKm">20.0</span> km 可解鎖下一階段</div>
+            <div class="rank" data-field="levelRank">本月還差 1.8 kg，約 20.0 km 可解鎖下一階段</div>
             <div class="threshold-grid">
               <div class="threshold-step" data-threshold-step="5">
                 <span class="target">5 kg → 1.2x</span>
@@ -1438,17 +1720,7 @@
                 <span class="status" data-field="threshold10Status">還差 1.8 kg / 20.0 km</span>
               </div>
             </div>
-            <div class="badges">
-              <div class="achievement">
-                🏆<div class="lbl">通勤達人</div>
-              </div>
-              <div class="achievement">
-                🌱<div class="lbl">減碳新星</div>
-              </div>
-              <div class="achievement">
-                🎯<div class="lbl">連續 14 天</div>
-              </div>
-            </div>
+            <div class="badges" data-achievements aria-label="成就徽章"></div>
           </div>
 
           <div class="action-row">
@@ -1546,6 +1818,42 @@
 
 </div>
 
+<div class="share-modal" data-share-modal hidden role="dialog" aria-modal="true" aria-labelledby="share-card-title">
+  <div class="share-panel">
+    <div class="share-panel-head">
+      <h2 id="share-card-title">今日成果分享卡</h2>
+      <button class="modal-close" type="button" data-action="close-share" aria-label="關閉分享卡">×</button>
+    </div>
+    <div class="share-card">
+      <div class="brand">
+        <span>從碳客變捷客</span>
+        <span>Human Truth. Machine Proof.</span>
+      </div>
+      <h3 data-field="shareTitle">今天先把一趟通勤變成綠點。</h3>
+      <div class="share-result" data-field="shareResult">完成示範通勤後，這張卡會更新減碳與點數成果。</div>
+      <div class="share-grid">
+        <div class="share-metric">
+          <span>本日減碳</span>
+          <strong><span data-field="todayCarbon">0.00</span> kg</strong>
+        </div>
+        <div class="share-metric">
+          <span>捷運點數</span>
+          <strong><span data-field="points">480</span> 點</strong>
+        </div>
+        <div class="share-metric">
+          <span>綠點乘數</span>
+          <strong data-field="shareMultiplier">1.2x</strong>
+        </div>
+        <div class="share-metric">
+          <span>任務狀態</span>
+          <strong data-field="shareTaskStatus">待完成</strong>
+        </div>
+      </div>
+    </div>
+    <div class="share-note">分享卡只使用本機示範資料，保留碳節省、點數與任務狀態，不揭露完整起訖站。</div>
+  </div>
+</div>
+
 <div class="footnote">
   <strong>團隊：通勤族也想拯救地球</strong> ・ 嚴世紀(Numbers Protocol) × 鍾天傑(LINE Pay) × 嚴世裕(台北市政府地政局)<br>
   本原型以 HTML/CSS/JavaScript 製作,正式產品將整合於台北捷運 Go App,並串接環境部碳排係數資料集與捷運點數系統。
@@ -1583,6 +1891,10 @@
 
   const CARBON_GRAMS_PER_KM = 90;
   const KG_PER_GRAM = 1000;
+  const DAILY_GOAL_KG = 0.72;
+  const MONTHLY_GOAL_KG = 12;
+  const YEARLY_GOAL_KG = 120;
+  const TREND_LABELS = ["5/2", "5/4", "5/6", "5/8", "5/10", "5/12", "今日"];
 
   const tripCatalog = [
     {
@@ -1726,9 +2038,27 @@
     selectedSort: "smart",
     selectedMerchantId: "louisa-daan",
     selectedTripId: "daily",
+    reportMode: "monthly",
     searchTerm: "",
+    shareOpen: false,
     simulatedEarnedPoints: 0,
     simulatedSpentPoints: 0,
+    lastTrip: {
+      name: "尚未完成今日通勤",
+      distanceKm: 0,
+      carbonKg: 0,
+      points: 0
+    },
+    report: {
+      todayCarbonKg: 0,
+      yearlyCarbonKg: 73.4,
+      trendKg: [0.36, 0.52, 0.78, 0.47, 0.63, 0.31, 0.28, 0.58, 0.74, 0.89, 0.68, 0.51, 0.43, 0]
+    },
+    tasks: {
+      dailyTrip: 0,
+      merchantAction: 0,
+      shareCard: 0
+    },
     metrics: {
       monthlyCarbonKg: 8.2,
       distanceKm: 91,
@@ -1776,6 +2106,100 @@
 
   function formatInteger(value) {
     return Math.round(value).toLocaleString("zh-TW");
+  }
+
+  function clampPercent(value) {
+    return Math.max(0, Math.min(100, value));
+  }
+
+  function getMonthlyGoalPercent() {
+    return clampPercent((state.metrics.monthlyCarbonKg / MONTHLY_GOAL_KG) * 100);
+  }
+
+  function getTaskModels() {
+    return [
+      {
+        id: "daily-trip",
+        title: "完成今日捷運通勤",
+        reward: "完成後更新本日減碳、月報與綠點乘數",
+        progress: Math.min(state.tasks.dailyTrip, 1),
+        target: 1
+      },
+      {
+        id: "merchant-action",
+        title: "完成一筆沿線商家點數互動",
+        reward: "模擬累點或兌換後，點數報告會同步更新",
+        progress: Math.min(state.tasks.merchantAction, 1),
+        target: 1
+      },
+      {
+        id: "share-card",
+        title: "產生今日成果分享卡",
+        reward: "將減碳、點數與任務狀態整理成投票素材",
+        progress: Math.min(state.tasks.shareCard, 1),
+        target: 1
+      }
+    ];
+  }
+
+  function getCompletedTaskCount() {
+    return getTaskModels().filter((task) => task.progress >= task.target).length;
+  }
+
+  function getReportSummary() {
+    const today = state.report.todayCarbonKg;
+    const monthly = state.metrics.monthlyCarbonKg;
+    const yearly = state.report.yearlyCarbonKg;
+    const taskCount = getCompletedTaskCount();
+    const lastTripText = state.lastTrip.carbonKg > 0
+      ? `最近一次 ${formatNumber(state.lastTrip.distanceKm)} km，新增 ${formatNumber(state.lastTrip.carbonKg, 2)} kg 與 ${state.lastTrip.points} 點。`
+      : "今日尚未完成示範通勤。";
+
+    if (state.reportMode === "daily") {
+      return {
+        label: "本日報告",
+        primary: `${formatNumber(today, 2)} kg CO₂`,
+        secondary: `${lastTripText} 今日任務 ${taskCount}/3。`,
+        progress: clampPercent((today / DAILY_GOAL_KG) * 100)
+      };
+    }
+
+    if (state.reportMode === "yearly") {
+      return {
+        label: "本年報告",
+        primary: `${formatNumber(yearly)} kg CO₂`,
+        secondary: `年度目標 ${formatNumber(YEARLY_GOAL_KG)} kg，目前完成 ${Math.round(clampPercent((yearly / YEARLY_GOAL_KG) * 100))}%。`,
+        progress: clampPercent((yearly / YEARLY_GOAL_KG) * 100)
+      };
+    }
+
+    return {
+      label: "本月報告",
+      primary: `${formatNumber(monthly)} kg CO₂`,
+      secondary: `目標 ${formatNumber(MONTHLY_GOAL_KG)} kg，目前完成 ${Math.round(getMonthlyGoalPercent())}%；累計 ${state.metrics.trips} 趟 / ${Math.round(state.metrics.distanceKm)} km。`,
+      progress: getMonthlyGoalPercent()
+    };
+  }
+
+  function getShareCopy() {
+    const multiplier = getMultiplier(state.metrics.monthlyCarbonKg).toFixed(1);
+    const taskCount = getCompletedTaskCount();
+    const completedTrip = state.lastTrip.carbonKg > 0;
+
+    return {
+      headline: `今天已累積 ${formatNumber(state.report.todayCarbonKg, 2)} kg CO₂`,
+      summary: completedTrip
+        ? `最近一次 ${state.lastTrip.name} 帶來 ${state.lastTrip.points} 點，任務完成 ${taskCount}/3。`
+        : "完成通勤後會同步帶入本日減碳、點數與綠點乘數。",
+      title: completedTrip
+        ? `今天把 ${formatNumber(state.lastTrip.distanceKm)} km 通勤變成綠點。`
+        : "今天先把一趟通勤變成綠點。",
+      result: completedTrip
+        ? `本日減碳 ${formatNumber(state.report.todayCarbonKg, 2)} kg CO₂，本月已到 ${formatNumber(state.metrics.monthlyCarbonKg)} kg，捷運點數累積 ${state.metrics.points} 點。`
+        : "完成示範通勤後，這張卡會更新減碳與點數成果。",
+      multiplier: `${multiplier}x`,
+      taskStatus: taskCount === 3 ? "3/3 完成" : `${taskCount}/3 任務`
+    };
   }
 
   function setText(field, value) {
@@ -1893,11 +2317,22 @@
     const carbonAdded = calculateTripCarbonKg(distanceAdded);
     const nextCarbon = state.metrics.monthlyCarbonKg + carbonAdded;
     const nextMultiplier = getMultiplier(nextCarbon);
+    const pointsAdded = Math.round(trip.basePoints * nextMultiplier);
 
     state.metrics.monthlyCarbonKg = nextCarbon;
     state.metrics.distanceKm += distanceAdded;
     state.metrics.trips += 1;
-    state.metrics.points += Math.round(trip.basePoints * nextMultiplier);
+    state.metrics.points += pointsAdded;
+    state.report.todayCarbonKg += carbonAdded;
+    state.report.yearlyCarbonKg += carbonAdded;
+    state.report.trendKg[state.report.trendKg.length - 1] += carbonAdded;
+    state.tasks.dailyTrip = 1;
+    state.lastTrip = {
+      name: trip.name,
+      distanceKm: distanceAdded,
+      carbonKg: carbonAdded,
+      points: pointsAdded
+    };
     state.proof.status = "已有可註冊資料";
     state.proof.shortStatus = "可產生";
     state.proof.updated = new Date().toLocaleString("zh-TW", {
@@ -1939,6 +2374,7 @@
 
     state.metrics.points += earned;
     state.simulatedEarnedPoints += earned;
+    state.tasks.merchantAction = 1;
     render();
     announce(`${merchant.name} 已模擬累點，新增 ${earned} 點。`);
   }
@@ -1952,8 +2388,22 @@
 
     state.metrics.points -= merchant.spendCost;
     state.simulatedSpentPoints += merchant.spendCost;
+    state.tasks.merchantAction = 1;
     render();
     announce(`${merchant.name} 已模擬用 ${merchant.spendCost} 點折 $${merchant.spendDiscount}。`);
+  }
+
+  function openShareCard() {
+    state.shareOpen = true;
+    state.tasks.shareCard = 1;
+    render();
+    announce("已產生今日成果分享卡。");
+  }
+
+  function closeShareCard() {
+    state.shareOpen = false;
+    render();
+    announce("已關閉分享卡。");
   }
 
   function renderNavigation() {
@@ -2005,11 +2455,17 @@
     setText("multiplier", `${multiplier.toFixed(1)}x`);
     setText("currentView", viewLabels[state.activeView]);
     setText("treeEquivalent", formatNumber(carbon / 12.1));
+    setText("todayCarbon", formatNumber(state.report.todayCarbonKg, 2));
+    setText("yearlyCarbon", formatNumber(state.report.yearlyCarbonKg));
+    setText("monthlyGoalProgress", Math.round(getMonthlyGoalPercent()));
     setText("nextKg", formatNumber(remainingKg));
     setText("nextKm", formatNumber(remainingKm));
     setText("nextThreshold", remainingKg > 0
       ? `距 ${threshold.label} 加成還差 ${formatNumber(remainingKg)} kg`
       : "已解鎖 1.5x 最高加成");
+    setText("levelRank", threshold.maxReached
+      ? "已解鎖 1.5x 最高加成"
+      : `本月還差 ${formatNumber(remainingKg)} kg，約 ${formatNumber(remainingKm)} km 可解鎖下一階段`);
     setText("tripDistance", formatNumber(trip.distanceKm));
     setText("tripCarbon", formatNumber(tripCarbonKg, 2));
     setText("tripCarbonGrams", formatInteger(tripCarbonGrams));
@@ -2046,6 +2502,91 @@
         node.classList.toggle("current", isCurrent);
       });
     });
+  }
+
+  function renderReport() {
+    const report = getReportSummary();
+    setText("reportModeLabel", report.label);
+    setText("reportPrimary", report.primary);
+    setText("reportSecondary", report.secondary);
+    setProgress("reportProgress", report.progress);
+
+    document.querySelectorAll("[data-report-mode]").forEach((button) => {
+      const isActive = button.dataset.reportMode === state.reportMode;
+      button.classList.toggle("active", isActive);
+      button.setAttribute("aria-pressed", isActive ? "true" : "false");
+    });
+  }
+
+  function renderTasks() {
+    const container = document.querySelector("[data-task-list]");
+    if (!container) return;
+
+    container.innerHTML = getTaskModels().map((task) => {
+      const complete = task.progress >= task.target;
+      const percent = clampPercent((task.progress / task.target) * 100);
+      return `
+        <div class="task-item" data-task-id="${escapeHtml(task.id)}">
+          <div class="task-top">
+            <div>
+              <div class="task-title">${escapeHtml(task.title)}</div>
+              <div class="task-reward">${escapeHtml(task.reward)}</div>
+            </div>
+            <div class="task-status${complete ? " done" : ""}">${complete ? "已完成" : `${task.progress}/${task.target}`}</div>
+          </div>
+          <div class="task-progress" aria-hidden="true">
+            <div class="task-progress-fill" style="width:${percent}%"></div>
+          </div>
+        </div>
+      `;
+    }).join("");
+  }
+
+  function renderAchievements() {
+    const container = document.querySelector("[data-achievements]");
+    if (!container) return;
+
+    const multiplier = getMultiplier(state.metrics.monthlyCarbonKg);
+    const achievements = [
+      { icon: "🏆", label: "19 趟通勤", unlocked: state.metrics.trips >= 19 },
+      { icon: "🌱", label: `${multiplier.toFixed(1)}x 綠點`, unlocked: multiplier >= 1.2 },
+      { icon: "🎯", label: "任務完成", unlocked: state.tasks.dailyTrip >= 1 }
+    ];
+
+    container.innerHTML = achievements.map((achievement) => `
+      <div class="achievement${achievement.unlocked ? "" : " locked"}">
+        ${escapeHtml(achievement.icon)}<div class="lbl">${escapeHtml(achievement.label)}</div>
+      </div>
+    `).join("");
+  }
+
+  function renderTrendChart() {
+    const chart = document.querySelector("[data-trend-chart]");
+    const axis = document.querySelector("[data-trend-axis]");
+    if (!chart || !axis) return;
+
+    const maxKg = Math.max(DAILY_GOAL_KG, ...state.report.trendKg);
+    chart.innerHTML = state.report.trendKg.map((kg, index) => {
+      const height = Math.max(10, (kg / maxKg) * 100);
+      const isToday = index === state.report.trendKg.length - 1;
+      const isPeak = kg >= DAILY_GOAL_KG;
+      return `<div class="bar${isPeak ? " peak" : ""}${isToday ? " today" : ""}" style="height:${height}%" title="${formatNumber(kg, 2)} kg"></div>`;
+    }).join("");
+
+    axis.innerHTML = TREND_LABELS.map((label) => `<span>${escapeHtml(label)}</span>`).join("");
+  }
+
+  function renderShare() {
+    const copy = getShareCopy();
+    setText("shareHeadline", copy.headline);
+    setText("shareSummary", copy.summary);
+    setText("shareTitle", copy.title);
+    setText("shareResult", copy.result);
+    setText("shareMultiplier", copy.multiplier);
+    setText("shareTaskStatus", copy.taskStatus);
+
+    const modal = document.querySelector("[data-share-modal]");
+    if (modal) modal.hidden = !state.shareOpen;
   }
 
   function renderMerchant() {
@@ -2169,8 +2710,13 @@
   function render() {
     renderNavigation();
     renderMetrics();
+    renderReport();
+    renderTasks();
+    renderAchievements();
+    renderTrendChart();
     renderMerchant();
     renderProof();
+    renderShare();
   }
 
   document.addEventListener("click", (event) => {
@@ -2227,6 +2773,14 @@
       return;
     }
 
+    const reportButton = event.target.closest("[data-report-mode]");
+    if (reportButton) {
+      state.reportMode = reportButton.dataset.reportMode;
+      render();
+      announce(`已切換到${getReportSummary().label}。`);
+      return;
+    }
+
     const actionButton = event.target.closest("[data-action]");
     if (!actionButton) return;
 
@@ -2234,6 +2788,8 @@
     if (actionButton.dataset.action === "generate-proof") generateProof();
     if (actionButton.dataset.action === "simulate-earn") simulateEarn();
     if (actionButton.dataset.action === "simulate-spend") simulateSpend();
+    if (actionButton.dataset.action === "open-share") openShareCard();
+    if (actionButton.dataset.action === "close-share") closeShareCard();
   });
 
   document.addEventListener("input", (event) => {
@@ -2243,6 +2799,11 @@
     selectFirstRecommendation();
     render();
     announce(state.searchTerm ? `已搜尋 ${state.searchTerm}。` : "已清除商家搜尋。");
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape" || !state.shareOpen) return;
+    closeShareCard();
   });
 
   render();
