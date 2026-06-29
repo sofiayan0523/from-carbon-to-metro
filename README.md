@@ -27,13 +27,14 @@ python3 -m http.server 4173 --bind 127.0.0.1
 - 🤖 **AI 點數路線引擎** — 根據用戶通勤路線推薦沿途賺點 / 用點商家
 - 🌿 **碳足跡綠點加成** — 以 `90 gCO₂e/km × 通勤距離` 換算碳節省量，並用 5 kg / 10 kg 門檻轉成捷運點乘數加成
 - 📊 **今日綠點報告** — 個人化儀表板，整合日 / 月 / 年減碳成績、任務成就、推薦路線與分享卡
+- 🔐 **Numbers 可信證明** — 以 opt-in 隱私同意產生去識別 proof record、demo hash 與可重播稽核軌跡
 
 ## 四大可導航區塊
 
 1. **首頁・今日綠點報告** — Hero Card + AI 推薦商家清單 + 日 / 月 / 年報告摘要、任務進度與分享卡入口
 2. **AI 點數路線地圖** — 資料驅動的 AI 推薦、商家篩選、排序、Pin 選取與點數累兌模擬
 3. **個人碳足跡儀表板** — 通勤距離模擬、碳節省公式、5 kg / 10 kg 綠點加成門檻、日 / 月 / 年報告切換與動態 14 天減碳趨勢圖
-4. **會員・可信數據證明** — 本機 demo state、去識別摘要與 proof shell
+4. **會員・可信數據證明** — 本機 demo state、隱私 opt-in、去識別 proof record、demo hash、audit trail 與 Numbers live integration slot
 
 ## 團隊：通勤族也想拯救地球
 
@@ -45,4 +46,4 @@ python3 -m http.server 4173 --bind 127.0.0.1
 
 ## 技術
 
-純 HTML/CSS/JavaScript（無 build step、無外部 API 依賴），任何現代瀏覽器可開啟。AI 路線推薦目前使用本機 mock 商家資料集與 deterministic scoring，碳足跡則以本機 `90 gCO₂e/km` 公式、5 kg → 1.2x、10 kg → 1.5x 門檻運算；今日綠點報告、任務成就、趨勢圖與分享卡也都由同一組本機 demo state 驅動，讓評審可離線操作分類、偏好、排序、通勤模擬、累點、兌換與成果分享流程。繁中文字型以本地 `assets/fonts/` 打包，確保離線 demo 與 QA 截圖可讀。正式產品將整合於台北捷運 Go App，串接環境部碳排係數資料集與捷運點數系統。
+純 HTML/CSS/JavaScript（無 build step、無外部 API 依賴），任何現代瀏覽器可開啟。AI 路線推薦目前使用本機 mock 商家資料集與 deterministic scoring，碳足跡則以本機 `90 gCO₂e/km` 公式、5 kg → 1.2x、10 kg → 1.5x 門檻運算；今日綠點報告、任務成就、趨勢圖、分享卡與可信證明也都由同一組本機 demo state 驅動，讓評審可離線操作分類、偏好、排序、通勤模擬、累點、兌換、成果分享與 proof record 產生流程。Proof flow 只保留月份、減碳值、距離區間、任務類型與 demo hash，不保存起訖站、商家、精確時間或個人識別碼；正式產品可在使用者同意後改接 Capture / Numbers API 註冊同一類 hash。繁中文字型以本地 `assets/fonts/` 打包，確保離線 demo 與 QA 截圖可讀。正式產品將整合於台北捷運 Go App，串接環境部碳排係數資料集與捷運點數系統。
