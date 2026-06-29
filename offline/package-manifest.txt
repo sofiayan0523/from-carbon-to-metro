@@ -1,0 +1,22 @@
+從碳客變捷客離線備援包 manifest
+Generated: 2026-06-29
+
+Package:
+offline/from-carbon-to-metro-offline.zip
+
+Included files:
+from-carbon-to-metro/index.html
+from-carbon-to-metro/README.md
+from-carbon-to-metro/TESTING_STEPS.md
+from-carbon-to-metro/SUBMISSION_CHECKLIST.md
+from-carbon-to-metro/docs/delivery-strategy.md
+from-carbon-to-metro/assets/fonts/NotoSansCJKtc-Regular.otf
+from-carbon-to-metro/assets/fonts/OFL.txt
+from-carbon-to-metro/assets/fonts/NOTICE.md
+from-carbon-to-metro/offline/README.md
+from-carbon-to-metro/offline/package-manifest.txt
+
+Offline constraints:
+- No external API is required for the main demo path.
+- No CDN, external script, external image, login, payment, Capture live API, Numbers live API, or blockchain RPC is required.
+- The proof flow uses a de-identified local payload and deterministic demo hash.

@@ -62,11 +62,12 @@
 - 不依賴 CDN、外部圖片、第三方 script、live API 或 blockchain RPC。
 - 若有 bonus live integration，必須在沒有網路時自動降級為 mock proof / demo record；目前 proof flow 已固定示範時間並用去識別 payload 產生 deterministic demo hash。
 
-Phase 6 交付時應產出：
+Phase 6 交付時已產出：
 
-- `offline/from-carbon-to-metro-offline.zip` 或等效壓縮包。
-- `TESTING_STEPS.md`，包含線上測試與離線測試兩條路徑。
-- `SUBMISSION_CHECKLIST.md`，列出 prototype URL、離線包、PPTX、測試步驟與素材授權檢查。
+- `offline/from-carbon-to-metro-offline.zip`：包含 `index.html`、文件、delivery strategy、離線說明與本地字型。
+- `TESTING_STEPS.md`：包含線上測試、離線測試、桌面 / 手機檢查、隱私與素材檢查。
+- `SUBMISSION_CHECKLIST.md`：列出 prototype URL、離線包、PPTX、測試步驟、素材授權、proof privacy 與 merge 前檢查。
+- `offline/README.md` 與 `offline/package-manifest.txt`：說明離線包內容、使用方式與重新打包流程。
 
 ## 本地開發與驗證
 

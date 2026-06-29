@@ -1166,7 +1166,7 @@
     line-height: 1.45;
   }
   .proof-copy {
-    font-family: "SF Mono", "Roboto Mono", Consolas, monospace;
+    font-family: "SF Mono", "Roboto Mono", Consolas, "MetroNotoTC", monospace;
     font-size: 10px;
     line-height: 1.55;
     color: #395239;
@@ -1999,6 +1999,7 @@
   const MONTHLY_GOAL_KG = 12;
   const YEARLY_GOAL_KG = 120;
   const TREND_LABELS = ["5/2", "5/4", "5/6", "5/8", "5/10", "5/12", "今日"];
+  // 示範流程固定時間，讓離線 QA 與現場截圖可重播；正式產品會改用事件時間。
   const PROOF_MONTH = "2026-06";
   const PROOF_FIXED_TIMESTAMP = "2026-06-29 09:41";
 

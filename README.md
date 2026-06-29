@@ -8,7 +8,7 @@
 
 ## 本地預覽
 
-目前專案是純靜態 HTML/CSS/JavaScript，可直接開啟 `index.html`，或用本機靜態 server 預覽：
+目前專案是純靜態 HTML/CSS/JavaScript。建議用本機靜態 server 預覽，確保本地字型與離線 QA 行為和 GitHub Pages 一致：
 
 ```bash
 python3 -m http.server 4173 --bind 127.0.0.1
@@ -16,9 +16,19 @@ python3 -m http.server 4173 --bind 127.0.0.1
 
 開啟 <http://127.0.0.1:4173/>。
 
+如果現場電腦沒有 Python，也可以直接用瀏覽器開啟 `index.html` 作為 fallback；主 demo 邏輯仍會在本機執行。
+
 ## 決賽交付策略
 
 決賽 prototype 採 GitHub Pages 作為線上展示，並在最後交付離線備援包，確保主辦單位電腦沒有網路時仍可完成 demo。細節見 [`docs/delivery-strategy.md`](docs/delivery-strategy.md)。
+
+## 決賽提交包
+
+- 線上 prototype：<https://sofiayan0523.github.io/from-carbon-to-metro/>
+- 測試步驟：[`TESTING_STEPS.md`](TESTING_STEPS.md)
+- 送件檢查清單：[`SUBMISSION_CHECKLIST.md`](SUBMISSION_CHECKLIST.md)
+- 離線備援包：`offline/from-carbon-to-metro-offline.zip`
+- 離線包說明：[`offline/README.md`](offline/README.md)
 
 ## 專案介紹
 
