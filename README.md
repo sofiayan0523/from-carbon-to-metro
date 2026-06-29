@@ -31,7 +31,7 @@ python3 -m http.server 4173 --bind 127.0.0.1
 ## 四大可導航區塊
 
 1. **首頁・今日綠點報告** — Hero Card + AI 推薦商家清單
-2. **AI 點數路線地圖** — 互動式捷運地圖 + 累點/用點/AI 推薦 Pin
+2. **AI 點數路線地圖** — 資料驅動的 AI 推薦、商家篩選、排序、Pin 選取與點數累兌模擬
 3. **個人碳足跡儀表板** — 14 天減碳趨勢圖 + 等級徽章
 4. **會員・可信數據證明** — 本機 demo state、去識別摘要與 proof shell
 
@@ -45,4 +45,4 @@ python3 -m http.server 4173 --bind 127.0.0.1
 
 ## 技術
 
-純 HTML/CSS/JavaScript（無 build step、無外部 API 依賴），任何現代瀏覽器可開啟。繁中文字型以本地 `assets/fonts/` 打包，確保離線 demo 與 QA 截圖可讀。正式產品將整合於台北捷運 Go App，串接環境部碳排係數資料集與捷運點數系統。
+純 HTML/CSS/JavaScript（無 build step、無外部 API 依賴），任何現代瀏覽器可開啟。AI 路線推薦目前使用本機 mock 商家資料集與 deterministic scoring，讓評審可離線操作分類、偏好、排序、累點與兌換流程。繁中文字型以本地 `assets/fonts/` 打包，確保離線 demo 與 QA 截圖可讀。正式產品將整合於台北捷運 Go App，串接環境部碳排係數資料集與捷運點數系統。

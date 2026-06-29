@@ -283,7 +283,12 @@
     align-items: center;
     gap: 12px;
     padding: 10px 0;
+    border: 0;
     border-bottom: 1px solid #f0f0f0;
+    width: 100%;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
   }
   .recommend-item:last-child { border-bottom: none; }
   .station-dot {
@@ -340,6 +345,10 @@
   .demo-nav:focus-visible,
   .nav-item:focus-visible,
   .filter-chip:focus-visible,
+  .preference-chip:focus-visible,
+  .sort-chip:focus-visible,
+  .recommendation-card:focus-visible,
+  .pin:focus-visible,
   .app-header .tab:focus-visible {
     outline: 3px solid rgba(251,192,45,0.65);
     outline-offset: 2px;
@@ -415,6 +424,15 @@
     font-weight: 600;
     box-shadow: 0 3px 10px rgba(0,0,0,0.2);
     border: 2px solid #fff;
+    padding: 0;
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .pin.is-selected {
+    transform: translate(-50%, -50%) scale(1.16);
+    box-shadow: 0 0 0 6px rgba(251,192,45,0.25), 0 4px 14px rgba(0,0,0,0.26);
+    z-index: 3;
   }
   .pin-earn { background: #e53935; }
   .pin-spend { background: #43a047; }
@@ -455,6 +473,18 @@
     overflow-x: auto;
     z-index: 5;
   }
+  .preference-row,
+  .sort-row {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    z-index: 5;
+  }
+  .preference-row { top: 108px; }
+  .sort-row { top: 146px; }
   .filter-chip {
     background: #fff;
     border: 1px solid #e0e0e0;
@@ -465,10 +495,30 @@
     flex-shrink: 0;
     cursor: pointer;
   }
+  .preference-chip,
+  .sort-chip {
+    background: rgba(255,255,255,0.92);
+    border: 1px solid #dfe8de;
+    color: #315b32;
+    border-radius: 16px;
+    padding: 5px 11px;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+    flex-shrink: 0;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(27,94,32,0.06);
+  }
   .filter-chip.active {
     background: #2e7d32;
     color: #fff;
     border-color: #2e7d32;
+  }
+  .preference-chip.active,
+  .sort-chip.active {
+    background: #1b5e20;
+    color: #fff;
+    border-color: #1b5e20;
   }
   .legend {
     position: absolute;
@@ -498,9 +548,14 @@
     right: 0;
     background: #fff;
     border-radius: 20px 20px 0 0;
-    padding: 16px 16px 20px;
+    padding: 14px 14px 18px;
     box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
     z-index: 4;
+    max-height: 330px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
   }
   .sheet-handle {
     width: 40px;
@@ -509,7 +564,7 @@
     border-radius: 2px;
     margin: 0 auto 12px;
   }
-  .sheet-title { font-size: 13px; color: #757575; margin-bottom: 8px; }
+  .sheet-title { font-size: 13px; color: #757575; }
   .sheet-shop {
     display: flex;
     align-items: center;
@@ -527,6 +582,90 @@
     align-items: center;
     justify-content: center;
     font-size: 22px;
+  }
+  .merchant-reason {
+    background: #f5faf5;
+    border: 1px solid #e1efe0;
+    border-radius: 10px;
+    padding: 8px 10px;
+    color: #405f41;
+    font-size: 11px;
+    line-height: 1.45;
+  }
+  .merchant-meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+  .merchant-meta span,
+  .points-simulation {
+    background: #fbfdfb;
+    border: 1px solid #edf3ec;
+    border-radius: 9px;
+    color: #496449;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 6px 7px;
+    min-width: 0;
+  }
+  .sheet-actions {
+    margin-top: 0;
+  }
+  .points-simulation {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .recommendation-list {
+    display: grid;
+    gap: 7px;
+    flex: 1;
+    min-height: 64px;
+    overflow-y: auto;
+    padding-right: 3px;
+  }
+  .recommendation-card {
+    display: grid;
+    grid-template-columns: 34px 1fr auto;
+    gap: 9px;
+    align-items: center;
+    border: 1px solid #edf3ec;
+    background: #fff;
+    border-radius: 12px;
+    padding: 8px;
+    text-align: left;
+    cursor: pointer;
+  }
+  .recommendation-card.active {
+    border-color: #2e7d32;
+    background: #f1f8f1;
+  }
+  .recommendation-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: #fff3e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+  .recommendation-title {
+    color: #263126;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+  .recommendation-reason {
+    color: #6d806d;
+    font-size: 10px;
+    line-height: 1.35;
+    margin-top: 2px;
+  }
+  .recommendation-score {
+    color: #1b5e20;
+    font-size: 11px;
+    font-weight: 800;
   }
   /* ─── Screen 3: Carbon Footprint Dashboard ─── */
   .stat-grid {
@@ -792,8 +931,11 @@
     .card { padding: 14px; }
     .state-list { grid-template-columns: 1fr; }
     .map-filters { left: 12px; right: 12px; }
+    .preference-row,
+    .sort-row { left: 12px; right: 12px; }
     .map-search { left: 12px; right: 12px; }
     .legend { left: 12px; bottom: 76px; }
+    .map-bottom-sheet { max-height: 310px; }
   }
 </style>
 </head>
@@ -881,30 +1023,7 @@
 
           <div class="card">
             <div class="card-title">📍 今日 AI 推薦路線</div>
-            <div class="recommend-item">
-              <div class="station-dot">🚇</div>
-              <div class="recommend-info">
-                <div class="station">大安站 1 號出口</div>
-                <div class="shop">路易莎咖啡</div>
-              </div>
-              <div class="badge badge-earn">+15 點</div>
-            </div>
-            <div class="recommend-item">
-              <div class="station-dot">🚇</div>
-              <div class="recommend-info">
-                <div class="station">忠孝復興站 2 號出口</div>
-                <div class="shop">全聯福利中心</div>
-              </div>
-              <div class="badge badge-spend">折 $30</div>
-            </div>
-            <div class="recommend-item">
-              <div class="station-dot">🚇</div>
-              <div class="recommend-info">
-                <div class="station">中山站 4 號出口</div>
-                <div class="shop">誠品書店</div>
-              </div>
-              <div class="badge badge-earn">+20 點</div>
-            </div>
+            <div data-home-recommendations></div>
             <div class="action-row">
               <button class="btn btn-secondary" type="button" data-action="complete-trip">完成示範通勤</button>
               <button class="btn btn-primary" type="button" data-nav="map">查看完整路線</button>
@@ -940,16 +1059,11 @@
           <div class="mrt-line line-green"></div>
           <div class="mrt-line line-blue"></div>
 
-          <div class="pin pin-earn" style="top: 30%; left: 25%;">15</div>
-          <div class="pin pin-spend" style="top: 38%; left: 55%;">30</div>
-          <div class="pin pin-star large" style="top: 50%; left: 40%;">⭐</div>
-          <div class="pin pin-earn" style="top: 60%; left: 65%;">20</div>
-          <div class="pin pin-spend" style="top: 68%; left: 28%;">50</div>
-          <div class="pin pin-earn" style="top: 78%; left: 50%;">10</div>
+          <div data-map-pins></div>
 
           <div class="map-search">
             <span>🔍</span>
-            <input placeholder="搜尋商家、車站..." value="">
+            <input placeholder="搜尋商家、車站..." value="" data-search aria-label="搜尋商家或車站">
           </div>
 
           <div class="map-filters" aria-label="商家類型篩選">
@@ -958,6 +1072,19 @@
             <button class="filter-chip" type="button" data-filter="shopping">🛍 購物</button>
             <button class="filter-chip" type="button" data-filter="drink">☕ 飲品</button>
             <button class="filter-chip" type="button" data-filter="culture">📚 文化</button>
+          </div>
+
+          <div class="preference-row" aria-label="推薦偏好">
+            <button class="preference-chip active" type="button" data-preference="commute">通勤順路</button>
+            <button class="preference-chip" type="button" data-preference="points">點數最大</button>
+            <button class="preference-chip" type="button" data-preference="saving">省錢優先</button>
+          </div>
+
+          <div class="sort-row" aria-label="排序方式">
+            <button class="sort-chip active" type="button" data-sort="smart">AI 推薦</button>
+            <button class="sort-chip" type="button" data-sort="points">點數</button>
+            <button class="sort-chip" type="button" data-sort="distance">距離</button>
+            <button class="sort-chip" type="button" data-sort="discount">折抵</button>
           </div>
 
           <div class="legend">
@@ -974,9 +1101,9 @@
 
           <div class="map-bottom-sheet">
             <div class="sheet-handle"></div>
-            <div class="sheet-title">⭐ AI 推薦・距你最近</div>
+            <div class="sheet-title" data-field="recommendationTitle">⭐ AI 推薦・距你最近</div>
             <div class="sheet-shop">
-              <div class="shop-icon">☕</div>
+              <div class="shop-icon" data-field="merchantIcon">☕</div>
               <div style="flex:1">
                 <div style="font-weight:600; font-size:15px;" data-field="merchantName">cama café・忠孝店</div>
                 <div style="font-size:12px; color:#757575; margin-top:2px;" data-field="merchantStation">忠孝復興站 ・ 距 120m</div>
@@ -986,6 +1113,21 @@
                 </div>
               </div>
             </div>
+            <div class="merchant-reason" data-field="merchantReason">依照目前通勤路線、距離與點數回饋推薦。</div>
+            <div class="merchant-meta">
+              <span data-field="merchantScore">AI 87 分</span>
+              <span data-field="merchantDistance">距 120m</span>
+              <span data-field="merchantCategory">飲品</span>
+            </div>
+            <div class="action-row sheet-actions">
+              <button class="btn btn-secondary" type="button" data-action="simulate-earn">模擬累點</button>
+              <button class="btn btn-primary" type="button" data-action="simulate-spend">用點兌換</button>
+            </div>
+            <div class="points-simulation">
+              <span>本輪累點 <strong data-field="simEarned">0</strong></span>
+              <span>已兌換 <strong data-field="simSpent">0</strong></span>
+            </div>
+            <div class="recommendation-list" data-recommendation-list aria-label="AI 推薦商家清單"></div>
           </div>
         </div>
         <div class="bottom-nav">
@@ -1190,42 +1332,147 @@
     proof: "會員證明"
   };
 
-  const merchants = {
-    all: {
-      name: "cama café・忠孝店",
-      station: "忠孝復興站 ・ 距 120m",
-      earn: "累點 1:5 加倍",
-      spend: "用點折 $50"
-    },
-    food: {
-      name: "MiaCucina・大安店",
-      station: "大安站 ・ 距 180m",
-      earn: "低碳套餐 +18 點",
-      spend: "用點折 $80"
-    },
-    shopping: {
-      name: "全聯福利中心・復興店",
-      station: "忠孝復興站 ・ 距 240m",
-      earn: "自備袋 +12 點",
-      spend: "用點折 $30"
-    },
-    drink: {
-      name: "路易莎咖啡・大安站前",
-      station: "大安站 ・ 距 90m",
-      earn: "通勤早鳥 +15 點",
-      spend: "用點折 $40"
-    },
-    culture: {
-      name: "誠品書店・南西店",
-      station: "中山站 ・ 距 160m",
-      earn: "文化探索 +20 點",
-      spend: "用點折 $60"
-    }
+  const categoryLabels = {
+    all: "全部",
+    food: "餐飲",
+    shopping: "購物",
+    drink: "飲品",
+    culture: "文化"
   };
+
+  const preferenceLabels = {
+    commute: "通勤順路",
+    points: "點數最大",
+    saving: "省錢優先"
+  };
+
+  const sortLabels = {
+    smart: "AI 推薦",
+    points: "點數",
+    distance: "距離",
+    discount: "折抵"
+  };
+
+  const merchantCatalog = [
+    {
+      id: "louisa-daan",
+      name: "路易莎咖啡・大安站前",
+      icon: "☕",
+      category: "drink",
+      station: "大安站",
+      exit: "1 號出口",
+      distanceM: 90,
+      earnPoints: 15,
+      spendCost: 120,
+      spendDiscount: 40,
+      routeFit: 94,
+      habitFit: 88,
+      route: "大安站下車後步行 2 分鐘",
+      mission: "通勤早鳥",
+      top: 50,
+      left: 40
+    },
+    {
+      id: "cama-zhongxiao",
+      name: "cama café・忠孝店",
+      icon: "☕",
+      category: "drink",
+      station: "忠孝復興站",
+      exit: "2 號出口",
+      distanceM: 120,
+      earnPoints: 18,
+      spendCost: 150,
+      spendDiscount: 50,
+      routeFit: 91,
+      habitFit: 82,
+      route: "轉乘板南線前可順路完成",
+      mission: "累點 1:5 加倍",
+      top: 30,
+      left: 25
+    },
+    {
+      id: "miacucina-daan",
+      name: "MiaCucina・大安店",
+      icon: "🍱",
+      category: "food",
+      station: "大安站",
+      exit: "4 號出口",
+      distanceM: 180,
+      earnPoints: 22,
+      spendCost: 220,
+      spendDiscount: 80,
+      routeFit: 78,
+      habitFit: 74,
+      route: "晚餐時段人流穩定，適合下班任務",
+      mission: "低碳套餐",
+      top: 60,
+      left: 65
+    },
+    {
+      id: "pxmart-fuxing",
+      name: "全聯福利中心・復興店",
+      icon: "🛍",
+      category: "shopping",
+      station: "忠孝復興站",
+      exit: "5 號出口",
+      distanceM: 240,
+      earnPoints: 12,
+      spendCost: 90,
+      spendDiscount: 30,
+      routeFit: 85,
+      habitFit: 79,
+      route: "返家採買繞行低，適合用點折抵",
+      mission: "自備袋回饋",
+      top: 38,
+      left: 55
+    },
+    {
+      id: "eslite-nanxi",
+      name: "誠品書店・南西店",
+      icon: "📚",
+      category: "culture",
+      station: "中山站",
+      exit: "4 號出口",
+      distanceM: 160,
+      earnPoints: 20,
+      spendCost: 180,
+      spendDiscount: 60,
+      routeFit: 74,
+      habitFit: 90,
+      route: "週末探索任務與文化消費偏好吻合",
+      mission: "文化探索",
+      top: 68,
+      left: 28
+    },
+    {
+      id: "citylink-taipei",
+      name: "CITYLINK・台北車站",
+      icon: "🎁",
+      category: "shopping",
+      station: "台北車站",
+      exit: "M2 出口",
+      distanceM: 210,
+      earnPoints: 10,
+      spendCost: 160,
+      spendDiscount: 70,
+      routeFit: 81,
+      habitFit: 72,
+      route: "主線轉乘站，適合把累積點數轉成折抵",
+      mission: "轉乘加碼",
+      top: 78,
+      left: 50
+    }
+  ];
 
   const state = {
     activeView: "home",
     selectedFilter: "all",
+    selectedPreference: "commute",
+    selectedSort: "smart",
+    selectedMerchantId: "louisa-daan",
+    searchTerm: "",
+    simulatedEarnedPoints: 0,
+    simulatedSpentPoints: 0,
     metrics: {
       monthlyCarbonKg: 8.2,
       distanceKm: 91,
@@ -1275,6 +1522,98 @@
     if (liveRegion) liveRegion.textContent = message;
   }
 
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, (char) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      "\"": "&quot;",
+      "'": "&#39;"
+    }[char]));
+  }
+
+  function scoreMerchant(merchant) {
+    const distanceScore = Math.max(0, 280 - merchant.distanceM) / 4;
+    const pointScore = merchant.earnPoints * 2.1;
+    const discountScore = merchant.spendDiscount * 0.72;
+    const routeScore = merchant.routeFit * 0.58;
+    const habitScore = merchant.habitFit * 0.28;
+
+    let preferenceBoost = 0;
+    if (state.selectedPreference === "commute") preferenceBoost = routeScore + distanceScore;
+    if (state.selectedPreference === "points") preferenceBoost = pointScore + habitScore;
+    if (state.selectedPreference === "saving") preferenceBoost = discountScore + routeScore * 0.35;
+
+    return Math.round(18 + preferenceBoost + pointScore * 0.36 + discountScore * 0.22);
+  }
+
+  function getReason(merchant, score) {
+    const preferenceText = {
+      commute: `${merchant.route}，距離 ${merchant.distanceM}m，通勤順路分數 ${merchant.routeFit}`,
+      points: `${merchant.mission} 可拿 ${merchant.earnPoints} 點，符合你的近期消費偏好`,
+      saving: `可用 ${merchant.spendCost} 點折 $${merchant.spendDiscount}，適合把通勤點數轉成現場折抵`
+    }[state.selectedPreference];
+
+    return `AI ${score} 分：${preferenceText}`;
+  }
+
+  function getRecommendations() {
+    const term = state.searchTerm.trim().toLowerCase();
+    const filtered = merchantCatalog.filter((merchant) => {
+      const categoryMatched = state.selectedFilter === "all" || merchant.category === state.selectedFilter;
+      const searchable = `${merchant.name} ${merchant.station} ${merchant.exit} ${merchant.mission}`.toLowerCase();
+      const termMatched = !term || searchable.includes(term);
+      return categoryMatched && termMatched;
+    }).map((merchant) => ({
+      ...merchant,
+      score: scoreMerchant(merchant)
+    }));
+
+    const sorted = filtered.sort((a, b) => {
+      if (state.selectedSort === "points") return b.earnPoints - a.earnPoints || b.score - a.score;
+      if (state.selectedSort === "distance") return a.distanceM - b.distanceM || b.score - a.score;
+      if (state.selectedSort === "discount") return b.spendDiscount - a.spendDiscount || b.score - a.score;
+      return b.score - a.score || a.distanceM - b.distanceM;
+    });
+
+    return sorted.map((merchant) => ({
+      ...merchant,
+      reason: getReason(merchant, merchant.score)
+    }));
+  }
+
+  function syncSelectedMerchant() {
+    const recommendations = getRecommendations();
+    if (!recommendations.length) {
+      state.selectedMerchantId = "";
+      return recommendations;
+    }
+
+    const selectedStillVisible = recommendations.some((merchant) => merchant.id === state.selectedMerchantId);
+    if (!selectedStillVisible) state.selectedMerchantId = recommendations[0].id;
+    return recommendations;
+  }
+
+  function selectFirstRecommendation() {
+    const recommendations = getRecommendations();
+    state.selectedMerchantId = recommendations[0] ? recommendations[0].id : "";
+  }
+
+  function getSelectedMerchant(recommendations = getRecommendations()) {
+    const merchant = recommendations.find((item) => item.id === state.selectedMerchantId)
+      || recommendations[0];
+    if (merchant) return merchant;
+
+    const fallback = {
+      ...merchantCatalog[0],
+      score: scoreMerchant(merchantCatalog[0])
+    };
+    return {
+      ...fallback,
+      reason: getReason(fallback, fallback.score)
+    };
+  }
+
   function completeTrip() {
     const distanceAdded = 8;
     const carbonAdded = 0.72;
@@ -1317,6 +1656,30 @@
     state.proof.progress = 100;
     render();
     announce("已產生本機示範證明。");
+  }
+
+  function simulateEarn() {
+    const merchant = getSelectedMerchant();
+    const multiplier = getMultiplier(state.metrics.monthlyCarbonKg);
+    const earned = Math.round(merchant.earnPoints * multiplier);
+
+    state.metrics.points += earned;
+    state.simulatedEarnedPoints += earned;
+    render();
+    announce(`${merchant.name} 已模擬累點，新增 ${earned} 點。`);
+  }
+
+  function simulateSpend() {
+    const merchant = getSelectedMerchant();
+    if (state.metrics.points < merchant.spendCost) {
+      announce(`${merchant.name} 需要 ${merchant.spendCost} 點，目前點數不足。`);
+      return;
+    }
+
+    state.metrics.points -= merchant.spendCost;
+    state.simulatedSpentPoints += merchant.spendCost;
+    render();
+    announce(`${merchant.name} 已模擬用 ${merchant.spendCost} 點折 $${merchant.spendDiscount}。`);
   }
 
   function renderNavigation() {
@@ -1370,17 +1733,112 @@
   }
 
   function renderMerchant() {
-    const merchant = merchants[state.selectedFilter] || merchants.all;
+    const recommendations = syncSelectedMerchant();
+    const merchant = getSelectedMerchant(recommendations);
+
+    setText("recommendationTitle", `⭐ ${sortLabels[state.selectedSort]}・${preferenceLabels[state.selectedPreference]}`);
+    setText("merchantIcon", merchant.icon);
     setText("merchantName", merchant.name);
-    setText("merchantStation", merchant.station);
-    setText("merchantEarn", merchant.earn);
-    setText("merchantSpend", merchant.spend);
+    setText("merchantStation", `${merchant.station} ${merchant.exit} ・ 距 ${merchant.distanceM}m`);
+    setText("merchantEarn", `${merchant.mission} +${merchant.earnPoints} 點`);
+    setText("merchantSpend", `用 ${merchant.spendCost} 點折 $${merchant.spendDiscount}`);
+    setText("merchantReason", merchant.reason);
+    setText("merchantScore", `AI ${merchant.score} 分`);
+    setText("merchantDistance", `距 ${merchant.distanceM}m`);
+    setText("merchantCategory", categoryLabels[merchant.category]);
+    setText("simEarned", `${state.simulatedEarnedPoints} 點`);
+    setText("simSpent", `${state.simulatedSpentPoints} 點`);
 
     document.querySelectorAll("[data-filter]").forEach((button) => {
       const isActive = button.dataset.filter === state.selectedFilter;
       button.classList.toggle("active", isActive);
       button.setAttribute("aria-pressed", isActive ? "true" : "false");
     });
+
+    document.querySelectorAll("[data-preference]").forEach((button) => {
+      const isActive = button.dataset.preference === state.selectedPreference;
+      button.classList.toggle("active", isActive);
+      button.setAttribute("aria-pressed", isActive ? "true" : "false");
+    });
+
+    document.querySelectorAll("[data-sort]").forEach((button) => {
+      const isActive = button.dataset.sort === state.selectedSort;
+      button.classList.toggle("active", isActive);
+      button.setAttribute("aria-pressed", isActive ? "true" : "false");
+    });
+
+    document.querySelectorAll("[data-search]").forEach((input) => {
+      if (input.value !== state.searchTerm) input.value = state.searchTerm;
+    });
+
+    renderHomeRecommendations(recommendations);
+    renderMapPins(recommendations);
+    renderRecommendationList(recommendations);
+  }
+
+  function renderHomeRecommendations(recommendations) {
+    const container = document.querySelector("[data-home-recommendations]");
+    if (!container) return;
+
+    const items = recommendations.slice(0, 3);
+    container.innerHTML = items.map((merchant) => `
+      <button class="recommend-item" type="button" data-merchant-id="${escapeHtml(merchant.id)}" data-nav="map">
+        <div class="station-dot">${escapeHtml(merchant.icon)}</div>
+        <div class="recommend-info">
+          <div class="station">${escapeHtml(merchant.station)} ${escapeHtml(merchant.exit)}</div>
+          <div class="shop">${escapeHtml(merchant.name)}</div>
+        </div>
+        <div class="badge badge-earn">+${escapeHtml(merchant.earnPoints)} 點</div>
+      </button>
+    `).join("");
+  }
+
+  function renderMapPins(recommendations) {
+    const container = document.querySelector("[data-map-pins]");
+    if (!container) return;
+
+    container.innerHTML = recommendations.map((merchant) => {
+      const selected = merchant.id === state.selectedMerchantId;
+      const pinClass = selected
+        ? "pin pin-star large is-selected"
+        : `pin ${merchant.spendDiscount > 55 ? "pin-spend" : "pin-earn"}`;
+      const label = selected ? "⭐" : merchant.earnPoints;
+      return `
+        <button
+          class="${pinClass}"
+          type="button"
+          style="top: ${merchant.top}%; left: ${merchant.left}%;"
+          data-merchant-id="${escapeHtml(merchant.id)}"
+          aria-label="選擇 ${escapeHtml(merchant.name)}"
+        >${escapeHtml(label)}</button>
+      `;
+    }).join("");
+  }
+
+  function renderRecommendationList(recommendations) {
+    const container = document.querySelector("[data-recommendation-list]");
+    if (!container) return;
+
+    if (!recommendations.length) {
+      container.innerHTML = `
+        <div class="merchant-reason">目前沒有符合篩選的商家。請放寬分類或清除搜尋字。</div>
+      `;
+      return;
+    }
+
+    container.innerHTML = recommendations.map((merchant) => {
+      const active = merchant.id === state.selectedMerchantId ? " active" : "";
+      return `
+        <button class="recommendation-card${active}" type="button" data-merchant-id="${escapeHtml(merchant.id)}">
+          <span class="recommendation-icon">${escapeHtml(merchant.icon)}</span>
+          <span>
+            <span class="recommendation-title">${escapeHtml(merchant.name)}</span>
+            <span class="recommendation-reason">${escapeHtml(merchant.reason)}</span>
+          </span>
+          <span class="recommendation-score">${escapeHtml(merchant.score)}</span>
+        </button>
+      `;
+    }).join("");
   }
 
   function renderProof() {
@@ -1400,6 +1858,15 @@
   }
 
   document.addEventListener("click", (event) => {
+    const merchantButton = event.target.closest("[data-merchant-id]");
+    if (merchantButton) {
+      state.selectedMerchantId = merchantButton.dataset.merchantId;
+      if (merchantButton.dataset.nav) state.activeView = merchantButton.dataset.nav;
+      render();
+      announce(`已選擇 ${getSelectedMerchant().name}。`);
+      return;
+    }
+
     const navButton = event.target.closest("[data-nav]");
     if (navButton) {
       state.activeView = navButton.dataset.nav;
@@ -1411,8 +1878,27 @@
     const filterButton = event.target.closest("[data-filter]");
     if (filterButton) {
       state.selectedFilter = filterButton.dataset.filter;
+      selectFirstRecommendation();
       render();
-      announce(`已更新商家篩選。`);
+      announce(`已更新商家篩選為${categoryLabels[state.selectedFilter]}。`);
+      return;
+    }
+
+    const preferenceButton = event.target.closest("[data-preference]");
+    if (preferenceButton) {
+      state.selectedPreference = preferenceButton.dataset.preference;
+      selectFirstRecommendation();
+      render();
+      announce(`已更新推薦偏好為${preferenceLabels[state.selectedPreference]}。`);
+      return;
+    }
+
+    const sortButton = event.target.closest("[data-sort]");
+    if (sortButton) {
+      state.selectedSort = sortButton.dataset.sort;
+      selectFirstRecommendation();
+      render();
+      announce(`已更新排序為${sortLabels[state.selectedSort]}。`);
       return;
     }
 
@@ -1421,6 +1907,17 @@
 
     if (actionButton.dataset.action === "complete-trip") completeTrip();
     if (actionButton.dataset.action === "generate-proof") generateProof();
+    if (actionButton.dataset.action === "simulate-earn") simulateEarn();
+    if (actionButton.dataset.action === "simulate-spend") simulateSpend();
+  });
+
+  document.addEventListener("input", (event) => {
+    if (!event.target.matches("[data-search]")) return;
+
+    state.searchTerm = event.target.value;
+    selectFirstRecommendation();
+    render();
+    announce(state.searchTerm ? `已搜尋 ${state.searchTerm}。` : "已清除商家搜尋。");
   });
 
   render();
