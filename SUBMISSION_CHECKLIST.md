@@ -1,6 +1,6 @@
 # 決賽送件檢查清單
 
-最後更新：2026-06-29
+最後更新：2026-06-30
 
 本清單對齊 2026 捷運盃黑客松決賽 prototype 交付需求。決賽送件截止時間為 2026-08-24 12:00，交付內容需包含 prototype URL、應用測試步驟與 Office 2024 PowerPoint 簡報。
 
@@ -16,11 +16,11 @@
 
 ## 必做功能覆蓋
 
-- [x] Judge-operable demo path：首頁 -> AI 路線 -> 碳足跡 -> 可信證明 -> 分享卡
-- [x] AI 點數推薦：商家資料集、偏好、篩選、排序、推薦理由與累兌點模擬
+- [x] Judge-operable demo path：今天 -> 路線 -> 減碳 -> 我的 -> 分享卡
+- [x] AI 點數推薦：商家資料集、分類篩選、推薦理由與路線集章任務
 - [x] 碳足跡綠點加成：`90 gCO2e/km` 公式、5 kg -> `1.2x`、10 kg -> `1.5x`
-- [x] 今日綠點報告：本日 / 本月 / 本年摘要、任務、成就、趨勢圖與分享卡
-- [x] Numbers Protocol 可信數據亮點：opt-in、去識別 payload、demo hash、audit trail、live integration slot
+- [x] 今日綠點互動：完成通勤、每日綠點卡、點數動畫、任務、成就、趨勢圖與分享卡
+- [x] Numbers Protocol 可信數據亮點：opt-in、去識別月度 proof record、demo hash、audit trail、live integration slot
 - [x] 離線 fallback：所有主流程都可在無網路狀態完成
 
 ## QA 與驗證
@@ -47,6 +47,10 @@
 - [x] `assets/fonts/NotoSansCJKtc-Regular.otf`
 - [x] `assets/fonts/OFL.txt`
 - [x] `assets/fonts/NOTICE.md`
+- [x] `assets/vendor/react.production.min.js`
+- [x] `assets/vendor/react-dom.production.min.js`
+- [x] `assets/vendor/babel.min.js`
+- [x] `assets/vendor/NOTICE.md`
 - [x] `offline/README.md`
 - [x] `offline/package-manifest.txt`
 
@@ -55,6 +59,7 @@
 - [x] 未使用官方捷運 Logo 或未授權官方 UI 素材
 - [x] 未使用外部圖片、音樂、地圖底圖或第三方 script
 - [x] 本地繁中文字型附帶 OFL 授權全文
+- [x] 本地 vendor runtime 附帶來源與 MIT 授權 notice
 - [x] 商家僅作為文字 mock 情境，沒有商標圖、廣告圖或交易資料
 - [x] 沒有 secrets、tokens、API key、真實會員資料、票務資料或付款資料
 
@@ -64,8 +69,8 @@
 - [x] Proof record 不保存商家名稱
 - [x] Proof record 不保存精確時間
 - [x] Proof record 不保存精確通勤距離
-- [x] Proof record 使用區間 bucket：趟數 bucket、距離 bucket
-- [x] Demo hash 可離線重現，固定示範輸出為 `0x51989C8D`
+- [x] Proof record 使用區間 bucket：距離 bucket
+- [x] Demo hash 可離線重現，固定示範輸出為 `0x7f3a·b8e2·c91e`
 - [x] Live Capture / Numbers 註冊只作為 optional slot，不阻塞主 demo
 
 ## 外部時程提醒
@@ -78,7 +83,7 @@
 
 - [ ] `git diff --check`
 - [ ] inline JavaScript `node --check`
-- [ ] 外部依賴掃描：無 `<script src>`、外部圖片、`fetch`、XHR、service worker、WebSocket
+- [ ] 外部依賴掃描：無外部 runtime URL、外部圖片、XHR、service worker、WebSocket；bundle runtime 只讀本機 `assets/vendor/`、嵌入資產與 Blob URL
 - [ ] secret scan：無 API key、token、password、private key
 - [ ] 本地 server 可回應 `HTTP 200`
 - [ ] 離線包解壓後可打開首頁

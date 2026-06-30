@@ -1,5 +1,5 @@
 從碳客變捷客離線備援包 manifest
-Generated: 2026-06-29
+Generated: 2026-06-30
 
 Package:
 offline/from-carbon-to-metro-offline.zip
@@ -13,10 +13,15 @@ from-carbon-to-metro/docs/delivery-strategy.md
 from-carbon-to-metro/assets/fonts/NotoSansCJKtc-Regular.otf
 from-carbon-to-metro/assets/fonts/OFL.txt
 from-carbon-to-metro/assets/fonts/NOTICE.md
+from-carbon-to-metro/assets/vendor/react.production.min.js
+from-carbon-to-metro/assets/vendor/react-dom.production.min.js
+from-carbon-to-metro/assets/vendor/babel.min.js
+from-carbon-to-metro/assets/vendor/NOTICE.md
 from-carbon-to-metro/offline/README.md
 from-carbon-to-metro/offline/package-manifest.txt
 
 Offline constraints:
 - No external API is required for the main demo path.
 - No CDN, external script, external image, login, payment, Capture live API, Numbers live API, or blockchain RPC is required.
-- The proof flow uses a de-identified local payload and deterministic demo hash.
+- The proof flow uses a de-identified monthly record and deterministic demo hash.
+- The updated UI bundle uses local fixed-version runtime files from assets/vendor for offline use.
