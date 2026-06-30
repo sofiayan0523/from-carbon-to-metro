@@ -5,9 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>從碳客變捷客 - App Mockup</title>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Microsoft JhengHei", sans-serif; }
+  @font-face {
+    font-family: "MetroNotoTC";
+    src: url("assets/fonts/NotoSansCJKtc-Regular.otf") format("opentype");
+    font-style: normal;
+    font-weight: 400 800;
+    font-display: swap;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: "MetroNotoTC", "Noto Sans CJK TC", "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif; }
   body {
-    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    background:
+      linear-gradient(120deg, rgba(46,125,50,0.10) 0 1px, transparent 1px 32px),
+      linear-gradient(135deg, #f5f7f4 0%, #dfeadd 100%);
     min-height: 100vh;
     padding: 40px 20px;
     color: #1b3a1d;
@@ -20,12 +29,12 @@
     font-size: 32px;
     color: #1b5e20;
     margin-bottom: 8px;
-    letter-spacing: 2px;
+    letter-spacing: 0;
   }
   .header .subtitle {
     font-size: 14px;
     color: #2e7d32;
-    letter-spacing: 1px;
+    letter-spacing: 0;
   }
   .header .tag {
     display: inline-block;
@@ -36,6 +45,30 @@
     font-size: 12px;
     margin-top: 10px;
   }
+  .demo-switcher {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    max-width: 520px;
+    margin: -30px auto 28px;
+  }
+  .demo-nav {
+    border: 1px solid rgba(46,125,50,0.2);
+    background: rgba(255,255,255,0.82);
+    color: #1b5e20;
+    border-radius: 999px;
+    padding: 8px 13px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(27,94,32,0.08);
+  }
+  .demo-nav.active {
+    background: #1b5e20;
+    color: #fff;
+    border-color: #1b5e20;
+  }
   .mockup-row {
     display: flex;
     justify-content: center;
@@ -43,6 +76,12 @@
     flex-wrap: wrap;
     max-width: 1400px;
     margin: 0 auto;
+  }
+  .mockup-row.app-mode .screen-wrap {
+    display: none;
+  }
+  .mockup-row.app-mode .screen-wrap.is-active {
+    display: flex;
   }
   .screen-wrap {
     display: flex;
@@ -133,13 +172,18 @@
   }
   .app-header .tabs {
     display: flex;
-    gap: 16px;
+    gap: 10px;
     margin-top: 12px;
     font-size: 13px;
   }
   .app-header .tab {
     opacity: 0.7;
     padding-bottom: 4px;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    font: inherit;
   }
   .app-header .tab.active {
     opacity: 1;
@@ -213,18 +257,38 @@
     background: #fff;
     width: 75%;
     border-radius: 3px;
+    transition: width 0.25s ease;
   }
   .progress-text {
     font-size: 11px;
     margin-top: 4px;
     opacity: 0.85;
   }
+  .hero-actions {
+    margin-top: 14px;
+  }
+  .hero-actions .btn {
+    border: 1px solid rgba(255,255,255,0.35);
+  }
+  .hero-actions .btn-secondary {
+    background: rgba(255,255,255,0.94);
+    color: #1b5e20;
+  }
+  .hero-actions .btn-primary {
+    background: #fbc02d;
+    color: #1b3a1d;
+  }
   .recommend-item {
     display: flex;
     align-items: center;
     gap: 12px;
     padding: 10px 0;
+    border: 0;
     border-bottom: 1px solid #f0f0f0;
+    width: 100%;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
   }
   .recommend-item:last-child { border-bottom: none; }
   .station-dot {
@@ -266,6 +330,7 @@
   }
   .btn {
     flex: 1;
+    min-width: 0;
     padding: 10px;
     border-radius: 10px;
     text-align: center;
@@ -276,6 +341,182 @@
   }
   .btn-primary { background: #2e7d32; color: #fff; }
   .btn-secondary { background: #e8f5e9; color: #2e7d32; }
+  .btn:focus-visible,
+  .demo-nav:focus-visible,
+  .nav-item:focus-visible,
+  .filter-chip:focus-visible,
+  .preference-chip:focus-visible,
+  .sort-chip:focus-visible,
+  .trip-chip:focus-visible,
+  .recommendation-card:focus-visible,
+  .report-tab:focus-visible,
+  .modal-close:focus-visible,
+  .pin:focus-visible,
+  .app-header .tab:focus-visible {
+    outline: 3px solid rgba(251,192,45,0.65);
+    outline-offset: 2px;
+  }
+  .state-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .state-item {
+    min-height: 62px;
+    border: 1px solid #edf3ec;
+    border-radius: 12px;
+    padding: 10px;
+    background: #fbfdfb;
+  }
+  .state-item .label {
+    color: #757575;
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
+  .state-item .value {
+    color: #1b5e20;
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    border-radius: 999px;
+    padding: 5px 9px;
+    background: #edf6ed;
+    color: #2e7d32;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .carbon-insights {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .carbon-chip {
+    border: 1px solid rgba(255,255,255,0.28);
+    border-radius: 12px;
+    padding: 8px 10px;
+    background: rgba(255,255,255,0.14);
+  }
+  .carbon-chip span {
+    display: block;
+    font-size: 10px;
+    opacity: 0.82;
+  }
+  .carbon-chip strong {
+    display: block;
+    margin-top: 2px;
+    font-size: 13px;
+  }
+  .report-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .report-stat {
+    min-width: 0;
+    border: 1px solid #edf3ec;
+    border-radius: 12px;
+    padding: 10px 8px;
+    background: #fbfdfb;
+  }
+  .report-stat > span {
+    display: block;
+    color: #6d806d;
+    font-size: 10px;
+    line-height: 1.3;
+  }
+  .report-stat strong {
+    display: block;
+    margin-top: 4px;
+    color: #1b5e20;
+    font-size: 15px;
+    line-height: 1.25;
+  }
+  .report-stat.accent {
+    border-color: rgba(216,183,106,0.45);
+    background: #fffaf0;
+  }
+  .task-list {
+    display: grid;
+    gap: 9px;
+  }
+  .task-item {
+    border: 1px solid #edf3ec;
+    border-radius: 13px;
+    padding: 10px;
+    background: #fbfdfb;
+  }
+  .task-top {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    align-items: start;
+  }
+  .task-title {
+    color: #263126;
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.35;
+  }
+  .task-reward {
+    margin-top: 3px;
+    color: #6d806d;
+    font-size: 10px;
+    line-height: 1.35;
+  }
+  .task-status {
+    border-radius: 999px;
+    padding: 4px 7px;
+    background: #edf6ed;
+    color: #1b5e20;
+    font-size: 10px;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+  .task-status.done {
+    background: #263126;
+    color: #fff;
+  }
+  .task-progress {
+    height: 6px;
+    margin-top: 9px;
+    border-radius: 999px;
+    background: #e7eee6;
+    overflow: hidden;
+  }
+  .task-progress-fill {
+    height: 100%;
+    width: 0;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #7f9c7e, #d8b76a);
+    transition: width 0.25s ease;
+  }
+  .share-teaser {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: center;
+  }
+  .share-preview {
+    min-width: 0;
+  }
+  .share-preview strong {
+    display: block;
+    color: #263126;
+    font-size: 14px;
+    line-height: 1.35;
+  }
+  .share-preview span {
+    display: block;
+    margin-top: 3px;
+    color: #6d806d;
+    font-size: 11px;
+    line-height: 1.4;
+  }
   /* ─── Screen 2: Map ─── */
   .map-screen {
     background: #f5f7f4;
@@ -314,6 +555,15 @@
     font-weight: 600;
     box-shadow: 0 3px 10px rgba(0,0,0,0.2);
     border: 2px solid #fff;
+    padding: 0;
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .pin.is-selected {
+    transform: translate(-50%, -50%) scale(1.16);
+    box-shadow: 0 0 0 6px rgba(251,192,45,0.25), 0 4px 14px rgba(0,0,0,0.26);
+    z-index: 3;
   }
   .pin-earn { background: #e53935; }
   .pin-spend { background: #43a047; }
@@ -354,6 +604,18 @@
     overflow-x: auto;
     z-index: 5;
   }
+  .preference-row,
+  .sort-row {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    z-index: 5;
+  }
+  .preference-row { top: 108px; }
+  .sort-row { top: 146px; }
   .filter-chip {
     background: #fff;
     border: 1px solid #e0e0e0;
@@ -362,11 +624,32 @@
     font-size: 12px;
     white-space: nowrap;
     flex-shrink: 0;
+    cursor: pointer;
+  }
+  .preference-chip,
+  .sort-chip {
+    background: rgba(255,255,255,0.92);
+    border: 1px solid #dfe8de;
+    color: #315b32;
+    border-radius: 16px;
+    padding: 5px 11px;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+    flex-shrink: 0;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(27,94,32,0.06);
   }
   .filter-chip.active {
     background: #2e7d32;
     color: #fff;
     border-color: #2e7d32;
+  }
+  .preference-chip.active,
+  .sort-chip.active {
+    background: #1b5e20;
+    color: #fff;
+    border-color: #1b5e20;
   }
   .legend {
     position: absolute;
@@ -396,9 +679,14 @@
     right: 0;
     background: #fff;
     border-radius: 20px 20px 0 0;
-    padding: 16px 16px 20px;
+    padding: 14px 14px 18px;
     box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
     z-index: 4;
+    max-height: 330px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
   }
   .sheet-handle {
     width: 40px;
@@ -407,11 +695,14 @@
     border-radius: 2px;
     margin: 0 auto 12px;
   }
-  .sheet-title { font-size: 13px; color: #757575; margin-bottom: 8px; }
+  .sheet-title { font-size: 13px; color: #757575; }
   .sheet-shop {
     display: flex;
     align-items: center;
     gap: 12px;
+  }
+  .sheet-shop > div {
+    min-width: 0;
   }
   .shop-icon {
     width: 44px;
@@ -422,6 +713,90 @@
     align-items: center;
     justify-content: center;
     font-size: 22px;
+  }
+  .merchant-reason {
+    background: #f5faf5;
+    border: 1px solid #e1efe0;
+    border-radius: 10px;
+    padding: 8px 10px;
+    color: #405f41;
+    font-size: 11px;
+    line-height: 1.45;
+  }
+  .merchant-meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+  .merchant-meta span,
+  .points-simulation {
+    background: #fbfdfb;
+    border: 1px solid #edf3ec;
+    border-radius: 9px;
+    color: #496449;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 6px 7px;
+    min-width: 0;
+  }
+  .sheet-actions {
+    margin-top: 0;
+  }
+  .points-simulation {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .recommendation-list {
+    display: grid;
+    gap: 7px;
+    flex: 1;
+    min-height: 64px;
+    overflow-y: auto;
+    padding-right: 3px;
+  }
+  .recommendation-card {
+    display: grid;
+    grid-template-columns: 34px 1fr auto;
+    gap: 9px;
+    align-items: center;
+    border: 1px solid #edf3ec;
+    background: #fff;
+    border-radius: 12px;
+    padding: 8px;
+    text-align: left;
+    cursor: pointer;
+  }
+  .recommendation-card.active {
+    border-color: #2e7d32;
+    background: #f1f8f1;
+  }
+  .recommendation-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: #fff3e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+  .recommendation-title {
+    color: #263126;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+  .recommendation-reason {
+    color: #6d806d;
+    font-size: 10px;
+    line-height: 1.35;
+    margin-top: 2px;
+  }
+  .recommendation-score {
+    color: #1b5e20;
+    font-size: 11px;
+    font-weight: 800;
   }
   /* ─── Screen 3: Carbon Footprint Dashboard ─── */
   .stat-grid {
@@ -477,6 +852,9 @@
   .bar.peak {
     background: linear-gradient(180deg, #81c784, #2e7d32);
   }
+  .bar.today {
+    background: linear-gradient(180deg, #d8b76a, #7f9c7e);
+  }
   .x-axis {
     display: flex;
     gap: 6px;
@@ -527,6 +905,10 @@
     margin-top: 2px;
     opacity: 0.9;
   }
+  .achievement.locked {
+    opacity: 0.55;
+    filter: grayscale(0.6);
+  }
   .tree-card {
     background: linear-gradient(135deg, #f1f8e9, #e8f5e9);
     border-radius: 16px;
@@ -548,6 +930,426 @@
     color: #558b2f;
     margin-top: 4px;
   }
+  .trip-panel {
+    background: #fff;
+    border: 1px solid #edf3ec;
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+  .panel-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .panel-title {
+    color: #263126;
+    font-size: 13px;
+    font-weight: 800;
+  }
+  .panel-note {
+    color: #6d806d;
+    font-size: 11px;
+    line-height: 1.4;
+    margin-top: 3px;
+  }
+  .trip-options {
+    display: grid;
+    gap: 8px;
+  }
+  .trip-chip {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    align-items: center;
+    width: 100%;
+    border: 1px solid #e1efe0;
+    border-radius: 13px;
+    background: #fbfdfb;
+    padding: 9px 10px;
+    color: #263126;
+    text-align: left;
+    cursor: pointer;
+  }
+  .trip-chip.active {
+    border-color: #2e7d32;
+    background: #f1f8f1;
+    box-shadow: inset 4px 0 0 #fbc02d;
+  }
+  .trip-name {
+    display: block;
+    font-size: 12px;
+    font-weight: 800;
+  }
+  .trip-route {
+    display: block;
+    margin-top: 2px;
+    color: #6d806d;
+    font-size: 10px;
+    line-height: 1.35;
+  }
+  .trip-distance {
+    color: #1b5e20;
+    font-size: 12px;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+  .formula-card {
+    margin-top: 10px;
+    border-radius: 14px;
+    padding: 12px;
+    background: #263126;
+    color: #fff;
+  }
+  .formula-line {
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.45;
+  }
+  .formula-sub {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 9px;
+  }
+  .formula-sub div {
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 10px;
+    padding: 7px;
+  }
+  .formula-sub span {
+    display: block;
+    font-size: 9px;
+    opacity: 0.72;
+  }
+  .formula-sub strong {
+    display: block;
+    margin-top: 2px;
+    font-size: 12px;
+  }
+  .report-panel {
+    background: #fff;
+    border: 1px solid #edf3ec;
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+  .report-panel .report-kicker {
+    color: #6d806d;
+    font-size: 11px;
+    font-weight: 800;
+  }
+  .report-panel .report-primary {
+    margin-top: 5px;
+    color: #1b5e20;
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1.1;
+  }
+  .report-panel .report-secondary {
+    margin-top: 5px;
+    color: #405f41;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+  .report-meter {
+    height: 7px;
+    margin-top: 10px;
+    border-radius: 999px;
+    background: #e7eee6;
+    overflow: hidden;
+  }
+  .report-meter-fill {
+    height: 100%;
+    width: 0;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #2e7d32, #d8b76a);
+    transition: width 0.25s ease;
+  }
+  .threshold-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .threshold-step {
+    border: 1px solid rgba(255,255,255,0.24);
+    border-radius: 12px;
+    padding: 10px;
+    background: rgba(255,255,255,0.1);
+  }
+  .threshold-step.unlocked {
+    background: rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.44);
+  }
+  .threshold-step.current {
+    border-color: #fbc02d;
+    box-shadow: 0 0 0 2px rgba(251,192,45,0.18);
+  }
+  .threshold-step .target {
+    display: block;
+    font-size: 12px;
+    font-weight: 800;
+  }
+  .threshold-step .status {
+    display: block;
+    margin-top: 4px;
+    font-size: 10px;
+    line-height: 1.35;
+    opacity: 0.88;
+  }
+  /* ─── Screen 4: Member / Proof Shell ─── */
+  .proof-status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255,255,255,0.25);
+  }
+  .proof-id {
+    max-width: 180px;
+    text-align: right;
+    font-size: 12px;
+    line-height: 1.4;
+    word-break: break-word;
+    opacity: 0.9;
+  }
+  .proof-row {
+    display: grid;
+    grid-template-columns: 88px 1fr;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 12px;
+  }
+  .proof-row:last-child { border-bottom: none; }
+  .proof-row .label { color: #757575; }
+  .proof-row .value {
+    color: #263126;
+    font-weight: 600;
+    line-height: 1.4;
+    word-break: break-word;
+  }
+  .proof-toggle {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 12px;
+    padding: 12px;
+    border: 1px solid #dfe9df;
+    border-radius: 12px;
+    background: #f8fbf7;
+    color: #263126;
+    cursor: pointer;
+  }
+  .proof-toggle input {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    accent-color: #2e7d32;
+    flex: 0 0 auto;
+  }
+  .proof-toggle strong {
+    display: block;
+    font-size: 13px;
+    line-height: 1.35;
+  }
+  .proof-toggle small {
+    display: block;
+    margin-top: 4px;
+    color: #5f765f;
+    font-size: 11px;
+    line-height: 1.45;
+  }
+  .proof-copy {
+    font-family: "SF Mono", "Roboto Mono", Consolas, "MetroNotoTC", monospace;
+    font-size: 10px;
+    line-height: 1.55;
+    color: #395239;
+  }
+  .proof-badge {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    max-width: 100%;
+    border-radius: 999px;
+    padding: 4px 8px;
+    background: #edf7ed;
+    color: #2e7d32;
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1.3;
+  }
+  .integration-slot {
+    margin-top: 12px;
+    border: 1px dashed #b9cbb9;
+    border-radius: 12px;
+    padding: 10px 12px;
+    background: #fbf8ef;
+  }
+  .integration-slot span,
+  .integration-slot small {
+    display: block;
+    color: #6d654e;
+    font-size: 11px;
+    line-height: 1.45;
+  }
+  .integration-slot strong {
+    display: block;
+    margin-top: 3px;
+    color: #263126;
+    font-size: 13px;
+    line-height: 1.35;
+  }
+  .audit-list {
+    list-style: none;
+  }
+  .audit-list li {
+    position: relative;
+    padding: 0 0 12px 18px;
+    color: #424242;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+  .audit-list li::before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #43a047;
+  }
+  .audit-list li.pending {
+    color: #7d827d;
+  }
+  .audit-list li.pending::before {
+    background: #bdbdbd;
+  }
+  .audit-list li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 12px;
+    left: 3px;
+    width: 2px;
+    height: calc(100% - 12px);
+    background: #d7ead7;
+  }
+  .privacy-note {
+    border-left: 4px solid #2e7d32;
+    background: #f5faf5;
+    border-radius: 10px;
+    padding: 10px 12px;
+    color: #4d654d;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .share-modal[hidden] {
+    display: none;
+  }
+  .share-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(26,26,26,0.52);
+  }
+  .share-panel {
+    width: min(360px, calc(100vw - 32px));
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 20px 70px rgba(0,0,0,0.28);
+    overflow: hidden;
+  }
+  .share-panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 16px;
+    border-bottom: 1px solid #edf3ec;
+  }
+  .share-panel-head h2 {
+    color: #263126;
+    font-size: 15px;
+    line-height: 1.35;
+  }
+  .modal-close {
+    width: 32px;
+    height: 32px;
+    border: 0;
+    border-radius: 50%;
+    background: #edf3ec;
+    color: #263126;
+    font-size: 18px;
+    font-weight: 800;
+    cursor: pointer;
+  }
+  .share-card {
+    margin: 16px;
+    border-radius: 16px;
+    padding: 18px;
+    background:
+      linear-gradient(120deg, rgba(216,183,106,0.20) 0 1px, transparent 1px 24px),
+      linear-gradient(145deg, #263126, #1b5e20 62%, #7f9c7e);
+    color: #fff;
+  }
+  .share-card .brand {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    color: rgba(255,255,255,0.78);
+    font-size: 10px;
+    line-height: 1.35;
+  }
+  .share-card h3 {
+    margin-top: 16px;
+    font-size: 24px;
+    line-height: 1.18;
+    letter-spacing: 0;
+  }
+  .share-card .share-result {
+    margin-top: 10px;
+    color: rgba(255,255,255,0.84);
+    font-size: 12px;
+    line-height: 1.55;
+  }
+  .share-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .share-metric {
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 12px;
+    padding: 10px;
+    background: rgba(255,255,255,0.12);
+  }
+  .share-metric > span {
+    display: block;
+    font-size: 9px;
+    color: rgba(255,255,255,0.72);
+  }
+  .share-metric strong {
+    display: block;
+    margin-top: 3px;
+    font-size: 14px;
+  }
+  .share-note {
+    margin: 0 16px 16px;
+    color: #6d806d;
+    font-size: 11px;
+    line-height: 1.5;
+  }
   /* Bottom Nav */
   .bottom-nav {
     height: 65px;
@@ -565,9 +1367,22 @@
     gap: 2px;
     color: #9e9e9e;
     font-size: 10px;
+    width: 25%;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    min-width: 0;
   }
   .nav-item.active { color: #2e7d32; }
   .nav-item .icon { font-size: 20px; }
+  .live-region {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
   .footnote {
     text-align: center;
     margin-top: 50px;
@@ -576,6 +1391,41 @@
     line-height: 1.6;
   }
   .footnote strong { color: #1b5e20; }
+  @media (max-width: 720px) {
+    body { padding: 24px 12px; }
+    .header { margin-bottom: 28px; }
+    .header h1 { font-size: 28px; }
+    .mockup-row { gap: 18px; }
+  }
+  @media (max-width: 420px) {
+    body { padding: 20px 10px; }
+    .phone {
+      width: min(340px, calc(100vw - 20px));
+      height: min(700px, calc((100vw - 20px) * 2.06));
+      border-radius: 34px;
+      padding: 10px;
+    }
+    .screen { border-radius: 26px; }
+    .app-header { padding: 8px 14px 12px; }
+    .app-header .user { font-size: 16px; }
+    .app-header .tabs {
+      justify-content: space-between;
+      gap: 6px;
+      font-size: 12px;
+    }
+    .body { padding: 12px; }
+    .card { padding: 14px; }
+    .state-list { grid-template-columns: 1fr; }
+    .report-summary-grid { grid-template-columns: 1fr; }
+    .share-teaser { grid-template-columns: 1fr; }
+    .proof-row { grid-template-columns: 1fr; }
+    .map-filters { left: 12px; right: 12px; }
+    .preference-row,
+    .sort-row { left: 12px; right: 12px; }
+    .map-search { left: 12px; right: 12px; }
+    .legend { left: 12px; bottom: 76px; }
+    .map-bottom-sheet { max-height: 310px; }
+  }
 </style>
 </head>
 <body>
@@ -586,10 +1436,18 @@
   <span class="tag">玩點生活・智慧串聯</span>
 </div>
 
-<div class="mockup-row">
+<div class="demo-switcher" aria-label="Prototype 區塊導覽">
+  <button class="demo-nav active" type="button" data-nav="home">首頁</button>
+  <button class="demo-nav" type="button" data-nav="map">AI 路線</button>
+  <button class="demo-nav" type="button" data-nav="carbon">碳足跡</button>
+  <button class="demo-nav" type="button" data-nav="proof">可信證明</button>
+</div>
+
+<div class="mockup-row app-mode" data-app>
+  <div class="live-region" aria-live="polite" data-live-region></div>
 
   <!-- ═══ Screen 1: Home / Green Point Report ═══ -->
-  <div class="screen-wrap">
+  <div class="screen-wrap is-active" data-view="home">
     <div class="screen-label">
       <span class="num">1</span>
       <span class="title">首頁・今日綠點報告</span>
@@ -603,73 +1461,128 @@
         <div class="app-header">
           <div class="greeting">早安 ☀</div>
           <div class="user">Sofia,今天也是綠捷客 🌿</div>
-          <div class="tabs">
-            <span class="tab active">首頁</span>
-            <span class="tab">地圖</span>
-            <span class="tab">碳足跡</span>
-            <span class="tab">會員</span>
+          <div class="tabs" role="tablist" aria-label="主要功能">
+            <button class="tab active" type="button" data-nav="home">首頁</button>
+            <button class="tab" type="button" data-nav="map">地圖</button>
+            <button class="tab" type="button" data-nav="carbon">碳足跡</button>
+            <button class="tab" type="button" data-nav="proof">會員</button>
           </div>
         </div>
         <div class="body">
           <div class="card hero-card">
             <div class="card-title">🌿 本月碳節省</div>
-            <div class="big-num">8.2 <span class="unit">kg CO₂</span></div>
+            <div class="big-num"><span data-field="monthlyCarbon">8.2</span> <span class="unit">kg CO₂</span></div>
             <div class="multiplier">
               <div>
                 <div class="label">目前綠點乘數</div>
-                <div class="progress">
-                  <div class="progress-fill"></div>
+                  <div class="progress" aria-hidden="true">
+                  <div class="progress-fill" data-field="carbonProgress"></div>
                 </div>
-                <div class="progress-text">距 1.5x 加成還差 1.8 kg</div>
+                <div class="progress-text" data-field="nextThreshold">距 1.5x 加成還差 1.8 kg</div>
               </div>
-              <div class="value">⭐ 1.2x</div>
+              <div class="value">⭐ <span data-field="multiplier">1.2x</span></div>
+            </div>
+            <div class="carbon-insights">
+              <div class="carbon-chip">
+                <span>本次通勤</span>
+                <strong><span data-field="tripDistance">8.0</span> km / <span data-field="tripCarbon">0.72</span> kg</strong>
+              </div>
+              <div class="carbon-chip">
+                <span>下一門檻</span>
+                <strong>再 <span data-field="nextKm">20.0</span> km</strong>
+              </div>
+            </div>
+            <div class="action-row hero-actions">
+              <button class="btn btn-secondary" type="button" data-action="complete-trip">完成通勤</button>
+              <button class="btn btn-primary" type="button" data-nav="map">看路線</button>
             </div>
           </div>
 
           <div class="card">
+            <div class="card-title">📊 今日綠點報告</div>
+            <div class="report-summary-grid">
+              <div class="report-stat">
+                <span>本日減碳</span>
+                <strong><span data-field="todayCarbon">0.00</span> kg</strong>
+              </div>
+              <div class="report-stat accent">
+                <span>本月目標</span>
+                <strong><span data-field="monthlyGoalProgress">68</span>%</strong>
+              </div>
+              <div class="report-stat">
+                <span>年度累積</span>
+                <strong><span data-field="yearlyCarbon">73.4</span> kg</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">🧭 今日任務狀態</div>
+            <div class="state-list">
+              <div class="state-item">
+                <div class="label">捷運點數</div>
+                <div class="value"><span data-field="points">480</span> 點</div>
+              </div>
+              <div class="state-item">
+                <div class="label">本月搭乘</div>
+                <div class="value"><span data-field="trips">18</span> 趟</div>
+              </div>
+              <div class="state-item">
+                <div class="label">可信證明</div>
+                <div class="value" data-field="proofShort">等待資料</div>
+              </div>
+              <div class="state-item">
+                <div class="label">目前畫面</div>
+                <div class="value" data-field="currentView">首頁</div>
+              </div>
+              <div class="state-item">
+                <div class="label">預估減碳</div>
+                <div class="value"><span data-field="tripCarbonGrams">720</span> g</div>
+              </div>
+              <div class="state-item">
+                <div class="label">加成預覽</div>
+                <div class="value" data-field="projectedMultiplier">1.2x</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">✅ 任務與成就</div>
+            <div class="task-list" data-task-list aria-label="今日任務進度"></div>
+          </div>
+
+          <div class="card">
             <div class="card-title">📍 今日 AI 推薦路線</div>
-            <div class="recommend-item">
-              <div class="station-dot">🚇</div>
-              <div class="recommend-info">
-                <div class="station">大安站 1 號出口</div>
-                <div class="shop">路易莎咖啡</div>
-              </div>
-              <div class="badge badge-earn">+15 點</div>
-            </div>
-            <div class="recommend-item">
-              <div class="station-dot">🚇</div>
-              <div class="recommend-info">
-                <div class="station">忠孝復興站 2 號出口</div>
-                <div class="shop">全聯福利中心</div>
-              </div>
-              <div class="badge badge-spend">折 $30</div>
-            </div>
-            <div class="recommend-item">
-              <div class="station-dot">🚇</div>
-              <div class="recommend-info">
-                <div class="station">中山站 4 號出口</div>
-                <div class="shop">誠品書店</div>
-              </div>
-              <div class="badge badge-earn">+20 點</div>
-            </div>
+            <div data-home-recommendations></div>
             <div class="action-row">
-              <button class="btn btn-secondary">分享減碳成績</button>
-              <button class="btn btn-primary">查看完整路線</button>
+              <button class="btn btn-secondary" type="button" data-action="complete-trip">完成示範通勤</button>
+              <button class="btn btn-primary" type="button" data-nav="map">查看完整路線</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">📣 分享今日成果</div>
+            <div class="share-teaser">
+              <div class="share-preview">
+                <strong data-field="shareHeadline">今天已累積 0.00 kg CO₂</strong>
+                <span data-field="shareSummary">完成通勤後會同步帶入本日減碳、點數與綠點乘數。</span>
+              </div>
+              <button class="btn btn-primary" type="button" data-action="open-share">產生分享卡</button>
             </div>
           </div>
         </div>
         <div class="bottom-nav">
-          <div class="nav-item active"><span class="icon">🏠</span>首頁</div>
-          <div class="nav-item"><span class="icon">🗺</span>地圖</div>
-          <div class="nav-item"><span class="icon">🌍</span>碳足跡</div>
-          <div class="nav-item"><span class="icon">👤</span>會員</div>
+          <button class="nav-item active" type="button" data-nav="home"><span class="icon">🏠</span>首頁</button>
+          <button class="nav-item" type="button" data-nav="map"><span class="icon">🗺</span>地圖</button>
+          <button class="nav-item" type="button" data-nav="carbon"><span class="icon">🌍</span>碳足跡</button>
+          <button class="nav-item" type="button" data-nav="proof"><span class="icon">👤</span>會員</button>
         </div>
       </div>
     </div>
   </div>
 
   <!-- ═══ Screen 2: Map / AI Route ═══ -->
-  <div class="screen-wrap">
+  <div class="screen-wrap" data-view="map">
     <div class="screen-label">
       <span class="num">2</span>
       <span class="title">AI 點數路線地圖</span>
@@ -687,24 +1600,32 @@
           <div class="mrt-line line-green"></div>
           <div class="mrt-line line-blue"></div>
 
-          <div class="pin pin-earn" style="top: 30%; left: 25%;">15</div>
-          <div class="pin pin-spend" style="top: 38%; left: 55%;">30</div>
-          <div class="pin pin-star large" style="top: 50%; left: 40%;">⭐</div>
-          <div class="pin pin-earn" style="top: 60%; left: 65%;">20</div>
-          <div class="pin pin-spend" style="top: 68%; left: 28%;">50</div>
-          <div class="pin pin-earn" style="top: 78%; left: 50%;">10</div>
+          <div data-map-pins></div>
 
           <div class="map-search">
             <span>🔍</span>
-            <input placeholder="搜尋商家、車站..." value="">
+            <input placeholder="搜尋商家、車站..." value="" data-search aria-label="搜尋商家或車站">
           </div>
 
-          <div class="map-filters">
-            <div class="filter-chip active">全部</div>
-            <div class="filter-chip">🍱 餐飲</div>
-            <div class="filter-chip">🛍 購物</div>
-            <div class="filter-chip">☕ 飲品</div>
-            <div class="filter-chip">📚 文化</div>
+          <div class="map-filters" aria-label="商家類型篩選">
+            <button class="filter-chip active" type="button" data-filter="all">全部</button>
+            <button class="filter-chip" type="button" data-filter="food">🍱 餐飲</button>
+            <button class="filter-chip" type="button" data-filter="shopping">🛍 購物</button>
+            <button class="filter-chip" type="button" data-filter="drink">☕ 飲品</button>
+            <button class="filter-chip" type="button" data-filter="culture">📚 文化</button>
+          </div>
+
+          <div class="preference-row" aria-label="推薦偏好">
+            <button class="preference-chip active" type="button" data-preference="commute">通勤順路</button>
+            <button class="preference-chip" type="button" data-preference="points">點數最大</button>
+            <button class="preference-chip" type="button" data-preference="saving">省錢優先</button>
+          </div>
+
+          <div class="sort-row" aria-label="排序方式">
+            <button class="sort-chip active" type="button" data-sort="smart">AI 推薦</button>
+            <button class="sort-chip" type="button" data-sort="points">點數</button>
+            <button class="sort-chip" type="button" data-sort="distance">距離</button>
+            <button class="sort-chip" type="button" data-sort="discount">折抵</button>
           </div>
 
           <div class="legend">
@@ -721,32 +1642,47 @@
 
           <div class="map-bottom-sheet">
             <div class="sheet-handle"></div>
-            <div class="sheet-title">⭐ AI 推薦・距你最近</div>
+            <div class="sheet-title" data-field="recommendationTitle">⭐ AI 推薦・距你最近</div>
             <div class="sheet-shop">
-              <div class="shop-icon">☕</div>
+              <div class="shop-icon" data-field="merchantIcon">☕</div>
               <div style="flex:1">
-                <div style="font-weight:600; font-size:15px;">cama café・忠孝店</div>
-                <div style="font-size:12px; color:#757575; margin-top:2px;">忠孝復興站 ・ 距 120m</div>
+                <div style="font-weight:600; font-size:15px;" data-field="merchantName">cama café・忠孝店</div>
+                <div style="font-size:12px; color:#757575; margin-top:2px;" data-field="merchantStation">忠孝復興站 ・ 距 120m</div>
                 <div style="margin-top:6px;">
-                  <span class="badge badge-earn">累點 1:5 加倍</span>
-                  <span class="badge badge-spend" style="margin-left:6px;">用點折 $50</span>
+                  <span class="badge badge-earn" data-field="merchantEarn">累點 1:5 加倍</span>
+                  <span class="badge badge-spend" style="margin-left:6px;" data-field="merchantSpend">用點折 $50</span>
                 </div>
               </div>
             </div>
+            <div class="merchant-reason" data-field="merchantReason">依照目前通勤路線、距離與點數回饋推薦。</div>
+            <div class="merchant-meta">
+              <span data-field="merchantScore">AI 87 分</span>
+              <span data-field="merchantDistance">距 120m</span>
+              <span data-field="merchantCategory">飲品</span>
+            </div>
+            <div class="action-row sheet-actions">
+              <button class="btn btn-secondary" type="button" data-action="simulate-earn">模擬累點</button>
+              <button class="btn btn-primary" type="button" data-action="simulate-spend">用點兌換</button>
+            </div>
+            <div class="points-simulation">
+              <span>本輪累點 <strong data-field="simEarned">0</strong></span>
+              <span>已兌換 <strong data-field="simSpent">0</strong></span>
+            </div>
+            <div class="recommendation-list" data-recommendation-list aria-label="AI 推薦商家清單"></div>
           </div>
         </div>
         <div class="bottom-nav">
-          <div class="nav-item"><span class="icon">🏠</span>首頁</div>
-          <div class="nav-item active"><span class="icon">🗺</span>地圖</div>
-          <div class="nav-item"><span class="icon">🌍</span>碳足跡</div>
-          <div class="nav-item"><span class="icon">👤</span>會員</div>
+          <button class="nav-item" type="button" data-nav="home"><span class="icon">🏠</span>首頁</button>
+          <button class="nav-item active" type="button" data-nav="map"><span class="icon">🗺</span>地圖</button>
+          <button class="nav-item" type="button" data-nav="carbon"><span class="icon">🌍</span>碳足跡</button>
+          <button class="nav-item" type="button" data-nav="proof"><span class="icon">👤</span>會員</button>
         </div>
       </div>
     </div>
   </div>
 
   <!-- ═══ Screen 3: Carbon Footprint Dashboard ═══ -->
-  <div class="screen-wrap">
+  <div class="screen-wrap" data-view="carbon">
     <div class="screen-label">
       <span class="num">3</span>
       <span class="title">個人碳足跡儀表板</span>
@@ -761,27 +1697,82 @@
           <div class="greeting">5 月個人報告</div>
           <div class="user">🌍 我的碳足跡</div>
           <div class="tabs">
-            <span class="tab">本日</span>
-            <span class="tab active">本月</span>
-            <span class="tab">本年</span>
+            <button class="tab report-tab" type="button" data-report-mode="daily">本日</button>
+            <button class="tab report-tab active" type="button" data-report-mode="monthly">本月</button>
+            <button class="tab report-tab" type="button" data-report-mode="yearly">本年</button>
           </div>
         </div>
         <div class="body">
           <div class="stat-grid">
             <div class="stat-mini">
-              <div class="num">32</div>
+              <div class="num"><span data-field="trips">18</span></div>
               <div class="lbl">本月搭乘趟數</div>
             </div>
             <div class="stat-mini">
-              <div class="num">296 <span style="font-size:14px">km</span></div>
+              <div class="num"><span data-field="distance">91</span> <span style="font-size:14px">km</span></div>
               <div class="lbl">累計里程</div>
+            </div>
+          </div>
+
+          <div class="report-panel">
+            <div class="report-kicker" data-field="reportModeLabel">本月報告</div>
+            <div class="report-primary" data-field="reportPrimary">8.2 kg CO₂</div>
+            <div class="report-secondary" data-field="reportSecondary">目標 12.0 kg，目前完成 68%。</div>
+            <div class="report-meter" aria-hidden="true">
+              <div class="report-meter-fill" data-field="reportProgress"></div>
+            </div>
+          </div>
+
+          <div class="trip-panel">
+            <div class="panel-head">
+              <div>
+                <div class="panel-title">🚇 本次通勤模擬</div>
+                <div class="panel-note">以環境部係數示意：捷運替代私人運具每公里節省 90 gCO₂e。</div>
+              </div>
+              <span class="status-pill"><span data-field="projectedMultiplier">1.2x</span></span>
+            </div>
+            <div class="trip-options" aria-label="示範通勤路線">
+              <button class="trip-chip" type="button" data-trip-id="short">
+                <span>
+                  <span class="trip-name">短程轉乘</span>
+                  <span class="trip-route">中山 → 忠孝復興</span>
+                </span>
+                <span class="trip-distance">4.6 km</span>
+              </button>
+              <button class="trip-chip active" type="button" data-trip-id="daily">
+                <span>
+                  <span class="trip-name">日常通勤</span>
+                  <span class="trip-route">大安 → 台北車站</span>
+                </span>
+                <span class="trip-distance">8.0 km</span>
+              </button>
+              <button class="trip-chip" type="button" data-trip-id="challenge">
+                <span>
+                  <span class="trip-name">跨城挑戰</span>
+                  <span class="trip-route">淡水 → 南港展覽館</span>
+                </span>
+                <span class="trip-distance">23.4 km</span>
+              </button>
+            </div>
+            <div class="formula-card">
+              <div class="formula-line" data-field="carbonFormula">90 gCO₂e/km × 8.0 km = 720 gCO₂e = 0.72 kg</div>
+              <div class="formula-sub">
+                <div>
+                  <span>完成後本月</span>
+                  <strong><span data-field="projectedCarbon">8.9</span> kg CO₂</strong>
+                </div>
+                <div>
+                  <span>距下一級</span>
+                  <strong><span data-field="nextKg">1.8</span> kg / <span data-field="nextKm">20.0</span> km</strong>
+                </div>
+              </div>
             </div>
           </div>
 
           <div class="tree-card">
             <div class="tree-emoji">🌳🌳</div>
-            <div class="num">26.6 kg CO₂</div>
-            <div class="desc">本月碳節省 ≈ 種植 2.2 棵樹</div>
+            <div class="num"><span data-field="monthlyCarbon">8.2</span> kg CO₂</div>
+            <div class="desc">本月碳節省 ≈ 種植 <span data-field="treeEquivalent">0.7</span> 棵樹</div>
           </div>
 
           <div class="chart-card">
@@ -789,55 +1780,141 @@
               <span>每日減碳趨勢</span>
               <span style="font-size:11px;color:#9e9e9e">近 14 天</span>
             </div>
-            <div class="chart">
-              <div class="bar" style="height: 35%"></div>
-              <div class="bar" style="height: 50%"></div>
-              <div class="bar peak" style="height: 75%"></div>
-              <div class="bar" style="height: 45%"></div>
-              <div class="bar" style="height: 60%"></div>
-              <div class="bar" style="height: 30%"></div>
-              <div class="bar" style="height: 25%"></div>
-              <div class="bar" style="height: 55%"></div>
-              <div class="bar" style="height: 70%"></div>
-              <div class="bar peak" style="height: 85%"></div>
-              <div class="bar" style="height: 65%"></div>
-              <div class="bar" style="height: 50%"></div>
-              <div class="bar" style="height: 40%"></div>
-              <div class="bar peak" style="height: 90%"></div>
-            </div>
-            <div class="x-axis">
-              <span>5/2</span><span>5/4</span><span>5/6</span><span>5/8</span>
-              <span>5/10</span><span>5/12</span><span>今日</span>
-            </div>
+            <div class="chart" data-trend-chart aria-label="近 14 天每日減碳趨勢"></div>
+            <div class="x-axis" data-trend-axis></div>
           </div>
 
           <div class="level-bar">
             <div class="lvl-title">🌿 目前等級・綠點乘數</div>
-            <div class="lvl-num">1.5x 加成中</div>
-            <div class="rank">全市排名 前 15%・領先 85,000 位用戶</div>
-            <div class="badges">
-              <div class="achievement">
-                🏆<div class="lbl">通勤達人</div>
+            <div class="lvl-num"><span data-field="multiplier">1.2x</span> 加成中</div>
+            <div class="rank" data-field="levelRank">本月還差 1.8 kg，約 20.0 km 可解鎖下一階段</div>
+            <div class="threshold-grid">
+              <div class="threshold-step" data-threshold-step="5">
+                <span class="target">5 kg → 1.2x</span>
+                <span class="status" data-field="threshold5Status">已解鎖 1.2x</span>
               </div>
-              <div class="achievement">
-                🌱<div class="lbl">減碳新星</div>
-              </div>
-              <div class="achievement">
-                🎯<div class="lbl">連續 14 天</div>
+              <div class="threshold-step current" data-threshold-step="10">
+                <span class="target">10 kg → 1.5x</span>
+                <span class="status" data-field="threshold10Status">還差 1.8 kg / 20.0 km</span>
               </div>
             </div>
+            <div class="badges" data-achievements aria-label="成就徽章"></div>
           </div>
 
           <div class="action-row">
-            <button class="btn btn-secondary">查看排行榜</button>
-            <button class="btn btn-primary">分享到社群</button>
+            <button class="btn btn-secondary" type="button" data-action="complete-trip">完成示範通勤</button>
+            <button class="btn btn-primary" type="button" data-nav="proof">查看可信證明</button>
           </div>
         </div>
         <div class="bottom-nav">
-          <div class="nav-item"><span class="icon">🏠</span>首頁</div>
-          <div class="nav-item"><span class="icon">🗺</span>地圖</div>
-          <div class="nav-item active"><span class="icon">🌍</span>碳足跡</div>
-          <div class="nav-item"><span class="icon">👤</span>會員</div>
+          <button class="nav-item" type="button" data-nav="home"><span class="icon">🏠</span>首頁</button>
+          <button class="nav-item" type="button" data-nav="map"><span class="icon">🗺</span>地圖</button>
+          <button class="nav-item active" type="button" data-nav="carbon"><span class="icon">🌍</span>碳足跡</button>
+          <button class="nav-item" type="button" data-nav="proof"><span class="icon">👤</span>會員</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Screen 4: Member / Proof Shell ═══ -->
+  <div class="screen-wrap" data-view="proof">
+    <div class="screen-label">
+      <span class="num">4</span>
+      <span class="title">會員・可信數據證明</span>
+    </div>
+    <div class="phone">
+      <div class="screen">
+        <div class="status-bar">
+          <span>9:41</span>
+          <span class="icons">●●● 📶 🔋</span>
+        </div>
+        <div class="app-header">
+          <div class="greeting">會員中心</div>
+          <div class="user">🔐 我的綠捷客證明</div>
+          <div class="tabs" role="tablist" aria-label="主要功能">
+            <button class="tab" type="button" data-nav="home">首頁</button>
+            <button class="tab" type="button" data-nav="map">地圖</button>
+            <button class="tab" type="button" data-nav="carbon">碳足跡</button>
+            <button class="tab active" type="button" data-nav="proof">會員</button>
+          </div>
+        </div>
+        <div class="body">
+          <div class="card hero-card">
+            <div class="card-title">🔐 可信證明狀態</div>
+            <div class="big-num" style="font-size:26px;" data-field="proofStatus">等待資料</div>
+            <div class="proof-status">
+              <div>
+                <div class="label">本機示範紀錄</div>
+                <div class="progress">
+                  <div class="progress-fill" data-field="proofProgress"></div>
+                </div>
+              </div>
+              <div class="proof-id" data-field="proofId">尚未產生 NID</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">🧾 去識別 Proof Record</div>
+            <div class="proof-row">
+              <div class="label">碳節省</div>
+              <div class="value"><span data-field="monthlyCarbon">8.2</span> kg CO₂，本月累積</div>
+            </div>
+            <div class="proof-row">
+              <div class="label">資料摘要</div>
+              <div class="value" data-field="routeDigest">僅保留距離區間、月份與任務類型，不顯示完整起訖站</div>
+            </div>
+            <div class="proof-row">
+              <div class="label">Proof hash</div>
+              <div class="value proof-copy" data-field="proofHash">尚未產生 demo hash</div>
+            </div>
+            <div class="proof-row">
+              <div class="label">Record</div>
+              <div class="value proof-copy" data-field="proofPayload">完成通勤後建立去識別 payload</div>
+            </div>
+            <div class="proof-row">
+              <div class="label">封存時間</div>
+              <div class="value" data-field="proofUpdated">尚未更新</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">🔏 隱私同意</div>
+            <div class="proof-badge" data-field="proofRecordStatus">等待通勤資料</div>
+            <label class="proof-toggle">
+              <input type="checkbox" data-proof-consent>
+              <span>
+                <strong data-field="proofConsentStatus">尚未同意註冊 proof</strong>
+                <small data-field="proofConsentDetail">同意後只封存去識別 payload 與 demo hash，不保留起訖站、商家或精確時間。</small>
+              </span>
+            </label>
+            <div class="integration-slot">
+              <span>Numbers Protocol live slot</span>
+              <strong data-field="liveSlotStatus">離線 fallback</strong>
+              <small data-field="liveSlotNote">正式產品可在使用者同意後把 demo hash 註冊到 Capture / Numbers API；本頁不發出網路請求。</small>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">🧱 可信稽核軌跡</div>
+            <ul class="audit-list" data-audit-list>
+              <li class="pending">等待完成捷運通勤事件。</li>
+              <li class="pending">等待建立去識別資料摘要。</li>
+              <li class="pending">等待使用者同意。</li>
+              <li class="pending">等待產生 demo hash。</li>
+            </ul>
+            <div class="privacy-note" data-field="privacyScope">本機示範不會連線、不會上傳個人資料，也不會暴露完整路線。</div>
+          </div>
+
+          <div class="action-row">
+            <button class="btn btn-secondary" type="button" data-action="complete-trip">完成示範通勤</button>
+            <button class="btn btn-primary" type="button" data-action="generate-proof">產生示範證明</button>
+          </div>
+        </div>
+        <div class="bottom-nav">
+          <button class="nav-item" type="button" data-nav="home"><span class="icon">🏠</span>首頁</button>
+          <button class="nav-item" type="button" data-nav="map"><span class="icon">🗺</span>地圖</button>
+          <button class="nav-item" type="button" data-nav="carbon"><span class="icon">🌍</span>碳足跡</button>
+          <button class="nav-item active" type="button" data-nav="proof"><span class="icon">👤</span>會員</button>
         </div>
       </div>
     </div>
@@ -845,10 +1922,1178 @@
 
 </div>
 
+<div class="share-modal" data-share-modal hidden role="dialog" aria-modal="true" aria-labelledby="share-card-title">
+  <div class="share-panel">
+    <div class="share-panel-head">
+      <h2 id="share-card-title">今日成果分享卡</h2>
+      <button class="modal-close" type="button" data-action="close-share" aria-label="關閉分享卡">×</button>
+    </div>
+    <div class="share-card">
+      <div class="brand">
+        <span>從碳客變捷客</span>
+        <span>Human Truth. Machine Proof.</span>
+      </div>
+      <h3 data-field="shareTitle">今天先把一趟通勤變成綠點。</h3>
+      <div class="share-result" data-field="shareResult">完成示範通勤後，這張卡會更新減碳與點數成果。</div>
+      <div class="share-grid">
+        <div class="share-metric">
+          <span>本日減碳</span>
+          <strong><span data-field="todayCarbon">0.00</span> kg</strong>
+        </div>
+        <div class="share-metric">
+          <span>捷運點數</span>
+          <strong><span data-field="points">480</span> 點</strong>
+        </div>
+        <div class="share-metric">
+          <span>綠點乘數</span>
+          <strong data-field="shareMultiplier">1.2x</strong>
+        </div>
+        <div class="share-metric">
+          <span>任務狀態</span>
+          <strong data-field="shareTaskStatus">待完成</strong>
+        </div>
+      </div>
+    </div>
+    <div class="share-note">分享卡只使用本機示範資料，保留碳節省、點數與任務狀態，不揭露完整起訖站。</div>
+  </div>
+</div>
+
 <div class="footnote">
   <strong>團隊：通勤族也想拯救地球</strong> ・ 嚴世紀(Numbers Protocol) × 鍾天傑(LINE Pay) × 嚴世裕(台北市政府地政局)<br>
-  本原型以 HTML/CSS 製作,正式產品將整合於台北捷運 Go App,並串接環境部碳排係數資料集與捷運點數系統。
+  本原型以 HTML/CSS/JavaScript 製作,正式產品將整合於台北捷運 Go App,並串接環境部碳排係數資料集與捷運點數系統。
 </div>
+
+<script>
+(() => {
+  const viewLabels = {
+    home: "首頁",
+    map: "AI 路線",
+    carbon: "碳足跡",
+    proof: "會員證明"
+  };
+
+  const categoryLabels = {
+    all: "全部",
+    food: "餐飲",
+    shopping: "購物",
+    drink: "飲品",
+    culture: "文化"
+  };
+
+  const preferenceLabels = {
+    commute: "通勤順路",
+    points: "點數最大",
+    saving: "省錢優先"
+  };
+
+  const sortLabels = {
+    smart: "AI 推薦",
+    points: "點數",
+    distance: "距離",
+    discount: "折抵"
+  };
+
+  const CARBON_GRAMS_PER_KM = 90;
+  const KG_PER_GRAM = 1000;
+  const DAILY_GOAL_KG = 0.72;
+  const MONTHLY_GOAL_KG = 12;
+  const YEARLY_GOAL_KG = 120;
+  const TREND_LABELS = ["5/2", "5/4", "5/6", "5/8", "5/10", "5/12", "今日"];
+  // 示範流程固定時間，讓離線 QA 與現場截圖可重播；正式產品會改用事件時間。
+  const PROOF_MONTH = "2026-06";
+  const PROOF_FIXED_TIMESTAMP = "2026-06-29 09:41";
+
+  const tripCatalog = [
+    {
+      id: "short",
+      name: "短程轉乘",
+      route: "中山 → 忠孝復興",
+      distanceKm: 4.6,
+      basePoints: 12
+    },
+    {
+      id: "daily",
+      name: "日常通勤",
+      route: "大安 → 台北車站",
+      distanceKm: 8.0,
+      basePoints: 18
+    },
+    {
+      id: "challenge",
+      name: "跨城挑戰",
+      route: "淡水 → 南港展覽館",
+      distanceKm: 23.4,
+      basePoints: 36
+    }
+  ];
+
+  const merchantCatalog = [
+    {
+      id: "louisa-daan",
+      name: "路易莎咖啡・大安站前",
+      icon: "☕",
+      category: "drink",
+      station: "大安站",
+      exit: "1 號出口",
+      distanceM: 90,
+      earnPoints: 15,
+      spendCost: 120,
+      spendDiscount: 40,
+      routeFit: 94,
+      habitFit: 88,
+      route: "大安站下車後步行 2 分鐘",
+      mission: "通勤早鳥",
+      top: 50,
+      left: 40
+    },
+    {
+      id: "cama-zhongxiao",
+      name: "cama café・忠孝店",
+      icon: "☕",
+      category: "drink",
+      station: "忠孝復興站",
+      exit: "2 號出口",
+      distanceM: 120,
+      earnPoints: 18,
+      spendCost: 150,
+      spendDiscount: 50,
+      routeFit: 91,
+      habitFit: 82,
+      route: "轉乘板南線前可順路完成",
+      mission: "累點 1:5 加倍",
+      top: 30,
+      left: 25
+    },
+    {
+      id: "miacucina-daan",
+      name: "MiaCucina・大安店",
+      icon: "🍱",
+      category: "food",
+      station: "大安站",
+      exit: "4 號出口",
+      distanceM: 180,
+      earnPoints: 22,
+      spendCost: 220,
+      spendDiscount: 80,
+      routeFit: 78,
+      habitFit: 74,
+      route: "晚餐時段人流穩定，適合下班任務",
+      mission: "低碳套餐",
+      top: 60,
+      left: 65
+    },
+    {
+      id: "pxmart-fuxing",
+      name: "全聯福利中心・復興店",
+      icon: "🛍",
+      category: "shopping",
+      station: "忠孝復興站",
+      exit: "5 號出口",
+      distanceM: 240,
+      earnPoints: 12,
+      spendCost: 90,
+      spendDiscount: 30,
+      routeFit: 85,
+      habitFit: 79,
+      route: "返家採買繞行低，適合用點折抵",
+      mission: "自備袋回饋",
+      top: 38,
+      left: 55
+    },
+    {
+      id: "eslite-nanxi",
+      name: "誠品書店・南西店",
+      icon: "📚",
+      category: "culture",
+      station: "中山站",
+      exit: "4 號出口",
+      distanceM: 160,
+      earnPoints: 20,
+      spendCost: 180,
+      spendDiscount: 60,
+      routeFit: 74,
+      habitFit: 90,
+      route: "週末探索任務與文化消費偏好吻合",
+      mission: "文化探索",
+      top: 68,
+      left: 28
+    },
+    {
+      id: "citylink-taipei",
+      name: "CITYLINK・台北車站",
+      icon: "🎁",
+      category: "shopping",
+      station: "台北車站",
+      exit: "M2 出口",
+      distanceM: 210,
+      earnPoints: 10,
+      spendCost: 160,
+      spendDiscount: 70,
+      routeFit: 81,
+      habitFit: 72,
+      route: "主線轉乘站，適合把累積點數轉成折抵",
+      mission: "轉乘加碼",
+      top: 78,
+      left: 50
+    }
+  ];
+
+  const state = {
+    activeView: "home",
+    selectedFilter: "all",
+    selectedPreference: "commute",
+    selectedSort: "smart",
+    selectedMerchantId: "louisa-daan",
+    selectedTripId: "daily",
+    reportMode: "monthly",
+    searchTerm: "",
+    shareOpen: false,
+    simulatedEarnedPoints: 0,
+    simulatedSpentPoints: 0,
+    lastTrip: {
+      name: "尚未完成今日通勤",
+      distanceKm: 0,
+      carbonKg: 0,
+      points: 0
+    },
+    report: {
+      todayCarbonKg: 0,
+      yearlyCarbonKg: 73.4,
+      trendKg: [0.36, 0.52, 0.78, 0.47, 0.63, 0.31, 0.28, 0.58, 0.74, 0.89, 0.68, 0.51, 0.43, 0]
+    },
+    tasks: {
+      dailyTrip: 0,
+      merchantAction: 0,
+      shareCard: 0
+    },
+    metrics: {
+      monthlyCarbonKg: 8.2,
+      distanceKm: 91,
+      trips: 18,
+      points: 480
+    },
+    proof: {
+      status: "等待資料",
+      shortStatus: "等待資料",
+      id: "尚未產生 NID",
+      updated: "尚未更新",
+      eventId: "等待通勤事件",
+      hash: "尚未產生 demo hash",
+      payload: "完成通勤後建立去識別 payload",
+      recordStatus: "等待通勤資料",
+      routeDigest: "僅保留距離區間、月份與任務類型，不顯示完整起訖站",
+      privacyScope: "僅保留月份、減碳值、距離區間、任務類型與綠點乘數；移除起訖站、商家、精確時間與個人識別碼。",
+      consent: false,
+      liveSlotStatus: "離線 fallback",
+      liveSlotNote: "正式產品可在使用者同意後把 demo hash 註冊到 Capture / Numbers API；本頁不發出網路請求。",
+      progress: 18
+    }
+  };
+
+  function getMultiplier(kg) {
+    if (kg >= 10) return 1.5;
+    if (kg >= 5) return 1.2;
+    return 1.0;
+  }
+
+  function getNextThreshold(kg) {
+    if (kg < 5) return { target: 5, label: "1.2x" };
+    if (kg < 10) return { target: 10, label: "1.5x" };
+    return { target: 10, label: "1.5x", maxReached: true };
+  }
+
+  function getSelectedTrip() {
+    return tripCatalog.find((trip) => trip.id === state.selectedTripId) || tripCatalog[1];
+  }
+
+  function calculateTripCarbonKg(distanceKm) {
+    return (distanceKm * CARBON_GRAMS_PER_KM) / KG_PER_GRAM;
+  }
+
+  function getRemainingThresholdDistance(remainingKg) {
+    if (remainingKg <= 0) return 0;
+    return remainingKg / (CARBON_GRAMS_PER_KM / KG_PER_GRAM);
+  }
+
+  function formatNumber(value, digits = 1) {
+    return Number(value).toFixed(digits);
+  }
+
+  function formatInteger(value) {
+    return Math.round(value).toLocaleString("zh-TW");
+  }
+
+  function formatBucket(value, buckets) {
+    const matched = buckets.find((bucket) => value < bucket.max);
+    return matched ? matched.label : buckets[buckets.length - 1].fallback;
+  }
+
+  function getDistanceBucket(distanceKm) {
+    return formatBucket(distanceKm, [
+      { max: 50, label: "0-50 km" },
+      { max: 100, label: "50-100 km" },
+      { max: 150, label: "100-150 km" },
+      { max: Infinity, label: "150+ km", fallback: "150+ km" }
+    ]);
+  }
+
+  function getTripBucket(trips) {
+    return formatBucket(trips, [
+      { max: 5, label: "0-4 趟" },
+      { max: 15, label: "5-14 趟" },
+      { max: 25, label: "15-24 趟" },
+      { max: Infinity, label: "25+ 趟", fallback: "25+ 趟" }
+    ]);
+  }
+
+  function getProofEventId() {
+    const paddedTrips = String(state.metrics.trips).padStart(4, "0");
+    return `METRO-${PROOF_MONTH.replace("-", "")}-${paddedTrips}`;
+  }
+
+  function getDeidentifiedRouteDigest() {
+    const taskType = state.lastTrip.name === "尚未完成今日通勤"
+      ? "捷運通勤任務"
+      : state.lastTrip.name;
+
+    return `本月通勤 ${getTripBucket(state.metrics.trips)}、距離 ${getDistanceBucket(state.metrics.distanceKm)}；最近一次僅保留「${taskType}」任務類型，不保存起訖站、商家或精確距離。`;
+  }
+
+  function buildProofPayload() {
+    return [
+      "v=metro-proof-demo-1",
+      `event=${state.proof.eventId}`,
+      `month=${PROOF_MONTH}`,
+      `carbon_kg=${formatNumber(state.metrics.monthlyCarbonKg)}`,
+      `trip_bucket=${getTripBucket(state.metrics.trips)}`,
+      `distance_bucket=${getDistanceBucket(state.metrics.distanceKm)}`,
+      "task_type=metro_commute",
+      `multiplier=${getMultiplier(state.metrics.monthlyCarbonKg).toFixed(1)}x`,
+      "privacy=origin_destination_merchant_time_redacted",
+      `consent=${state.proof.consent ? "opt_in" : "pending"}`
+    ].join("|");
+  }
+
+  function createDemoHash(payload) {
+    let hash = 2166136261;
+    for (let index = 0; index < payload.length; index += 1) {
+      hash ^= payload.charCodeAt(index);
+      hash = Math.imul(hash, 16777619);
+    }
+    return `0x${(hash >>> 0).toString(16).toUpperCase().padStart(8, "0")}`;
+  }
+
+  function clampPercent(value) {
+    return Math.max(0, Math.min(100, value));
+  }
+
+  function getMonthlyGoalPercent() {
+    return clampPercent((state.metrics.monthlyCarbonKg / MONTHLY_GOAL_KG) * 100);
+  }
+
+  function getTaskModels() {
+    return [
+      {
+        id: "daily-trip",
+        title: "完成今日捷運通勤",
+        reward: "完成後更新本日減碳、月報與綠點乘數",
+        progress: Math.min(state.tasks.dailyTrip, 1),
+        target: 1
+      },
+      {
+        id: "merchant-action",
+        title: "完成一筆沿線商家點數互動",
+        reward: "模擬累點或兌換後，點數報告會同步更新",
+        progress: Math.min(state.tasks.merchantAction, 1),
+        target: 1
+      },
+      {
+        id: "share-card",
+        title: "產生今日成果分享卡",
+        reward: "將減碳、點數與任務狀態整理成投票素材",
+        progress: Math.min(state.tasks.shareCard, 1),
+        target: 1
+      }
+    ];
+  }
+
+  function getCompletedTaskCount() {
+    return getTaskModels().filter((task) => task.progress >= task.target).length;
+  }
+
+  function getReportSummary() {
+    const today = state.report.todayCarbonKg;
+    const monthly = state.metrics.monthlyCarbonKg;
+    const yearly = state.report.yearlyCarbonKg;
+    const taskCount = getCompletedTaskCount();
+    const lastTripText = state.lastTrip.carbonKg > 0
+      ? `最近一次 ${formatNumber(state.lastTrip.distanceKm)} km，新增 ${formatNumber(state.lastTrip.carbonKg, 2)} kg 與 ${state.lastTrip.points} 點。`
+      : "今日尚未完成示範通勤。";
+
+    if (state.reportMode === "daily") {
+      return {
+        label: "本日報告",
+        primary: `${formatNumber(today, 2)} kg CO₂`,
+        secondary: `${lastTripText} 今日任務 ${taskCount}/3。`,
+        progress: clampPercent((today / DAILY_GOAL_KG) * 100)
+      };
+    }
+
+    if (state.reportMode === "yearly") {
+      return {
+        label: "本年報告",
+        primary: `${formatNumber(yearly)} kg CO₂`,
+        secondary: `年度目標 ${formatNumber(YEARLY_GOAL_KG)} kg，目前完成 ${Math.round(clampPercent((yearly / YEARLY_GOAL_KG) * 100))}%。`,
+        progress: clampPercent((yearly / YEARLY_GOAL_KG) * 100)
+      };
+    }
+
+    return {
+      label: "本月報告",
+      primary: `${formatNumber(monthly)} kg CO₂`,
+      secondary: `目標 ${formatNumber(MONTHLY_GOAL_KG)} kg，目前完成 ${Math.round(getMonthlyGoalPercent())}%；累計 ${state.metrics.trips} 趟 / ${Math.round(state.metrics.distanceKm)} km。`,
+      progress: getMonthlyGoalPercent()
+    };
+  }
+
+  function getShareCopy() {
+    const multiplier = getMultiplier(state.metrics.monthlyCarbonKg).toFixed(1);
+    const taskCount = getCompletedTaskCount();
+    const completedTrip = state.lastTrip.carbonKg > 0;
+
+    return {
+      headline: `今天已累積 ${formatNumber(state.report.todayCarbonKg, 2)} kg CO₂`,
+      summary: completedTrip
+        ? `最近一次 ${state.lastTrip.name} 帶來 ${state.lastTrip.points} 點，任務完成 ${taskCount}/3。`
+        : "完成通勤後會同步帶入本日減碳、點數與綠點乘數。",
+      title: completedTrip
+        ? `今天把 ${formatNumber(state.lastTrip.distanceKm)} km 通勤變成綠點。`
+        : "今天先把一趟通勤變成綠點。",
+      result: completedTrip
+        ? `本日減碳 ${formatNumber(state.report.todayCarbonKg, 2)} kg CO₂，本月已到 ${formatNumber(state.metrics.monthlyCarbonKg)} kg，捷運點數累積 ${state.metrics.points} 點。`
+        : "完成示範通勤後，這張卡會更新減碳與點數成果。",
+      multiplier: `${multiplier}x`,
+      taskStatus: taskCount === 3 ? "3/3 完成" : `${taskCount}/3 任務`
+    };
+  }
+
+  function setText(field, value) {
+    document.querySelectorAll(`[data-field="${field}"]`).forEach((node) => {
+      node.textContent = value;
+    });
+  }
+
+  function setProgress(field, percent) {
+    document.querySelectorAll(`[data-field="${field}"]`).forEach((node) => {
+      node.style.width = `${Math.max(0, Math.min(100, percent))}%`;
+    });
+  }
+
+  function announce(message) {
+    const liveRegion = document.querySelector("[data-live-region]");
+    if (liveRegion) liveRegion.textContent = message;
+  }
+
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, (char) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      "\"": "&quot;",
+      "'": "&#39;"
+    }[char]));
+  }
+
+  function scoreMerchant(merchant) {
+    const distanceScore = Math.max(0, 280 - merchant.distanceM) / 4;
+    const pointScore = merchant.earnPoints * 2.1;
+    const discountScore = merchant.spendDiscount * 0.72;
+    const routeScore = merchant.routeFit * 0.58;
+    const habitScore = merchant.habitFit * 0.28;
+
+    let preferenceBoost = 0;
+    if (state.selectedPreference === "commute") preferenceBoost = routeScore + distanceScore;
+    if (state.selectedPreference === "points") preferenceBoost = pointScore + habitScore;
+    if (state.selectedPreference === "saving") preferenceBoost = discountScore + routeScore * 0.35;
+
+    return Math.round(18 + preferenceBoost + pointScore * 0.36 + discountScore * 0.22);
+  }
+
+  function getReason(merchant, score) {
+    const preferenceText = {
+      commute: `${merchant.route}，距離 ${merchant.distanceM}m，通勤順路分數 ${merchant.routeFit}`,
+      points: `${merchant.mission} 可拿 ${merchant.earnPoints} 點，符合你的近期消費偏好`,
+      saving: `可用 ${merchant.spendCost} 點折 $${merchant.spendDiscount}，適合把通勤點數轉成現場折抵`
+    }[state.selectedPreference];
+
+    return `AI ${score} 分：${preferenceText}`;
+  }
+
+  function getRecommendations() {
+    const term = state.searchTerm.trim().toLowerCase();
+    const filtered = merchantCatalog.filter((merchant) => {
+      const categoryMatched = state.selectedFilter === "all" || merchant.category === state.selectedFilter;
+      const searchable = `${merchant.name} ${merchant.station} ${merchant.exit} ${merchant.mission}`.toLowerCase();
+      const termMatched = !term || searchable.includes(term);
+      return categoryMatched && termMatched;
+    }).map((merchant) => ({
+      ...merchant,
+      score: scoreMerchant(merchant)
+    }));
+
+    const sorted = filtered.sort((a, b) => {
+      if (state.selectedSort === "points") return b.earnPoints - a.earnPoints || b.score - a.score;
+      if (state.selectedSort === "distance") return a.distanceM - b.distanceM || b.score - a.score;
+      if (state.selectedSort === "discount") return b.spendDiscount - a.spendDiscount || b.score - a.score;
+      return b.score - a.score || a.distanceM - b.distanceM;
+    });
+
+    return sorted.map((merchant) => ({
+      ...merchant,
+      reason: getReason(merchant, merchant.score)
+    }));
+  }
+
+  function syncSelectedMerchant() {
+    const recommendations = getRecommendations();
+    if (!recommendations.length) {
+      state.selectedMerchantId = "";
+      return recommendations;
+    }
+
+    const selectedStillVisible = recommendations.some((merchant) => merchant.id === state.selectedMerchantId);
+    if (!selectedStillVisible) state.selectedMerchantId = recommendations[0].id;
+    return recommendations;
+  }
+
+  function selectFirstRecommendation() {
+    const recommendations = getRecommendations();
+    state.selectedMerchantId = recommendations[0] ? recommendations[0].id : "";
+  }
+
+  function getSelectedMerchant(recommendations = getRecommendations()) {
+    const merchant = recommendations.find((item) => item.id === state.selectedMerchantId)
+      || recommendations[0];
+    if (merchant) return merchant;
+
+    const fallback = {
+      ...merchantCatalog[0],
+      score: scoreMerchant(merchantCatalog[0])
+    };
+    return {
+      ...fallback,
+      reason: getReason(fallback, fallback.score)
+    };
+  }
+
+  function completeTrip() {
+    const trip = getSelectedTrip();
+    const distanceAdded = trip.distanceKm;
+    const carbonAdded = calculateTripCarbonKg(distanceAdded);
+    const nextCarbon = state.metrics.monthlyCarbonKg + carbonAdded;
+    const nextMultiplier = getMultiplier(nextCarbon);
+    const pointsAdded = Math.round(trip.basePoints * nextMultiplier);
+
+    state.metrics.monthlyCarbonKg = nextCarbon;
+    state.metrics.distanceKm += distanceAdded;
+    state.metrics.trips += 1;
+    state.metrics.points += pointsAdded;
+    state.report.todayCarbonKg += carbonAdded;
+    state.report.yearlyCarbonKg += carbonAdded;
+    state.report.trendKg[state.report.trendKg.length - 1] += carbonAdded;
+    state.tasks.dailyTrip = 1;
+    state.lastTrip = {
+      name: trip.name,
+      distanceKm: distanceAdded,
+      carbonKg: carbonAdded,
+      points: pointsAdded
+    };
+    state.proof.eventId = getProofEventId();
+    state.proof.status = state.proof.consent ? "已同意，可產生證明" : "已有可註冊資料";
+    state.proof.shortStatus = state.proof.consent ? "可產生" : "待同意";
+    state.proof.id = "待產生 NID";
+    state.proof.hash = "待產生 demo hash";
+    state.proof.recordStatus = state.proof.consent ? "可封存 proof record" : "等待隱私同意";
+    state.proof.updated = PROOF_FIXED_TIMESTAMP;
+    state.proof.routeDigest = getDeidentifiedRouteDigest();
+    state.proof.payload = buildProofPayload();
+    state.proof.progress = 64;
+
+    render();
+    announce(`已完成${trip.name}，依 90 gCO2e/km 新增 ${formatNumber(carbonAdded)} kg CO2，綠點乘數 ${nextMultiplier.toFixed(1)}x。`);
+  }
+
+  function generateProof() {
+    if (state.lastTrip.carbonKg <= 0) {
+      state.proof.status = "請先完成通勤";
+      state.proof.shortStatus = "需通勤";
+      state.proof.recordStatus = "等待通勤資料";
+      state.proof.progress = 28;
+      render();
+      announce("請先完成一筆示範通勤，再產生可信證明。");
+      return;
+    }
+
+    if (!state.proof.consent) {
+      state.proof.status = "等待隱私同意";
+      state.proof.shortStatus = "需同意";
+      state.proof.recordStatus = "請先同意去識別 proof record";
+      state.proof.payload = buildProofPayload();
+      state.proof.progress = 72;
+      render();
+      announce("請先勾選隱私同意，再產生本機示範證明。");
+      return;
+    }
+
+    state.proof.payload = buildProofPayload();
+    state.proof.hash = createDemoHash(state.proof.payload);
+    state.proof.status = "已產生本機證明";
+    state.proof.shortStatus = "已封存";
+    state.proof.id = `NID-DEMO-${state.proof.hash.slice(2, 8)}`;
+    state.proof.recordStatus = "本機 proof record 已封存";
+    state.proof.routeDigest = getDeidentifiedRouteDigest();
+    state.proof.updated = PROOF_FIXED_TIMESTAMP;
+    state.proof.progress = 100;
+    render();
+    announce("已產生本機示範證明，去識別 payload 與 demo hash 已封存。");
+  }
+
+  function updateProofConsent(checked) {
+    state.proof.consent = checked;
+
+    if (state.lastTrip.carbonKg <= 0) {
+      state.proof.recordStatus = checked ? "已同意，等待通勤資料" : "等待通勤資料";
+      render();
+      announce(checked ? "已開啟 proof 隱私同意，請完成通勤資料。" : "已關閉 proof 隱私同意。");
+      return;
+    }
+
+    if (state.proof.hash.startsWith("0x")) {
+      state.proof.recordStatus = checked ? "本機 proof record 已封存" : "同意已關閉，需重新封存";
+      if (!checked) {
+        state.proof.status = "等待隱私同意";
+        state.proof.shortStatus = "需同意";
+        state.proof.id = "待重新產生 NID";
+        state.proof.hash = "待重新產生 demo hash";
+        state.proof.progress = 72;
+      }
+    } else {
+      state.proof.status = checked ? "已同意，可產生證明" : "已有可註冊資料";
+      state.proof.shortStatus = checked ? "可產生" : "待同意";
+      state.proof.recordStatus = checked ? "可封存 proof record" : "等待隱私同意";
+      state.proof.progress = checked ? 72 : 64;
+    }
+
+    state.proof.payload = buildProofPayload();
+    render();
+    announce(checked ? "已同意使用去識別資料產生 proof record。" : "已關閉 proof 隱私同意。");
+  }
+
+  function simulateEarn() {
+    const merchant = getSelectedMerchant();
+    const multiplier = getMultiplier(state.metrics.monthlyCarbonKg);
+    const earned = Math.round(merchant.earnPoints * multiplier);
+
+    state.metrics.points += earned;
+    state.simulatedEarnedPoints += earned;
+    state.tasks.merchantAction = 1;
+    render();
+    announce(`${merchant.name} 已模擬累點，新增 ${earned} 點。`);
+  }
+
+  function simulateSpend() {
+    const merchant = getSelectedMerchant();
+    if (state.metrics.points < merchant.spendCost) {
+      announce(`${merchant.name} 需要 ${merchant.spendCost} 點，目前點數不足。`);
+      return;
+    }
+
+    state.metrics.points -= merchant.spendCost;
+    state.simulatedSpentPoints += merchant.spendCost;
+    state.tasks.merchantAction = 1;
+    render();
+    announce(`${merchant.name} 已模擬用 ${merchant.spendCost} 點折 $${merchant.spendDiscount}。`);
+  }
+
+  function openShareCard() {
+    state.shareOpen = true;
+    state.tasks.shareCard = 1;
+    render();
+    announce("已產生今日成果分享卡。");
+  }
+
+  function closeShareCard() {
+    state.shareOpen = false;
+    render();
+    announce("已關閉分享卡。");
+  }
+
+  function renderNavigation() {
+    document.querySelectorAll("[data-view]").forEach((section) => {
+      const isActive = section.dataset.view === state.activeView;
+      section.classList.toggle("is-active", isActive);
+    });
+
+    document.querySelectorAll("[data-nav]").forEach((button) => {
+      const isPrimaryNav = button.classList.contains("tab")
+        || button.classList.contains("nav-item")
+        || button.classList.contains("demo-nav");
+      if (!isPrimaryNav) return;
+
+      const isActive = button.dataset.nav === state.activeView;
+      button.classList.toggle("active", isActive);
+
+      if (button.classList.contains("tab")) {
+        button.setAttribute("aria-selected", isActive ? "true" : "false");
+      } else {
+        if (isActive) {
+          button.setAttribute("aria-current", "page");
+        } else {
+          button.removeAttribute("aria-current");
+        }
+      }
+    });
+  }
+
+  function renderMetrics() {
+    const carbon = state.metrics.monthlyCarbonKg;
+    const multiplier = getMultiplier(carbon);
+    const threshold = getNextThreshold(carbon);
+    const remainingKg = Math.max(0, threshold.target - carbon);
+    const remainingKm = getRemainingThresholdDistance(remainingKg);
+    const progress = threshold.maxReached
+      ? 100
+      : (carbon / threshold.target) * 100;
+    const trip = getSelectedTrip();
+    const tripCarbonKg = calculateTripCarbonKg(trip.distanceKm);
+    const tripCarbonGrams = trip.distanceKm * CARBON_GRAMS_PER_KM;
+    const projectedCarbon = carbon + tripCarbonKg;
+    const projectedMultiplier = getMultiplier(projectedCarbon);
+
+    setText("monthlyCarbon", formatNumber(carbon));
+    setText("distance", Math.round(state.metrics.distanceKm));
+    setText("trips", state.metrics.trips);
+    setText("points", state.metrics.points);
+    setText("multiplier", `${multiplier.toFixed(1)}x`);
+    setText("currentView", viewLabels[state.activeView]);
+    setText("treeEquivalent", formatNumber(carbon / 12.1));
+    setText("todayCarbon", formatNumber(state.report.todayCarbonKg, 2));
+    setText("yearlyCarbon", formatNumber(state.report.yearlyCarbonKg));
+    setText("monthlyGoalProgress", Math.round(getMonthlyGoalPercent()));
+    setText("nextKg", formatNumber(remainingKg));
+    setText("nextKm", formatNumber(remainingKm));
+    setText("nextThreshold", remainingKg > 0
+      ? `距 ${threshold.label} 加成還差 ${formatNumber(remainingKg)} kg`
+      : "已解鎖 1.5x 最高加成");
+    setText("levelRank", threshold.maxReached
+      ? "已解鎖 1.5x 最高加成"
+      : `本月還差 ${formatNumber(remainingKg)} kg，約 ${formatNumber(remainingKm)} km 可解鎖下一階段`);
+    setText("tripDistance", formatNumber(trip.distanceKm));
+    setText("tripCarbon", formatNumber(tripCarbonKg, 2));
+    setText("tripCarbonGrams", formatInteger(tripCarbonGrams));
+    setText("projectedCarbon", formatNumber(projectedCarbon));
+    setText("projectedMultiplier", `${projectedMultiplier.toFixed(1)}x`);
+    setText("carbonFormula", `${CARBON_GRAMS_PER_KM} gCO₂e/km × ${formatNumber(trip.distanceKm)} km = ${formatInteger(tripCarbonGrams)} gCO₂e = ${formatNumber(tripCarbonKg, 2)} kg`);
+    setProgress("carbonProgress", progress);
+
+    document.querySelectorAll("[data-trip-id]").forEach((button) => {
+      const isActive = button.dataset.tripId === state.selectedTripId;
+      button.classList.toggle("active", isActive);
+      button.setAttribute("aria-pressed", isActive ? "true" : "false");
+    });
+
+    renderThresholds(carbon);
+  }
+
+  function renderThresholds(carbon) {
+    [
+      { target: 5, label: "1.2x", field: "threshold5Status" },
+      { target: 10, label: "1.5x", field: "threshold10Status" }
+    ].forEach((threshold) => {
+      const remainingKg = Math.max(0, threshold.target - carbon);
+      const remainingKm = getRemainingThresholdDistance(remainingKg);
+      const isUnlocked = carbon >= threshold.target;
+      const isCurrent = !isUnlocked && getNextThreshold(carbon).target === threshold.target;
+
+      setText(threshold.field, isUnlocked
+        ? `已解鎖 ${threshold.label}`
+        : `還差 ${formatNumber(remainingKg)} kg / ${formatNumber(remainingKm)} km`);
+
+      document.querySelectorAll(`[data-threshold-step="${threshold.target}"]`).forEach((node) => {
+        node.classList.toggle("unlocked", isUnlocked);
+        node.classList.toggle("current", isCurrent);
+      });
+    });
+  }
+
+  function renderReport() {
+    const report = getReportSummary();
+    setText("reportModeLabel", report.label);
+    setText("reportPrimary", report.primary);
+    setText("reportSecondary", report.secondary);
+    setProgress("reportProgress", report.progress);
+
+    document.querySelectorAll("[data-report-mode]").forEach((button) => {
+      const isActive = button.dataset.reportMode === state.reportMode;
+      button.classList.toggle("active", isActive);
+      button.setAttribute("aria-pressed", isActive ? "true" : "false");
+    });
+  }
+
+  function renderTasks() {
+    const container = document.querySelector("[data-task-list]");
+    if (!container) return;
+
+    container.innerHTML = getTaskModels().map((task) => {
+      const complete = task.progress >= task.target;
+      const percent = clampPercent((task.progress / task.target) * 100);
+      return `
+        <div class="task-item" data-task-id="${escapeHtml(task.id)}">
+          <div class="task-top">
+            <div>
+              <div class="task-title">${escapeHtml(task.title)}</div>
+              <div class="task-reward">${escapeHtml(task.reward)}</div>
+            </div>
+            <div class="task-status${complete ? " done" : ""}">${complete ? "已完成" : `${task.progress}/${task.target}`}</div>
+          </div>
+          <div class="task-progress" aria-hidden="true">
+            <div class="task-progress-fill" style="width:${percent}%"></div>
+          </div>
+        </div>
+      `;
+    }).join("");
+  }
+
+  function renderAchievements() {
+    const container = document.querySelector("[data-achievements]");
+    if (!container) return;
+
+    const multiplier = getMultiplier(state.metrics.monthlyCarbonKg);
+    const achievements = [
+      { icon: "🏆", label: "19 趟通勤", unlocked: state.metrics.trips >= 19 },
+      { icon: "🌱", label: `${multiplier.toFixed(1)}x 綠點`, unlocked: multiplier >= 1.2 },
+      { icon: "🎯", label: "任務完成", unlocked: state.tasks.dailyTrip >= 1 }
+    ];
+
+    container.innerHTML = achievements.map((achievement) => `
+      <div class="achievement${achievement.unlocked ? "" : " locked"}">
+        ${escapeHtml(achievement.icon)}<div class="lbl">${escapeHtml(achievement.label)}</div>
+      </div>
+    `).join("");
+  }
+
+  function renderTrendChart() {
+    const chart = document.querySelector("[data-trend-chart]");
+    const axis = document.querySelector("[data-trend-axis]");
+    if (!chart || !axis) return;
+
+    const maxKg = Math.max(DAILY_GOAL_KG, ...state.report.trendKg);
+    chart.innerHTML = state.report.trendKg.map((kg, index) => {
+      const height = Math.max(10, (kg / maxKg) * 100);
+      const isToday = index === state.report.trendKg.length - 1;
+      const isPeak = kg >= DAILY_GOAL_KG;
+      return `<div class="bar${isPeak ? " peak" : ""}${isToday ? " today" : ""}" style="height:${height}%" title="${formatNumber(kg, 2)} kg"></div>`;
+    }).join("");
+
+    axis.innerHTML = TREND_LABELS.map((label) => `<span>${escapeHtml(label)}</span>`).join("");
+  }
+
+  function renderShare() {
+    const copy = getShareCopy();
+    setText("shareHeadline", copy.headline);
+    setText("shareSummary", copy.summary);
+    setText("shareTitle", copy.title);
+    setText("shareResult", copy.result);
+    setText("shareMultiplier", copy.multiplier);
+    setText("shareTaskStatus", copy.taskStatus);
+
+    const modal = document.querySelector("[data-share-modal]");
+    if (modal) modal.hidden = !state.shareOpen;
+    document.body.style.overflow = state.shareOpen ? "hidden" : "";
+  }
+
+  function renderMerchant() {
+    const recommendations = syncSelectedMerchant();
+    const merchant = getSelectedMerchant(recommendations);
+
+    setText("recommendationTitle", `⭐ ${sortLabels[state.selectedSort]}・${preferenceLabels[state.selectedPreference]}`);
+    setText("merchantIcon", merchant.icon);
+    setText("merchantName", merchant.name);
+    setText("merchantStation", `${merchant.station} ${merchant.exit} ・ 距 ${merchant.distanceM}m`);
+    setText("merchantEarn", `${merchant.mission} +${merchant.earnPoints} 點`);
+    setText("merchantSpend", `用 ${merchant.spendCost} 點折 $${merchant.spendDiscount}`);
+    setText("merchantReason", merchant.reason);
+    setText("merchantScore", `AI ${merchant.score} 分`);
+    setText("merchantDistance", `距 ${merchant.distanceM}m`);
+    setText("merchantCategory", categoryLabels[merchant.category]);
+    setText("simEarned", `${state.simulatedEarnedPoints} 點`);
+    setText("simSpent", `${state.simulatedSpentPoints} 點`);
+
+    document.querySelectorAll("[data-filter]").forEach((button) => {
+      const isActive = button.dataset.filter === state.selectedFilter;
+      button.classList.toggle("active", isActive);
+      button.setAttribute("aria-pressed", isActive ? "true" : "false");
+    });
+
+    document.querySelectorAll("[data-preference]").forEach((button) => {
+      const isActive = button.dataset.preference === state.selectedPreference;
+      button.classList.toggle("active", isActive);
+      button.setAttribute("aria-pressed", isActive ? "true" : "false");
+    });
+
+    document.querySelectorAll("[data-sort]").forEach((button) => {
+      const isActive = button.dataset.sort === state.selectedSort;
+      button.classList.toggle("active", isActive);
+      button.setAttribute("aria-pressed", isActive ? "true" : "false");
+    });
+
+    document.querySelectorAll("[data-search]").forEach((input) => {
+      if (input.value !== state.searchTerm) input.value = state.searchTerm;
+    });
+
+    renderHomeRecommendations(recommendations);
+    renderMapPins(recommendations);
+    renderRecommendationList(recommendations);
+  }
+
+  function renderHomeRecommendations(recommendations) {
+    const container = document.querySelector("[data-home-recommendations]");
+    if (!container) return;
+
+    const items = recommendations.slice(0, 3);
+    container.innerHTML = items.map((merchant) => `
+      <button class="recommend-item" type="button" data-merchant-id="${escapeHtml(merchant.id)}" data-nav="map">
+        <div class="station-dot">${escapeHtml(merchant.icon)}</div>
+        <div class="recommend-info">
+          <div class="station">${escapeHtml(merchant.station)} ${escapeHtml(merchant.exit)}</div>
+          <div class="shop">${escapeHtml(merchant.name)}</div>
+        </div>
+        <div class="badge badge-earn">+${escapeHtml(merchant.earnPoints)} 點</div>
+      </button>
+    `).join("");
+  }
+
+  function renderMapPins(recommendations) {
+    const container = document.querySelector("[data-map-pins]");
+    if (!container) return;
+
+    container.innerHTML = recommendations.map((merchant) => {
+      const selected = merchant.id === state.selectedMerchantId;
+      const pinClass = selected
+        ? "pin pin-star large is-selected"
+        : `pin ${merchant.spendDiscount > 55 ? "pin-spend" : "pin-earn"}`;
+      const label = selected ? "⭐" : merchant.earnPoints;
+      return `
+        <button
+          class="${pinClass}"
+          type="button"
+          style="top: ${merchant.top}%; left: ${merchant.left}%;"
+          data-merchant-id="${escapeHtml(merchant.id)}"
+          aria-label="選擇 ${escapeHtml(merchant.name)}"
+        >${escapeHtml(label)}</button>
+      `;
+    }).join("");
+  }
+
+  function renderRecommendationList(recommendations) {
+    const container = document.querySelector("[data-recommendation-list]");
+    if (!container) return;
+
+    if (!recommendations.length) {
+      container.innerHTML = `
+        <div class="merchant-reason">目前沒有符合篩選的商家。請放寬分類或清除搜尋字。</div>
+      `;
+      return;
+    }
+
+    container.innerHTML = recommendations.map((merchant) => {
+      const active = merchant.id === state.selectedMerchantId ? " active" : "";
+      return `
+        <button class="recommendation-card${active}" type="button" data-merchant-id="${escapeHtml(merchant.id)}">
+          <span class="recommendation-icon">${escapeHtml(merchant.icon)}</span>
+          <span>
+            <span class="recommendation-title">${escapeHtml(merchant.name)}</span>
+            <span class="recommendation-reason">${escapeHtml(merchant.reason)}</span>
+          </span>
+          <span class="recommendation-score">${escapeHtml(merchant.score)}</span>
+        </button>
+      `;
+    }).join("");
+  }
+
+  function getAuditSteps() {
+    const hasTrip = state.lastTrip.carbonKg > 0;
+    const hasHash = state.proof.hash.startsWith("0x");
+
+    return [
+      {
+        done: hasTrip,
+        text: hasTrip
+          ? `本機建立 ${PROOF_MONTH} 捷運通勤事件，事件 ID ${state.proof.eventId}。`
+          : "等待完成捷運通勤事件。"
+      },
+      {
+        done: hasTrip,
+        text: hasTrip
+          ? "已將資料轉成去識別摘要：月份、減碳值、距離區間、任務類型與乘數。"
+          : "等待建立去識別資料摘要。"
+      },
+      {
+        done: state.proof.consent,
+        text: state.proof.consent
+          ? "使用者已同意封存去識別 proof record。"
+          : "等待使用者同意，不會註冊或封存 proof。"
+      },
+      {
+        done: hasHash,
+        text: hasHash
+          ? `已產生 demo hash ${state.proof.hash}，可作為正式 Numbers 註冊前的離線校驗值。`
+          : "等待產生 demo hash。"
+      }
+    ];
+  }
+
+  function renderAuditTrail() {
+    const container = document.querySelector("[data-audit-list]");
+    if (!container) return;
+
+    container.innerHTML = getAuditSteps().map((step) => `
+      <li class="${step.done ? "done" : "pending"}">${escapeHtml(step.text)}</li>
+    `).join("");
+  }
+
+  function renderProof() {
+    setText("proofStatus", state.proof.status);
+    setText("proofShort", state.proof.shortStatus);
+    setText("proofId", state.proof.id);
+    setText("proofUpdated", state.proof.updated);
+    setText("routeDigest", state.proof.routeDigest);
+    setText("proofHash", state.proof.hash);
+    setText("proofPayload", state.proof.payload);
+    setText("proofRecordStatus", state.proof.recordStatus);
+    setText("proofConsentStatus", state.proof.consent ? "已同意註冊去識別 proof" : "尚未同意註冊 proof");
+    setText("proofConsentDetail", state.proof.consent
+      ? "將封存月份、減碳值、距離區間、任務類型與 demo hash，不含起訖站或個人識別碼。"
+      : "同意後只封存去識別 payload 與 demo hash，不保留起訖站、商家或精確時間。");
+    setText("privacyScope", state.proof.privacyScope);
+    setText("liveSlotStatus", state.proof.liveSlotStatus);
+    setText("liveSlotNote", state.proof.liveSlotNote);
+    setProgress("proofProgress", state.proof.progress);
+
+    document.querySelectorAll("[data-proof-consent]").forEach((input) => {
+      input.checked = state.proof.consent;
+    });
+
+    renderAuditTrail();
+  }
+
+  function render() {
+    renderNavigation();
+    renderMetrics();
+    renderReport();
+    renderTasks();
+    renderAchievements();
+    renderTrendChart();
+    renderMerchant();
+    renderProof();
+    renderShare();
+  }
+
+  document.addEventListener("click", (event) => {
+    const merchantButton = event.target.closest("[data-merchant-id]");
+    if (merchantButton) {
+      state.selectedMerchantId = merchantButton.dataset.merchantId;
+      if (merchantButton.dataset.nav) state.activeView = merchantButton.dataset.nav;
+      render();
+      announce(`已選擇 ${getSelectedMerchant().name}。`);
+      return;
+    }
+
+    const navButton = event.target.closest("[data-nav]");
+    if (navButton) {
+      state.activeView = navButton.dataset.nav;
+      render();
+      announce(`已切換到${viewLabels[state.activeView]}。`);
+      return;
+    }
+
+    const filterButton = event.target.closest("[data-filter]");
+    if (filterButton) {
+      state.selectedFilter = filterButton.dataset.filter;
+      selectFirstRecommendation();
+      render();
+      announce(`已更新商家篩選為${categoryLabels[state.selectedFilter]}。`);
+      return;
+    }
+
+    const preferenceButton = event.target.closest("[data-preference]");
+    if (preferenceButton) {
+      state.selectedPreference = preferenceButton.dataset.preference;
+      selectFirstRecommendation();
+      render();
+      announce(`已更新推薦偏好為${preferenceLabels[state.selectedPreference]}。`);
+      return;
+    }
+
+    const sortButton = event.target.closest("[data-sort]");
+    if (sortButton) {
+      state.selectedSort = sortButton.dataset.sort;
+      selectFirstRecommendation();
+      render();
+      announce(`已更新排序為${sortLabels[state.selectedSort]}。`);
+      return;
+    }
+
+    const tripButton = event.target.closest("[data-trip-id]");
+    if (tripButton) {
+      state.selectedTripId = tripButton.dataset.tripId;
+      const trip = getSelectedTrip();
+      render();
+      announce(`已選擇${trip.name}，本次距離 ${formatNumber(trip.distanceKm)} 公里。`);
+      return;
+    }
+
+    const reportButton = event.target.closest("[data-report-mode]");
+    if (reportButton) {
+      state.reportMode = reportButton.dataset.reportMode;
+      render();
+      announce(`已切換到${getReportSummary().label}。`);
+      return;
+    }
+
+    const actionButton = event.target.closest("[data-action]");
+    if (!actionButton) return;
+
+    if (actionButton.dataset.action === "complete-trip") completeTrip();
+    if (actionButton.dataset.action === "generate-proof") generateProof();
+    if (actionButton.dataset.action === "simulate-earn") simulateEarn();
+    if (actionButton.dataset.action === "simulate-spend") simulateSpend();
+    if (actionButton.dataset.action === "open-share") openShareCard();
+    if (actionButton.dataset.action === "close-share") closeShareCard();
+  });
+
+  document.addEventListener("input", (event) => {
+    if (!event.target.matches("[data-search]")) return;
+
+    state.searchTerm = event.target.value;
+    selectFirstRecommendation();
+    render();
+    announce(state.searchTerm ? `已搜尋 ${state.searchTerm}。` : "已清除商家搜尋。");
+  });
+
+  document.addEventListener("change", (event) => {
+    if (!event.target.matches("[data-proof-consent]")) return;
+    updateProofConsent(event.target.checked);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape" || !state.shareOpen) return;
+    closeShareCard();
+  });
+
+  render();
+})();
+</script>
 
 </body>
 </html>

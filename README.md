@@ -6,19 +6,45 @@
 
 🔗 **[Live Demo](https://sofiayan0523.github.io/from-carbon-to-metro/)**
 
+## 本地預覽
+
+目前專案是純靜態 HTML/CSS/JavaScript。建議用本機靜態 server 預覽，確保本地字型與離線 QA 行為和 GitHub Pages 一致：
+
+```bash
+python3 -m http.server 4173 --bind 127.0.0.1
+```
+
+開啟 <http://127.0.0.1:4173/>。
+
+如果現場電腦沒有 Python，也可以直接用瀏覽器開啟 `index.html` 作為 fallback；主 demo 邏輯仍會在本機執行。
+
+## 決賽交付策略
+
+決賽 prototype 採 GitHub Pages 作為線上展示，並在最後交付離線備援包，確保主辦單位電腦沒有網路時仍可完成 demo。細節見 [`docs/delivery-strategy.md`](docs/delivery-strategy.md)。
+
+## 決賽提交包
+
+- 線上 prototype：<https://sofiayan0523.github.io/from-carbon-to-metro/>
+- 測試步驟：[`TESTING_STEPS.md`](TESTING_STEPS.md)
+- 送件檢查清單：[`SUBMISSION_CHECKLIST.md`](SUBMISSION_CHECKLIST.md)
+- 離線備援包：`offline/from-carbon-to-metro-offline.zip`
+- 離線包說明：[`offline/README.md`](offline/README.md)
+
 ## 專案介紹
 
 「從碳客變捷客」是整合於台北捷運 Go App 的 AI 智慧服務模組，結合**個人化點數導航**與**碳足跡回饋**雙引擎：
 
 - 🤖 **AI 點數路線引擎** — 根據用戶通勤路線推薦沿途賺點 / 用點商家
-- 🌿 **碳足跡綠點加成** — 將以捷運取代私人運具的碳節省量轉換為捷運點乘數加成
-- 📊 **今日綠點報告** — 個人化儀表板，整合減碳成績、推薦路線、社群排名
+- 🌿 **碳足跡綠點加成** — 以 `90 gCO₂e/km × 通勤距離` 換算碳節省量，並用 5 kg / 10 kg 門檻轉成捷運點乘數加成
+- 📊 **今日綠點報告** — 個人化儀表板，整合日 / 月 / 年減碳成績、任務成就、推薦路線與分享卡
+- 🔐 **Numbers 可信證明** — 以 opt-in 隱私同意產生去識別 proof record、demo hash 與可重播稽核軌跡
 
-## 三大畫面
+## 四大可導航區塊
 
-1. **首頁・今日綠點報告** — Hero Card + AI 推薦商家清單
-2. **AI 點數路線地圖** — 互動式捷運地圖 + 累點/用點/AI 推薦 Pin
-3. **個人碳足跡儀表板** — 14 天減碳趨勢圖 + 等級徽章
+1. **首頁・今日綠點報告** — Hero Card + AI 推薦商家清單 + 日 / 月 / 年報告摘要、任務進度與分享卡入口
+2. **AI 點數路線地圖** — 資料驅動的 AI 推薦、商家篩選、排序、Pin 選取與點數累兌模擬
+3. **個人碳足跡儀表板** — 通勤距離模擬、碳節省公式、5 kg / 10 kg 綠點加成門檻、日 / 月 / 年報告切換與動態 14 天減碳趨勢圖
+4. **會員・可信數據證明** — 本機 demo state、隱私 opt-in、去識別 proof record、demo hash、audit trail 與 Numbers live integration slot
 
 ## 團隊：通勤族也想拯救地球
 
@@ -30,4 +56,4 @@
 
 ## 技術
 
-純 HTML/CSS（零 JS 依賴），任何現代瀏覽器可開啟。正式產品將整合於台北捷運 Go App，串接環境部碳排係數資料集與捷運點數系統。
+純 HTML/CSS/JavaScript（無 build step、無外部 API 依賴），任何現代瀏覽器可開啟。AI 路線推薦目前使用本機 mock 商家資料集與 deterministic scoring，碳足跡則以本機 `90 gCO₂e/km` 公式、5 kg → 1.2x、10 kg → 1.5x 門檻運算；今日綠點報告、任務成就、趨勢圖、分享卡與可信證明也都由同一組本機 demo state 驅動，讓評審可離線操作分類、偏好、排序、通勤模擬、累點、兌換、成果分享與 proof record 產生流程。Proof flow 只保留月份、減碳值、距離區間、任務類型與 demo hash，不保存起訖站、商家、精確時間或個人識別碼；正式產品可在使用者同意後改接 Capture / Numbers API 註冊同一類 hash。繁中文字型以本地 `assets/fonts/` 打包，確保離線 demo 與 QA 截圖可讀。正式產品將整合於台北捷運 Go App，串接環境部碳排係數資料集與捷運點數系統。
