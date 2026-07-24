@@ -30,7 +30,7 @@ offline/from-carbon-to-metro-offline.zip
 ## 離線保證
 
 - 主 demo path 不依賴外部 API、CDN、圖片、模型服務、Capture / Numbers live API 或 blockchain RPC。
-- AI 推薦、碳足跡、綠點倍率、路線集章、每日綠點卡、分享卡與 proof record 都由本機 JavaScript state 驅動。
+- AI 推薦、碳足跡、捷運點倍率、路線集章、每日捷運點卡、分享卡與 proof record 都由本機 JavaScript state 驅動。
 - 新版 UI/UX 的主要 bundle 位於 `index.html`；固定版本前端 runtime 已放在 `assets/vendor/`，字型資源與授權文件保留在 `assets/fonts/`。
 - Proof flow 的 live integration slot 是加分展示說明，沒有網路時仍以 deterministic demo hash 完成。
 

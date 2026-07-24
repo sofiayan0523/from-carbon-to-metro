@@ -18,8 +18,8 @@
 
 - [x] Judge-operable demo path：今天 -> 路線 -> 減碳 -> 我的 -> 分享卡
 - [x] AI 點數推薦：商家資料集、分類篩選、推薦理由與路線集章任務
-- [x] 碳足跡綠點加成：`90 gCO2e/km` 公式、5 kg -> `1.2x`、10 kg -> `1.5x`
-- [x] 今日綠點互動：完成通勤、每日綠點卡、點數動畫、任務、成就、趨勢圖與分享卡
+- [x] 碳足跡捷運點加成：`90 gCO2e/km` 公式、5 kg -> `1.2x`、10 kg -> `1.5x`
+- [x] 今日捷運點互動：完成通勤、每日捷運點卡、點數動畫、任務、成就、趨勢圖與分享卡
 - [x] Numbers Protocol 可信數據亮點：opt-in、去識別月度 proof record、demo hash、audit trail、live integration slot
 - [x] 離線 fallback：所有主流程都可在無網路狀態完成
 
