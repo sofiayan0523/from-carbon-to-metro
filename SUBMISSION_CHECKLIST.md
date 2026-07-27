@@ -6,13 +6,14 @@
 
 ## Prototype 交付物
 
-- [x] 線上 prototype URL：<https://sofiayan0523.github.io/from-carbon-to-metro/>
+- [x] 線上投票展示 URL：<https://from-carbon-metro-vote.pages.dev/>
+- [x] 線上互動 prototype URL：<https://from-carbon-metro-vote.pages.dev/demo/>
 - [x] 本地可執行 source repo：`sofiayan0523/from-carbon-to-metro`
 - [x] 離線備援包：`offline/from-carbon-to-metro-offline.zip`
 - [x] 測試步驟：`TESTING_STEPS.md`
 - [x] 交付策略：`docs/delivery-strategy.md`
 - [ ] Office 2024 PPTX 決賽簡報
-- [ ] 送件前將 prototype branch 合併到 `main`，讓 GitHub Pages production 更新到最終版本
+- [x] 線上投票展示頁已部署至 Cloudflare Pages；GitHub Pages production 可在 GitHub 認證恢復後再同步
 
 ## 必做功能覆蓋
 
@@ -39,7 +40,8 @@
 
 ## 離線包內容
 
-- [x] `index.html`
+- [x] `index.html`（民眾投票展示頁）
+- [x] `demo/index.html`（互動 prototype）
 - [x] `README.md`
 - [x] `TESTING_STEPS.md`
 - [x] `SUBMISSION_CHECKLIST.md`
@@ -76,7 +78,7 @@
 ## 外部時程提醒
 
 - [ ] 2026-07-11 workshop 後補充現場回饋與最終 demo script
-- [ ] 2026-07-28 線上投票材料確認：公開 teaser、prototype 存取策略與投票推廣素材
+- [x] 2026-07-27 線上投票材料確認：v2-A 吉祥物主圖、民眾投票展示頁、同站內 prototype 存取策略與投票推廣素材
 - [ ] 2026-08-24 12:00 前完成 prototype URL、測試步驟與 Office 2024 PPTX 送件
 
 ## Merge 前檢查

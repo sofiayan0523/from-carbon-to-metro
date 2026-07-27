@@ -1,0 +1,17 @@
+{
+  "version": "1.0",
+  "skills": [
+    {
+      "name": "view-showcase",
+      "description": "Read the public voting showcase for the Taipei Metro hackathon project.",
+      "capabilities": ["browse-showcase", "understand-project-summary"],
+      "url": "https://from-carbon-metro-vote.pages.dev/"
+    },
+    {
+      "name": "try-prototype",
+      "description": "Open the same-site interactive demo for the From Carbon to Metro prototype.",
+      "capabilities": ["open-demo", "inspect-user-flow"],
+      "url": "https://from-carbon-metro-vote.pages.dev/demo/"
+    }
+  ]
+}

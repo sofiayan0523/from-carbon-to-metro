@@ -1,0 +1,13 @@
+# 從碳客變捷客
+
+> 《從碳客變捷客》是 2026 捷運盃黑客松作品展示頁，面向民眾投票介紹一個把捷運通勤變成集點、沿線優惠與減碳加成任務的互動 App prototype。網站包含公開投票展示首頁與同站內可操作 demo。
+
+## 主要頁面
+
+- [民眾投票展示頁](https://from-carbon-metro-vote.pages.dev/): 以 v2-A 吉祥物視覺介紹作品，主打搭捷運集捷運點、出站領好康與順手減碳。
+- [互動 Demo](https://from-carbon-metro-vote.pages.dev/demo/): 可操作 prototype，體驗完成通勤、出站推播、沿線推薦、捷運點換券、票券夾與減碳 dashboard。
+
+## 作品重點
+
+- [作品圖片](https://from-carbon-metro-vote.pages.dev/assets/voting/vote-submit-v2-A-mascot-768x514.png): 768x514px 公開投票主視覺，使用 3D 可愛捷運吉祥物風格。
+- [Agent manifest](https://from-carbon-metro-vote.pages.dev/agent.json): 機器可讀的作品展示站點描述。

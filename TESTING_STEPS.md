@@ -6,13 +6,14 @@
 
 ## 測試入口
 
-- 線上 prototype：<https://sofiayan0523.github.io/from-carbon-to-metro/>
-- 本地 server：在 repo 根目錄執行 `python3 -m http.server 4173 --bind 127.0.0.1`，再開啟 <http://127.0.0.1:4173/>
+- 線上民眾投票展示頁：<https://from-carbon-metro-vote.pages.dev/>
+- 線上互動 prototype：<https://from-carbon-metro-vote.pages.dev/demo/>
+- 本地 server：在 repo 根目錄執行 `python3 -m http.server 4173 --bind 127.0.0.1`，展示頁開啟 <http://127.0.0.1:4173/>，互動 prototype 開啟 <http://127.0.0.1:4173/demo/>
 - 離線包：`offline/from-carbon-to-metro-offline.zip`
 - 建議瀏覽器：Chrome、Edge 或 Safari 的近代版本
 - 狀態重置：重新整理頁面即可回到初始 demo state
 
-注意：在開發分支尚未合併到 `main` 前，GitHub Pages production URL 仍可能顯示舊版。Phase 6 branch QA 請先用本地 server 或離線包驗證；送件前需合併到 `main` 並重新跑本文件的線上測試流程。
+注意：GitHub Pages production URL 目前仍可能顯示舊版；線上投票送件與本文件線上驗證請以 Cloudflare Pages 連結為準。根目錄是民眾展示頁，完整互動 prototype 位於同站內 `/demo/`。
 
 ## 測試前提
 
@@ -25,7 +26,7 @@
 
 ## A. 線上測試流程
 
-1. 開啟線上 prototype。
+1. 開啟線上互動 prototype：<https://from-carbon-metro-vote.pages.dev/demo/>。
    - 預期看到頁首「從碳客變捷客」與左側四個導覽卡：`今天`、`路線`、`減碳`、`我的`。
    - 右側手機框底部也有同樣四個 tab。
    - 預設位於 `今天`，畫面顯示「6 月 30 日 週二」、「早安，Sofia」與捷運點 `1,240`。
@@ -88,8 +89,14 @@
    http://127.0.0.1:4173/
    ```
 
-4. 如果現場電腦沒有 Python，直接用瀏覽器開啟解壓後的 `index.html` 作為 fallback。
-   - Demo 邏輯仍可執行。
+   根目錄預期顯示民眾投票展示頁；完整互動 prototype 請開啟：
+
+   ```text
+   http://127.0.0.1:4173/demo/
+   ```
+
+4. 如果現場電腦沒有 Python，直接用瀏覽器開啟解壓後的 `index.html` 作為展示頁 fallback；完整互動 demo 建議仍以 static server 開啟 `demo/`。
+   - 若直接開啟 `demo/index.html`，多數現代瀏覽器仍可執行 demo；如遇 script blob 或子路徑限制，改用 static server。
    - 若特定瀏覽器限制 `file://` 字型載入，畫面會回退到系統中文字型，不影響主流程判讀。
 
 5. 依照「A. 線上測試流程」第 2 到第 6 步重跑一次。
@@ -119,7 +126,7 @@
 
 ## E. 通過標準
 
-- 線上 URL 可完成今天 -> 路線 -> 減碳 -> 我的 -> 分享卡主流程。
+- 線上 `/demo/` URL 可完成今天 -> 路線 -> 減碳 -> 我的 -> 分享卡主流程。
 - 離線包在無網路環境可完成同一主流程。
 - `我的` 頁在 opt-in 後可重現 demo hash `0x7f3a·b8e2·c91e`。
 - 任何 live integration 文案都只能是加分展示，不得阻塞主 demo。

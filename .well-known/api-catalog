@@ -1,0 +1,21 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://from-carbon-metro-vote.pages.dev/",
+      "service-desc": [
+        {
+          "href": "https://from-carbon-metro-vote.pages.dev/agent.json",
+          "type": "application/json",
+          "title": "Agent Web Protocol manifest"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://from-carbon-metro-vote.pages.dev/llms.txt",
+          "type": "text/markdown",
+          "title": "LLM site index"
+        }
+      ]
+    }
+  ]
+}

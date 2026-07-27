@@ -14,17 +14,18 @@
 python3 -m http.server 4173 --bind 127.0.0.1
 ```
 
-開啟 <http://127.0.0.1:4173/>。
+開啟 <http://127.0.0.1:4173/> 可看民眾投票展示頁；完整互動 prototype 在 <http://127.0.0.1:4173/demo/>。
 
-如果現場電腦沒有 Python，也可以直接用瀏覽器開啟 `index.html` 作為 fallback；主 demo 邏輯仍會在本機執行。
+如果現場電腦沒有 Python，也可以直接用瀏覽器開啟 `index.html` 作為展示頁 fallback；完整互動 demo 建議使用 static server 開啟 `demo/`。
 
 ## 決賽交付策略
 
-決賽 prototype 採 GitHub Pages 作為線上展示，並在最後交付離線備援包，確保主辦單位電腦沒有網路時仍可完成 demo。細節見 [`docs/delivery-strategy.md`](docs/delivery-strategy.md)。
+線上投票展示採 Cloudflare Pages：根目錄是民眾版展示頁，同站內 `/demo/` 保留完整 prototype。離線備援包確保主辦單位電腦沒有網路時仍可完成 demo。細節見 [`docs/delivery-strategy.md`](docs/delivery-strategy.md)。
 
 ## 決賽提交包
 
-- 線上 prototype：<https://sofiayan0523.github.io/from-carbon-to-metro/>
+- 線上投票展示頁：<https://from-carbon-metro-vote.pages.dev/>
+- 線上互動 prototype：<https://from-carbon-metro-vote.pages.dev/demo/>
 - 測試步驟：[`TESTING_STEPS.md`](TESTING_STEPS.md)
 - 送件檢查清單：[`SUBMISSION_CHECKLIST.md`](SUBMISSION_CHECKLIST.md)
 - 離線備援包：`offline/from-carbon-to-metro-offline.zip`
@@ -56,4 +57,4 @@ python3 -m http.server 4173 --bind 127.0.0.1
 
 ## 技術
 
-純 HTML/CSS/JavaScript（無 build step、無外部 API 依賴），任何現代瀏覽器可開啟。新版 UI/UX 以 bundled `index.html` 交付，前端 runtime 固定版本放在 `assets/vendor/`，字型資源則隨 bundle 與 `assets/fonts/` 授權文件一起保留，確保 GitHub Pages 與離線包都不需要 CDN。AI 路線推薦目前使用本機 mock 商家資料集，碳足跡則以本機 `90 gCO₂e/km` 公式、5 kg → 1.2x、10 kg → 1.5x 門檻運算；通勤完成、每日捷運點卡、路線集章、成就徽章、趨勢圖、分享卡與可信證明都由同一組本機 demo state 驅動。Proof flow 只保留月份、減碳值、距離區間、任務類型與 demo hash，不保存完整起訖站、商家、精確時間或個人識別碼；正式產品可在使用者同意後改接 Capture / Numbers API 註冊同一類 hash。正式產品將整合於台北捷運 Go App，串接環境部碳排係數資料集與捷運點數系統。
+純 HTML/CSS/JavaScript（無 build step、無外部 API 依賴），任何現代瀏覽器可開啟。根目錄 `index.html` 是民眾投票展示頁；新版 UI/UX prototype bundle 位於 `demo/index.html`，前端 runtime 固定版本放在 `demo/assets/vendor/`，字型資源與授權文件保留在 `assets/fonts/`，確保 Cloudflare Pages 與離線包都不需要 CDN。AI 路線推薦目前使用本機 mock 商家資料集，碳足跡以可配置係數呈現，預設展示工作坊口述值 `小客車 104 gCO₂e/km - 捷運 75 gCO₂e/km = 差額 29 gCO₂e/km`，並標示待北捷正式係數確認；通勤完成、每日捷運點卡、路線集章、成就徽章、趨勢圖、分享卡與可信證明都由同一組本機 demo state 驅動。Proof flow 只保留月份、減碳值、距離區間、任務類型與 demo hash，不保存完整起訖站、商家、精確時間或個人識別碼；正式產品可在使用者同意後改接 Capture / Numbers API 註冊同一類 hash。正式產品將整合於台北捷運 Go App，串接正式碳排係數與捷運點數系統。

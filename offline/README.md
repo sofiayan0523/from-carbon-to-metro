@@ -17,21 +17,28 @@ offline/from-carbon-to-metro-offline.zip
    python3 -m http.server 4173 --bind 127.0.0.1
    ```
 
-5. 開啟：
+5. 開啟民眾投票展示頁：
 
    ```text
    http://127.0.0.1:4173/
    ```
 
-6. 如果現場電腦沒有 Python，直接開啟 `index.html` 作為 fallback。
+6. 若要操作完整 prototype，開啟：
+
+   ```text
+   http://127.0.0.1:4173/demo/
+   ```
+
+7. 如果現場電腦沒有 Python，直接開啟 `index.html` 作為展示頁 fallback；完整互動 demo 建議仍以 static server 開啟 `demo/`，避免瀏覽器對子路徑或 script blob 的限制。
 
 詳細操作步驟見 zip 內的 `TESTING_STEPS.md`。
 
 ## 離線保證
 
-- 主 demo path 不依賴外部 API、CDN、圖片、模型服務、Capture / Numbers live API 或 blockchain RPC。
+- 民眾投票展示頁與主 demo path 不依賴外部 API、CDN、圖片、模型服務、Capture / Numbers live API 或 blockchain RPC。
+- 根目錄 `index.html` 是 v2-A 吉祥物風格的民眾版展示頁；完整 prototype 保留在 `demo/index.html`。
 - AI 推薦、碳足跡、捷運點倍率、路線集章、每日捷運點卡、分享卡與 proof record 都由本機 JavaScript state 驅動。
-- 新版 UI/UX 的主要 bundle 位於 `index.html`；固定版本前端 runtime 已放在 `assets/vendor/`，字型資源與授權文件保留在 `assets/fonts/`。
+- 新版 UI/UX 的主要 bundle 位於 `demo/index.html`；固定版本前端 runtime 已放在 `demo/assets/vendor/`，字型資源與授權文件保留在 `assets/fonts/`。
 - Proof flow 的 live integration slot 是加分展示說明，沒有網路時仍以 deterministic demo hash 完成。
 
 ## 重新產生 zip
