@@ -77,7 +77,7 @@ def main():
     # Card
     draw.rectangle([(badge_x1, badge_y1), (badge_x2, badge_y2)], fill=COLOR_WHITE, outline=COLOR_DARK, width=6)
     # Text inside card
-    title_text = "✦ 人氣票選 ‧ 誠摯邀票 ✦"
+    title_text = "★ 人氣票選 ‧ 誠摯邀票 ★"
     tw = text_width(draw, title_text, f_main_title)
     tx = badge_x1 + (badge_x2 - badge_x1 - tw) // 2
     ty = badge_y1 + (badge_y2 - badge_y1 - 60) // 2 - 2
@@ -104,7 +104,7 @@ def main():
     # 5. Accent badge on the Mascot Image (top right corner)
     # "入圍決賽 10 強"
     f_badge = get_font(FONT_BLACK, 30)
-    badge_text = " 決賽 10 強入圍! 🏆 "
+    badge_text = " 決賽 10 強入圍! "
     btw = text_width(draw, badge_text, f_badge)
     bx1, by1 = mx + target_w - btw - 40, my - 25
     bx2, by2 = mx + target_w - 20, my + 35
@@ -185,7 +185,7 @@ def main():
 
     # Daily reminder at the bottom of the card
     f_reminder = get_font(FONT_BOLD, 32)
-    reminder_txt = "💡 貼心提醒：每個會員帳號每天可投 1 票！"
+    reminder_txt = "★ 貼心提醒：每個會員帳號每天可投 1 票！"
     draw_centered_text(draw, reminder_txt, f_reminder, 1585, COLOR_RED)
 
     # 8. Footer Section
@@ -193,11 +193,11 @@ def main():
     f_footer_tech = get_font(FONT_REG, 24)
 
     # Showcase Link
-    url_txt = "體驗互動 Demo 👉 from-carbon-metro-vote.pages.dev"
+    url_txt = "體驗互動 Demo ▶ from-carbon-metro-vote.pages.dev"
     draw_centered_text(draw, url_txt, f_url, 1735, COLOR_DARK)
 
     # Tech Support line
-    tech_txt = "Omni Edge ✦ Numbers Protocol 共同提供技術支持"
+    tech_txt = "Omni Edge ｜ Numbers Protocol 共同提供技術支持"
     draw_centered_text(draw, tech_txt, f_footer_tech, 1805, COLOR_DARK)
 
     # Save outputs

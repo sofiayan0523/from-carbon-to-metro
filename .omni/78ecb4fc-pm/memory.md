@@ -22,6 +22,7 @@
 
 ## Key Discoveries
 
+- 捷運盃黑客松工作坊簡報已建立於 `personal-auto/workshop-presentation.html`，內容依 Google Doc 提案「從碳客變捷客」整理；使用 `assets/fonts/NotoSansCJKtc-Workshop.woff2` 子集字型確保繁中離線顯示。
 - 2026-07-28 公開投票展示頁 `from-carbon-to-metro/index.html` 的 Demo 區塊只保留「開啟互動 Demo」CTA；已移除「看提交文案／看提案文案」按鈕，避免公開頁出現內部提交語感；同步更新 Cloudflare Pages 與離線 zip。
 - 共享經濟／健康減碳方向提案已整理為台北捷運審閱版 `personal-auto/metro-shared-health-proposal.html`；定位為「捷運健康共享生活圈」，以捷運點承接 U-Sport／U-Walk、YouBike、raingo、旅電／ChargeSPOT、亞尼克 YTM 與悠遊付第二階段合作場景，已新增 ESG 敘事與首年財務試算（基準：合作金流 2,270 萬、支出 1,525 萬、可支應營運餘額 745 萬，待北捷確認）；文案已移除 v3／新版比較語氣；同檔使用 `assets/fonts/NotoSansCJKtc-MetroShared-*.woff2` 子集字型避免繁中缺字。
 - 線上投票提交草稿在 `personal-auto/online-voting-submission.md`；2026-07-27 依 Sofia 回饋「不夠吸睛」全面重製為 v2 三版，最終選用 v2-A（3D 吉祥物風格，更換為最新的 `捷客松_1.png` 官方正確視覺並極致壓縮至 51.7 KB WebP）。2026-07-27 已將 Cloudflare Pages `https://from-carbon-metro-vote.pages.dev/` 部署為民眾投票展示頁，互動 prototype 在同站內 `/demo/`；已全面清除內部/開發人員語言。展示頁已整合 Omni Edge 官方技術支持（連結至 https://edge.omniai.one/zh-TW/）、高質感 inline SVG 標誌、官方 SVG Favicon、自製精美「捷運點」金幣與綠葉旋轉動畫，卡片 Neo-brutalism 浮動等普普風小動畫。針對手機移動端，已全面修復「一趟車，三個收穫」在極窄寬度下的疊加/遮擋 Bug（優化 z-index 階層並縮小手機版 Phone 尺寸，使文字 100% 完美呈現），且點擊目標加大觸控安全範圍，在捷運 App 內置瀏覽器中開啟能獲得極佳的響應式單手操作體驗。公開 URL、手機 UA、離線備援包（from-carbon-to-metro-offline.zip）與 smoke test 均通過。GitHub Pages production 仍是舊版，`from-carbon-to-metro` 本地分支 ahead，且 GitHub API 認證回 401。
@@ -33,7 +34,6 @@
 - 2026-08-10 已為 IG Story 設計並部署 9:16 (1080x1920px) 直式高質感宣傳海報（`vote-submit-ig-story-1080x1920.png`），並提供三款 IG Stories 精美宣傳短文案、完成 Cloudflare Pages 部署且同步封裝至離線備援 zip 中。
 - 2026-07-31 已在 Z decision card `https://zwork.one/?decision=9fae481f-ac84-4be8-a90c-5317ce351a1a` 新增 task `7d5d33bd-2c94-41b9-8c20-5458ce915d2d`：`【Sofia】8/24 12:00前繳交原型展示資料`，due date `2026-08-24`；完整繳交清單寫在同卡 comment。
 - `from-carbon-to-metro/index.html` 的 bundler template script 需將 raw JSON 內的 literal `<` 序列化為 `\u003c`；DC runtime 會 `fetch(location.href)` 並用 regex 搜 `<x-dc>`，若外層 bundle raw script 留有 literal `<x-dc>`，會誤解析 JSON 字串內的 template，導致 React `onClick` 收到 string 並在點擊時出現 `[bundle] Script error`。
-- 捷運盃黑客松工作坊簡報已建立於 `personal-auto/workshop-presentation.html`，內容依 Google Doc 提案「從碳客變捷客」整理；使用 `assets/fonts/NotoSansCJKtc-Workshop.woff2` 子集字型確保繁中離線顯示。
 - 點數商業模式研究報告已建立於 `personal-auto/points-business-model-report.html`：涵蓋 OPENPOINT、Hami Point、LINE POINTS、台灣星巴克、Rakuten、Marriott Bonvoy，以及 IFRS 15／點數負債與 breakage 風險；可作為捷運提案與 prototype 的研究底稿。
 - 原版企劃書 `personal-auto/2026捷運盃黑客松_提案企劃書_綠點導航.docx` 的 ESG 內容集中在「綠點導航／碳足跡回饋／國泰世華 ESG 聯名／全市減碳量」；決賽口徑宜改掛到 AI 站點情境助理、捷運點減碳加成與北捷可衡量站點導客。
 - 捷運盃工作坊與後續點數討論整理於 `personal-auto/workshop-discussion-notes.md`；核心 pivot 是從「泛綠點」收斂為「捷運點減碳加成 + 精準推播導客 + 北捷可變現行銷方案」，並需改用北捷口述碳係數 104/75/29（待正式確認）。
@@ -75,4 +75,4 @@
 
 
 ---
-_Last system refresh: 2026-08-10 11:19 UTC_
+_Last system refresh: 2026-08-10 11:29 UTC_
