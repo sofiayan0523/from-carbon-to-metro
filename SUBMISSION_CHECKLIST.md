@@ -1,6 +1,6 @@
 # 決賽送件檢查清單
 
-最後更新：2026-06-30
+最後更新：2026-08-11
 
 本清單對齊 2026 捷運盃黑客松決賽 prototype 交付需求。決賽送件截止時間為 2026-08-24 12:00，交付內容需包含 prototype URL、應用測試步驟與 Office 2024 PowerPoint 簡報。
 
@@ -12,16 +12,16 @@
 - [x] 離線備援包：`offline/from-carbon-to-metro-offline.zip`
 - [x] 測試步驟：`TESTING_STEPS.md`
 - [x] 交付策略：`docs/delivery-strategy.md`
-- [ ] Office 2024 PPTX 決賽簡報
+- [x] Office 2024 PPTX 決賽簡報：`從碳客變捷客_決賽簡報_v2.pptx`（16 頁 Neo-brutalism 版，Google Drive 備份 id `1k8B2qPTHDVZ5VzvUbX26QGM-ObmF6Tzm`）
 - [x] 線上投票展示頁已部署至 Cloudflare Pages；GitHub Pages production 可在 GitHub 認證恢復後再同步
 
 ## 必做功能覆蓋
 
 - [x] Judge-operable demo path：今天 -> 路線 -> 減碳 -> 我的 -> 分享卡
 - [x] AI 點數推薦：商家資料集、分類篩選、推薦理由與路線集章任務
-- [x] 碳足跡捷運點加成：`90 gCO2e/km` 公式、5 kg -> `1.2x`、10 kg -> `1.5x`
+- [x] 碳足跡捷運點加成：`(104 − 75) = 29 gCO2e/km` 可配置係數、5 kg -> `1.2x`、10 kg -> `1.5x`、雙數字聯動特效
 - [x] 今日捷運點互動：完成通勤、每日捷運點卡、點數動畫、任務、成就、趨勢圖與分享卡
-- [x] Numbers Protocol 可信數據亮點：opt-in、去識別月度 proof record、demo hash、audit trail、live integration slot
+- [x] Numbers Protocol 可信數據亮點：opt-in、去識別月度 proof record、demo hash、audit trail、live integration slot、換券資料指紋、dashboard 稽核就緒條與 LIVE 即時事件流
 - [x] 離線 fallback：所有主流程都可在無網路狀態完成
 
 ## QA 與驗證
