@@ -1,6 +1,6 @@
 # 決賽 prototype 交付策略
 
-最後更新：2026-06-29
+最後更新：2026-08-11
 
 本文件記錄「從碳客變捷客」決賽 prototype 的 Phase 0 交付決策。目標是讓後續開發、審查與 QA 可以用同一組依據判斷線上展示、離線備援與權限風險。
 
@@ -9,29 +9,28 @@
 - Repository：`sofiayan0523/from-carbon-to-metro`
 - Default branch：`main`
 - Workspace 開發分支：`omni/78ecb4fc/from-carbon-to-metro`
-- Production URL：<https://sofiayan0523.github.io/from-carbon-to-metro/>
-- GitHub Pages 來源：`main` branch `/`
-- GitHub Pages 狀態：`built`
-- CI / Pages workflow：GitHub 內建 `pages-build-deployment`
+- Production URL：<https://from-carbon-metro-vote.pages.dev/>
+- Cloudflare Pages project：`from-carbon-metro-vote`
+- GitHub Pages URL 保留作為 repo 備援，不作為決賽送件主連結
 - 現有程式：`index.html` 與 `README.md`
-- 現有技術型態：純 HTML/CSS/JavaScript，無 build step，無外部 API，無登入；AI 路線推薦使用本機 mock 商家資料集與 deterministic scoring；碳足跡使用 `90 gCO₂e/km × distance` 本機公式與 5 kg / 10 kg 捷運點倍率門檻；今日捷運點報告、任務進度、成就徽章、14 天趨勢圖、分享卡與可信證明都由本機 demo state 驅動；可信證明使用固定 demo timestamp、去識別 payload、deterministic demo hash 與 opt-in 隱私同意，不保存完整起訖站、商家、精確時間或個人識別碼；繁中文字型已在 repo 內本地打包，避免離線或 headless QA 環境缺字
+- 現有技術型態：純 HTML/CSS/JavaScript，無 build step，無外部 API，無登入；小捷路線推薦使用本機展示商家資料集與固定權重；碳足跡使用官方參考係數 `(104 - 75) = 29 gCO₂e/km` 與 5 kg / 10 kg 捷運點倍率門檻；今日捷運點報告、健康共享生活圈、小捷散步隊、站內補給站、任務進度、成就徽章、14 天趨勢圖、分享卡與可信證明都由本機 demo state 驅動；可信證明使用固定展示月份、去識別 payload、可重播資料指紋與 opt-in 隱私同意，不保存完整起訖站、商家、精確時間或個人識別碼；繁中文字型已在 repo 內本地打包，避免離線或 headless QA 環境缺字
 
 ## 線上展示策略
 
-預設使用 GitHub Pages 作為線上 prototype 連結。原因是：
+預設使用 Cloudflare Pages 作為線上 prototype 連結。原因是：
 
 - 決賽交付需要一個可開啟的 prototype URL。
-- 現有 repo 已啟用 GitHub Pages，且 URL 已可回應 `200 OK`。
+- Cloudflare Pages 已承載民眾投票展示頁與互動 prototype，URL 已可回應 `200 OK`。
 - Prototype 不含真實會員、票務、支付或商家資料，因此不需要把主 demo 放在登入牆後。
 - 以靜態網站交付可降低決賽前部署失敗風險。
 
 後續每個開發 phase 仍應遵守：
 
 - 主 demo 流程不得依賴外部 API 才能完成。
-- 碳足跡與捷運點倍率需保留本機公式 fallback：`90 gCO₂e/km`、5 kg → 1.2x、10 kg → 1.5x。
+- 碳足跡與捷運點倍率需保留本機公式 fallback：`(104 - 75) = 29 gCO₂e/km`、5 kg → 1.2x、10 kg → 1.5x。
 - 今日捷運點報告、任務成就與成果分享卡需保留本機 state fallback，確保沒有網路時仍能完成評審操作路徑。
-- Numbers proof 需保留本機去識別 payload、demo hash 與 audit trail fallback；任何 Capture / Numbers API 註冊都只能放在 optional live slot，不得阻塞主 demo。
-- 若加入任何網路整合，只能作為 bonus 或 live slot，必須保留 deterministic fallback。
+- Numbers proof 需保留本機去識別 payload、資料指紋與 audit trail fallback；外部資料服務不得阻塞主 demo。
+- 若加入任何網路整合，必須保留可重播 fallback。
 - PR target 固定為 `main`，merge 後由 GitHub Pages 內建 workflow 更新 production。
 
 ## Access-control 策略
@@ -40,7 +39,7 @@
 
 公開 demo 的界線：
 
-- 可展示：假資料、去識別化通勤情境、mock 商家、mock proof、可解釋的 AI scoring。
+- 可展示：本機展示資料、去識別化通勤情境、展示商家、可重播 proof、可解釋的推薦排序。
 - 不可展示：真實 Go App 會員資料、真實票務紀錄、真實付款資訊、任何未授權品牌素材或 private credentials。
 
 如果後續 Sofia 或主辦方要求限制存取，處理方式是：
@@ -60,7 +59,7 @@
 - 可直接開啟 `index.html` 完成主 demo path。
 - 所有 CSS、JS、字型、圖像與資料都在 repo/package 內。
 - 不依賴 CDN、外部圖片、第三方 script、live API 或 blockchain RPC。
-- 若有 bonus live integration，必須在沒有網路時自動降級為 mock proof / demo record；目前 proof flow 使用固定示範月份、去識別月度紀錄與 deterministic demo hash。
+- 若有外部資料服務，必須在沒有網路時自動降級為可重播 proof / demo record；目前 proof flow 使用固定展示月份、去識別月度紀錄與資料指紋。
 
 Phase 6 交付時已產出：
 
@@ -86,8 +85,8 @@ http://127.0.0.1:4173/
 Phase 0 已完成的 smoke test：
 
 - `curl -fsSI http://127.0.0.1:4173/` 回傳 `HTTP/1.0 200 OK`。
-- Browser snapshot 可讀到三個既有畫面：首頁・今日捷運點報告、AI 點數路線地圖、個人碳足跡儀表板。
-- Production URL `https://sofiayan0523.github.io/from-carbon-to-metro/` 回傳 `HTTP/2 200`。
+- Browser snapshot 可讀到三個既有畫面：首頁・今日捷運點報告、小捷點數路線地圖、個人碳足跡儀表板。
+- Production URL `https://from-carbon-metro-vote.pages.dev/` 回傳 `HTTP/2 200`。
 
 ## 後續 phase 的交付要求
 

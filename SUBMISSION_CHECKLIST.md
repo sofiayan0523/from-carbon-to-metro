@@ -18,10 +18,10 @@
 ## 必做功能覆蓋
 
 - [x] Judge-operable demo path：今天 -> 路線 -> 減碳 -> 我的 -> 分享卡
-- [x] AI 點數推薦：商家資料集、分類篩選、推薦理由與路線集章任務
+- [x] 小捷點數推薦：商家資料集、分類篩選、推薦理由與路線集章任務
 - [x] 碳足跡捷運點加成：`(104 − 75) = 29 gCO2e/km` 可配置係數、5 kg -> `1.2x`、10 kg -> `1.5x`、雙數字聯動特效
-- [x] 今日捷運點互動：完成通勤、每日捷運點卡、點數動畫、任務、成就、趨勢圖與分享卡
-- [x] Numbers Protocol 可信數據亮點：opt-in、去識別月度 proof record、demo hash、audit trail、live integration slot、換券資料指紋、dashboard 稽核就緒條與 LIVE 即時事件流
+- [x] 今日捷運點互動：完成通勤、每日捷運點卡、健康共享生活圈、小捷散步隊、點數動畫、任務、成就、趨勢圖與分享卡
+- [x] Numbers Protocol 可信數據亮點：opt-in、去識別月度 proof record、資料指紋、audit trail、換券資料指紋、dashboard 稽核就緒條與 LIVE 即時事件流
 - [x] 離線 fallback：所有主流程都可在無網路狀態完成
 
 ## QA 與驗證
@@ -62,7 +62,7 @@
 - [x] 未使用外部圖片、音樂、地圖底圖或第三方 script
 - [x] 本地繁中文字型附帶 OFL 授權全文
 - [x] 本地 vendor runtime 附帶來源與 MIT 授權 notice
-- [x] 商家僅作為文字 mock 情境，沒有商標圖、廣告圖或交易資料
+- [x] 商家僅作為文字展示情境，沒有商標圖、廣告圖或交易資料
 - [x] 沒有 secrets、tokens、API key、真實會員資料、票務資料或付款資料
 
 ## 隱私與可信數據
@@ -72,8 +72,8 @@
 - [x] Proof record 不保存精確時間
 - [x] Proof record 不保存精確通勤距離
 - [x] Proof record 使用區間 bucket：距離 bucket
-- [x] Demo hash 可離線重現，固定示範輸出為 `0x7f3a·b8e2·c91e`
-- [x] Live Capture / Numbers 註冊只作為 optional slot，不阻塞主 demo
+- [x] 資料指紋可離線重現，固定展示輸出為 `0x7f3a·b8e2·c91e`
+- [x] 外部資料服務不阻塞主 demo
 
 ## 外部時程提醒
 
