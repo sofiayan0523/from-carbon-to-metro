@@ -1,0 +1,38 @@
+{
+  "awp_version": "0.2",
+  "domain": "from-carbon-metro-vote.pages.dev",
+  "intent": "展示 2026 捷運盃黑客松作品《從碳客變捷客》，讓民眾快速理解搭捷運集點、出站領好康與減碳加成的互動 App 概念。",
+  "capabilities": {
+    "streaming": false,
+    "batch_actions": false,
+    "webhooks": false
+  },
+  "actions": [
+    {
+      "id": "view-public-showcase",
+      "description": "Open the public voting showcase page",
+      "auth_required": false,
+      "endpoint": "/",
+      "method": "GET"
+    },
+    {
+      "id": "try-interactive-demo",
+      "description": "Open the interactive prototype demo",
+      "auth_required": false,
+      "endpoint": "/demo/",
+      "method": "GET"
+    },
+    {
+      "id": "read-llms-index",
+      "description": "Read the LLM-oriented site index",
+      "auth_required": false,
+      "endpoint": "/llms.txt",
+      "method": "GET"
+    }
+  ],
+  "agent_hints": {
+    "primary_use_case": "Public voting showcase for a Taipei Metro hackathon prototype",
+    "content_types": "Static HTML showcase, interactive prototype, image asset, machine-readable site metadata",
+    "update_frequency": "Updated during the 2026 hackathon submission period"
+  }
+}
