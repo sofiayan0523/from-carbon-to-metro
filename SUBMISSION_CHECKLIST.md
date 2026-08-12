@@ -12,7 +12,7 @@
 - [x] 離線備援包：`offline/from-carbon-to-metro-offline.zip`
 - [x] 測試步驟：`TESTING_STEPS.md`
 - [x] 交付策略：`docs/delivery-strategy.md`
-- [x] Office 2024 PPTX 決賽簡報：`從碳客變捷客_決賽簡報_v2.pptx`（16 頁 Neo-brutalism 版，Google Drive 備份 id `1k8B2qPTHDVZ5VzvUbX26QGM-ObmF6Tzm`）
+- [x] Office 2024 PPTX 決賽簡報：`從碳客變捷客_決賽簡報_v3.pptx`（17 頁 Neo-brutalism 版，含 3 分鐘 Demo 動線、小捷與碳森林情感層、B2B 營運主控台雙端展示；Google Drive 備份 https://docs.google.com/presentation/d/1EJntBMEa394MeHA-dZ80Sb-H2_AvE-xB/edit ）
 - [x] 線上投票展示頁已部署至 Cloudflare Pages；GitHub Pages production 可在 GitHub 認證恢復後再同步
 
 ## 必做功能覆蓋
