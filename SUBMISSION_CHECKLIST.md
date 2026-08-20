@@ -1,26 +1,27 @@
 # 決賽送件檢查清單
 
-最後更新：2026-06-30
+最後更新：2026-08-11
 
 本清單對齊 2026 捷運盃黑客松決賽 prototype 交付需求。決賽送件截止時間為 2026-08-24 12:00，交付內容需包含 prototype URL、應用測試步驟與 Office 2024 PowerPoint 簡報。
 
 ## Prototype 交付物
 
-- [x] 線上 prototype URL：<https://sofiayan0523.github.io/from-carbon-to-metro/>
+- [x] 線上投票展示 URL：<https://from-carbon-metro-vote.pages.dev/>
+- [x] 線上互動 prototype URL：<https://from-carbon-metro-vote.pages.dev/demo/>
 - [x] 本地可執行 source repo：`sofiayan0523/from-carbon-to-metro`
 - [x] 離線備援包：`offline/from-carbon-to-metro-offline.zip`
 - [x] 測試步驟：`TESTING_STEPS.md`
 - [x] 交付策略：`docs/delivery-strategy.md`
-- [ ] Office 2024 PPTX 決賽簡報
-- [ ] 送件前將 prototype branch 合併到 `main`，讓 GitHub Pages production 更新到最終版本
+- [x] Office 2024 PPTX 決賽簡報：`從碳客變捷客_決賽簡報_v3.pptx`（17 頁 Neo-brutalism 版，含 3 分鐘 Demo 動線、小捷與碳森林情感層、B2B 營運主控台雙端展示；Google Drive 備份 https://docs.google.com/presentation/d/1EJntBMEa394MeHA-dZ80Sb-H2_AvE-xB/edit ）
+- [x] 線上投票展示頁已部署至 Cloudflare Pages；GitHub Pages production 可在 GitHub 認證恢復後再同步
 
 ## 必做功能覆蓋
 
 - [x] Judge-operable demo path：今天 -> 路線 -> 減碳 -> 我的 -> 分享卡
-- [x] AI 點數推薦：商家資料集、分類篩選、推薦理由與路線集章任務
-- [x] 碳足跡綠點加成：`90 gCO2e/km` 公式、5 kg -> `1.2x`、10 kg -> `1.5x`
-- [x] 今日綠點互動：完成通勤、每日綠點卡、點數動畫、任務、成就、趨勢圖與分享卡
-- [x] Numbers Protocol 可信數據亮點：opt-in、去識別月度 proof record、demo hash、audit trail、live integration slot
+- [x] 小捷點數推薦：商家資料集、分類篩選、推薦理由與路線集章任務
+- [x] 碳足跡捷運點加成：`(104 − 75) = 29 gCO2e/km` 可配置係數、5 kg -> `1.2x`、10 kg -> `1.5x`、雙數字聯動特效
+- [x] 今日捷運點互動：完成通勤、每日捷運點卡、健康共享生活圈、小捷散步隊、點數動畫、任務、成就、趨勢圖與分享卡
+- [x] Numbers Protocol 可信數據亮點：opt-in、去識別月度 proof record、資料指紋、audit trail、換券資料指紋、dashboard 稽核就緒條與 LIVE 即時事件流
 - [x] 離線 fallback：所有主流程都可在無網路狀態完成
 
 ## QA 與驗證
@@ -39,7 +40,8 @@
 
 ## 離線包內容
 
-- [x] `index.html`
+- [x] `index.html`（民眾投票展示頁）
+- [x] `demo/index.html`（互動 prototype）
 - [x] `README.md`
 - [x] `TESTING_STEPS.md`
 - [x] `SUBMISSION_CHECKLIST.md`
@@ -60,7 +62,7 @@
 - [x] 未使用外部圖片、音樂、地圖底圖或第三方 script
 - [x] 本地繁中文字型附帶 OFL 授權全文
 - [x] 本地 vendor runtime 附帶來源與 MIT 授權 notice
-- [x] 商家僅作為文字 mock 情境，沒有商標圖、廣告圖或交易資料
+- [x] 商家僅作為文字展示情境，沒有商標圖、廣告圖或交易資料
 - [x] 沒有 secrets、tokens、API key、真實會員資料、票務資料或付款資料
 
 ## 隱私與可信數據
@@ -70,13 +72,13 @@
 - [x] Proof record 不保存精確時間
 - [x] Proof record 不保存精確通勤距離
 - [x] Proof record 使用區間 bucket：距離 bucket
-- [x] Demo hash 可離線重現，固定示範輸出為 `0x7f3a·b8e2·c91e`
-- [x] Live Capture / Numbers 註冊只作為 optional slot，不阻塞主 demo
+- [x] 資料指紋可離線重現，固定展示輸出為 `0x7f3a·b8e2·c91e`
+- [x] 外部資料服務不阻塞主 demo
 
 ## 外部時程提醒
 
 - [ ] 2026-07-11 workshop 後補充現場回饋與最終 demo script
-- [ ] 2026-07-28 線上投票材料確認：公開 teaser、prototype 存取策略與投票推廣素材
+- [x] 2026-07-27 線上投票材料確認：v2-A 吉祥物主圖、民眾投票展示頁、同站內 prototype 存取策略與投票推廣素材
 - [ ] 2026-08-24 12:00 前完成 prototype URL、測試步驟與 Office 2024 PPTX 送件
 
 ## Merge 前檢查

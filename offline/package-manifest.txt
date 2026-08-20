@@ -1,15 +1,20 @@
 從碳客變捷客離線備援包 manifest
-Generated: 2026-06-30
+Generated: 2026-08-20
 
 Package:
 offline/from-carbon-to-metro-offline.zip
 
 Included files:
 from-carbon-to-metro/index.html
+from-carbon-to-metro/demo/index.html
 from-carbon-to-metro/README.md
 from-carbon-to-metro/TESTING_STEPS.md
 from-carbon-to-metro/SUBMISSION_CHECKLIST.md
 from-carbon-to-metro/docs/delivery-strategy.md
+from-carbon-to-metro/assets/voting/vote-submit-v2-A-mascot-768x514.png
+from-carbon-to-metro/assets/voting/vote-submit-v2-A-mascot-768x514.webp
+from-carbon-to-metro/assets/voting/vote-submit-ig-story-1080x1920.png
+from-carbon-to-metro/assets/voting/vote-submit-ig-story-1080x1920.webp
 from-carbon-to-metro/assets/fonts/NotoSansCJKtc-Regular.otf
 from-carbon-to-metro/assets/fonts/OFL.txt
 from-carbon-to-metro/assets/fonts/NOTICE.md
@@ -17,11 +22,24 @@ from-carbon-to-metro/assets/vendor/react.production.min.js
 from-carbon-to-metro/assets/vendor/react-dom.production.min.js
 from-carbon-to-metro/assets/vendor/babel.min.js
 from-carbon-to-metro/assets/vendor/NOTICE.md
+from-carbon-to-metro/demo/assets/vendor/react.production.min.js
+from-carbon-to-metro/demo/assets/vendor/react-dom.production.min.js
+from-carbon-to-metro/demo/assets/vendor/babel.min.js
+from-carbon-to-metro/demo/assets/vendor/NOTICE.md
+from-carbon-to-metro/robots.txt
+from-carbon-to-metro/llms.txt
+from-carbon-to-metro/agent.json
+from-carbon-to-metro/sitemap-index.xml
+from-carbon-to-metro/sitemap.xml
+from-carbon-to-metro/.well-known/mcp/server-card.json
+from-carbon-to-metro/.well-known/agent-skills/index.json
+from-carbon-to-metro/.well-known/api-catalog
 from-carbon-to-metro/offline/README.md
 from-carbon-to-metro/offline/package-manifest.txt
 
 Offline constraints:
-- No external API is required for the main demo path.
-- No CDN, external script, external image, login, payment, Capture live API, Numbers live API, or blockchain RPC is required.
-- The proof flow uses a de-identified monthly record and deterministic demo hash.
-- The updated UI bundle uses local fixed-version runtime files from assets/vendor for offline use.
+- No external API is required for the public showcase page or main demo path.
+- No CDN, external script, external image, login, payment, external data service, or blockchain RPC is required.
+- The proof flow uses a de-identified monthly record and reproducible data fingerprint.
+- The public showcase page uses the local v2-A voting image and local Noto Sans TC font.
+- The interactive prototype is preserved at demo/index.html and uses local fixed-version runtime files from demo/assets/vendor for offline use.
